@@ -14,23 +14,41 @@ export const Navbar: React.FC = () => {
   return (
     <nav className={`fixed top-6 left-0 right-0 z-50 flex justify-center transition-all duration-500 ${scrolled ? 'translate-y-0' : 'translate-y-0'}`}>
       <div className={`
-        relative flex justify-between items-center px-6 py-3 rounded-full transition-all duration-500
+        relative flex justify-between items-center px-8 py-4 rounded-full transition-all duration-500
         ${scrolled 
           ? 'w-[90%] md:w-[700px] bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20' 
           : 'w-[95%] md:w-[1200px] bg-transparent border border-transparent'}
       `}>
         
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-ethereal-blue to-ethereal-green flex items-center justify-center border border-white/10">
-            <span className="font-mono text-xs font-bold text-white">RF</span>
+        <div className="flex items-center gap-4">
+          {/* Profile Photo - Enlarged */}
+          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10 shadow-lg relative z-10 flex-shrink-0 group">
+            <img 
+              src="https://github.com/robertoecf.png" 
+              alt="Roberto Freitas" 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={(e) => {
+                // Fallback visualization if image fails to load
+                e.currentTarget.style.display = 'none';
+                if (e.currentTarget.parentElement) {
+                   e.currentTarget.parentElement.style.backgroundColor = '#1e293b';
+                   e.currentTarget.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-xs text-white font-mono">RF</div>';
+                }
+              }}
+            />
           </div>
+          
           <div className="hidden sm:block">
-            <div className="text-sm font-medium text-white tracking-tight">Wealth Management</div>
-            <div className="text-[10px] font-mono text-ethereal-orange tracking-widest uppercase">Fintech</div>
+            <div className="text-base font-medium text-white tracking-tight leading-tight">Roberto E. C. Freitas</div>
+            <div className="flex items-center gap-2 text-[10px] font-mono text-ethereal-orange tracking-widest uppercase mt-0.5">
+              <span>Wealth Management</span>
+              <span className="w-1 h-1 rounded-full bg-slate-600" />
+              <span>Fintech</span>
+            </div>
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-2">
           {['Expertise', 'Experience', 'Contact'].map((item) => (
             <a 
               key={item}
@@ -63,7 +81,7 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-           <div className="absolute top-full left-0 right-0 mt-4 mx-auto w-full bg-black/80 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 overflow-hidden animate-fade-in-up">
+           <div className="absolute top-full left-0 right-0 mt-4 mx-auto w-full bg-black/80 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 overflow-hidden animate-fade-in-up shadow-2xl">
               <a href="#expertise" onClick={() => setMobileOpen(false)} className="text-slate-300 text-sm hover:text-white">Expertise</a>
               <a href="#experience" onClick={() => setMobileOpen(false)} className="text-slate-300 text-sm hover:text-white">Experience</a>
               <button onClick={() => { document.getElementById('chat')?.scrollIntoView({ behavior: 'smooth' }); setMobileOpen(false); }} className="text-left text-ethereal-orange text-sm font-mono">AI_ASSISTANT</button>
