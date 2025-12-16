@@ -1,8 +1,11 @@
 import React from 'react';
 import { ArrowRight, Activity, Globe, Cpu } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export const Hero: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden">
       
@@ -12,7 +15,7 @@ export const Hero: React.FC = () => {
         <div className="lg:col-span-7 space-y-8 animate-fade-in-up">
           <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full bg-ethereal-blue/30 border border-ethereal-blue/50 text-[10px] font-mono tracking-[0.2em] uppercase text-blue-200 backdrop-blur-md">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-            System_Ready_For_Work
+            {t('hero.systemReady')}
           </div>
           
           <div className="space-y-2">
@@ -21,24 +24,25 @@ export const Hero: React.FC = () => {
               Freitas
             </h1>
             <h2 className="text-xl sm:text-2xl font-mono text-ethereal-orange/80 pt-2 flex items-center gap-4">
-              <span>// Strategy</span>
               <span className="w-1 h-1 bg-slate-600 rounded-full" />
-              <span>// Operations</span>
+              <span>{t('hero.roles.strategy')}</span>
               <span className="w-1 h-1 bg-slate-600 rounded-full" />
-              <span>// Product</span>
+              <span>{t('hero.roles.ops')}</span>
+              <span className="w-1 h-1 bg-slate-600 rounded-full" />
+              <span>{t('hero.roles.product')}</span>
             </h2>
           </div>
           
           <p className="text-lg text-slate-300 max-w-xl leading-relaxed font-light border-l border-ethereal-border pl-6 py-2">
-            8+ years integrating financial rigor with product velocity. Specialized in structuring ambiguous problems and driving cross-functional execution in AI and Fintech environments.
+            {t('hero.description')}
           </p>
 
           <div className="flex flex-wrap gap-4 pt-4">
             <Button size="lg" onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}>
-              View Experience
+              {t('hero.viewExp')}
             </Button>
             <Button variant="ghost" size="lg" onClick={() => document.getElementById('chat')?.scrollIntoView({ behavior: 'smooth' })} className="group">
-              <span className="mr-2 font-mono text-xs text-slate-400 group-hover:text-white">INIT_CHAT_PROTOCOL</span>
+              <span className="mr-2 font-mono text-xs text-slate-400 group-hover:text-white">{t('hero.initChat')}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
@@ -54,14 +58,14 @@ export const Hero: React.FC = () => {
                 {/* HUD Header */}
                 <div className="flex justify-between items-start border-b border-white/5 pb-6">
                   <div>
-                    <div className="text-[10px] font-mono text-slate-500 mb-1">CURRENT_STATUS</div>
+                    <div className="text-[10px] font-mono text-slate-500 mb-1">{t('hero.hud.status')}</div>
                     <div className="flex items-center gap-2 text-emerald-400 text-sm font-mono font-bold">
                       <Activity className="w-4 h-4" />
-                      OPTIMAL_PERFORMANCE
+                      {t('hero.hud.optimal')}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[10px] font-mono text-slate-500 mb-1">LOCATION</div>
+                    <div className="text-[10px] font-mono text-slate-500 mb-1">{t('hero.hud.location')}</div>
                     <div className="text-white text-sm font-medium">São Paulo, BR</div>
                   </div>
                 </div>
@@ -71,12 +75,12 @@ export const Hero: React.FC = () => {
                   <div className="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-ethereal-blue/50 transition-colors duration-300">
                     <Cpu className="w-5 h-5 text-ethereal-blue mb-2" />
                     <div className="text-2xl font-bold text-white">98.2%</div>
-                    <div className="text-[10px] font-mono text-slate-400 mt-1">LLM_EVAL_ACCURACY</div>
+                    <div className="text-[10px] font-mono text-slate-400 mt-1">{t('hero.hud.evalAcc')}</div>
                   </div>
                   <div className="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-ethereal-green/50 transition-colors duration-300">
                     <Globe className="w-5 h-5 text-ethereal-green mb-2" />
-                    <div className="text-2xl font-bold text-white">$20M+</div>
-                    <div className="text-[10px] font-mono text-slate-400 mt-1">AUM_MANAGED</div>
+                    <div className="text-2xl font-bold text-white">{t('hero.hud.aumValue')}</div>
+                    <div className="text-[10px] font-mono text-slate-400 mt-1">{t('hero.hud.aum')}</div>
                   </div>
                 </div>
 

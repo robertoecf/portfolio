@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const ResumeItem = ({ 
   period, 
@@ -46,12 +47,14 @@ const ResumeItem = ({
 );
 
 export const Experience: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="experience" className="py-32 px-6 relative z-10">
       <div className="max-w-5xl mx-auto">
         <div className="mb-24 pl-6 border-l-2 border-ethereal-blue">
-          <h2 className="text-4xl font-bold text-white mb-2">Career History</h2>
-          <p className="text-slate-400 font-mono text-xs tracking-widest uppercase">DATA_LOGS: 2017 — PRESENT</p>
+          <h2 className="text-4xl font-bold text-white mb-2">{t('experience.title')}</h2>
+          <p className="text-slate-400 font-mono text-xs tracking-widest uppercase">{t('experience.logs')}</p>
         </div>
 
         <div className="space-y-8 relative">
@@ -60,49 +63,37 @@ export const Experience: React.FC = () => {
 
           <ResumeItem 
             period="2025 — PRESENT"
-            title="Subject-Matter Expert (Financial Services)"
+            title={t('experience.jobs.mercor.title')}
             company="Mercor"
-            description={[
-              "Built evaluation frameworks, rubrics, and benchmark tasks to assess LLM performance in financial advising, planning, and wealth management use cases.",
-              "Reviewed and scored complex AI-generated outputs, identifying reasoning gaps, hallucinations, and compliance risks in high-stakes financial scenarios.",
-              "Collaborated with AI research and product teams by delivering structured feedback and synthetic test cases that informed model and product improvements.",
-              "Used spreadsheets and basic SQL-style thinking to organize evaluation data, compare model variants, and support data-driven decisions on model changes."
-            ]}
+            description={t('experience.jobs.mercor.desc')}
           />
 
           <ResumeItem 
             period="2018 — PRESENT"
-            title="Senior Financial Advisor & Strategic Contributor"
+            title={t('experience.jobs.warren.title')}
             company="Warren Investimentos"
-            description={[
-              "Manage a portfolio of high-net-worth (HNW) clients exceeding USD 20M in assets, combining financial planning and investment strategy with product feedback loops.",
-              "Provide end-to-end financial planning (tax, succession, retirement, risk/insurance) and translate client needs into structured recommendations and scalable frameworks.",
-              "Partner with product, operations, and leadership to refine onboarding, advisory workflows, and platform features, reducing friction for clients and internal teams.",
-              "Identify market opportunities and client pain points, proposing strategic improvements that support the evolution of Warren from a fintech startup to a full-service platform."
-            ]}
+            description={t('experience.jobs.warren.desc')}
           />
 
           <ResumeItem 
             period="2017 — 2018"
-            title="Research Assistant"
+            title={t('experience.jobs.ea.title')}
             company="EA-UFRGS"
-            description={[
-              "Supported academic research projects by reviewing literature, helping structure theses and dissertations, and assisting with data analysis and writing."
-            ]}
+            description={t('experience.jobs.ea.desc')}
           />
         </div>
 
         <div className="mt-32 grid md:grid-cols-2 gap-8">
             <div className="glass-panel p-8 rounded-2xl">
-                <h3 className="font-mono text-xs text-ethereal-blue mb-6 uppercase tracking-widest">Education_Background</h3>
+                <h3 className="font-mono text-xs text-ethereal-blue mb-6 uppercase tracking-widest">{t('experience.education.title')}</h3>
                 <div className="space-y-6">
                     <div className="group">
-                        <div className="text-white font-bold group-hover:text-ethereal-blue transition-colors">Bachelor in Public Relations</div>
+                        <div className="text-white font-bold group-hover:text-ethereal-blue transition-colors">{t('experience.education.ufrgs')}</div>
                         <div className="text-slate-500 text-sm mb-1">Federal University of Rio Grande do Sul (UFRGS)</div>
                         <div className="text-slate-600 font-mono text-[10px]">2017 — 2023</div>
                     </div>
                     <div className="group">
-                        <div className="text-white font-bold group-hover:text-ethereal-blue transition-colors">Technical Degree in Logistics</div>
+                        <div className="text-white font-bold group-hover:text-ethereal-blue transition-colors">{t('experience.education.senac')}</div>
                         <div className="text-slate-500 text-sm mb-1">SENAC-RS</div>
                         <div className="text-slate-600 font-mono text-[10px]">2015 — 2016</div>
                     </div>
@@ -110,24 +101,24 @@ export const Experience: React.FC = () => {
             </div>
             
             <div className="glass-panel p-8 rounded-2xl">
-                <h3 className="font-mono text-xs text-emerald-500 mb-6 uppercase tracking-widest">Credentials & Locale</h3>
+                <h3 className="font-mono text-xs text-emerald-500 mb-6 uppercase tracking-widest">{t('experience.credentials.title')}</h3>
                 <div className="space-y-8">
                     <div>
                         <div className="inline-flex items-center gap-2 text-emerald-400 font-bold mb-2">
                           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                          CFP® Certified
+                          {t('experience.credentials.cfp')}
                         </div>
-                        <div className="text-slate-500 text-sm">Certified Financial Planner</div>
+                        <div className="text-slate-500 text-sm">{t('experience.credentials.planner')}</div>
                         <div className="text-slate-600 text-xs mt-1">Planejar / Financial Planning Standards Board</div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="p-3 rounded bg-black/40 border border-white/5">
-                            <div className="text-slate-300 text-sm font-medium">Portuguese</div>
-                            <div className="text-slate-600 text-[10px] font-mono uppercase">Native</div>
+                            <div className="text-slate-300 text-sm font-medium">{t('experience.credentials.langs.pt')}</div>
+                            <div className="text-slate-600 text-[10px] font-mono uppercase">{t('experience.credentials.langs.ptLevel')}</div>
                         </div>
                         <div className="p-3 rounded bg-black/40 border border-white/5">
-                            <div className="text-slate-300 text-sm font-medium">English</div>
-                            <div className="text-slate-600 text-[10px] font-mono uppercase">Fluent</div>
+                            <div className="text-slate-300 text-sm font-medium">{t('experience.credentials.langs.en')}</div>
+                            <div className="text-slate-600 text-[10px] font-mono uppercase">{t('experience.credentials.langs.enLevel')}</div>
                         </div>
                     </div>
                 </div>

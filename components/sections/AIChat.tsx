@@ -2,19 +2,26 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, Sparkles, User, Terminal } from 'lucide-react';
 import { generateChatResponse } from '../../services/gemini';
 import { ChatMessage, UserRole } from '../../types';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export const AIChat: React.FC = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: '1',
-      role: UserRole.MODEL,
-      text: "System initialized. I am Roberto's Digital Associate. Accessing professional archives... Ready for queries regarding Strategy, Operations, or Finance.",
-      timestamp: Date.now()
-    }
-  ]);
+  const { t, language } = useLanguage();
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // Initialize or reset chat when language changes
+  useEffect(() => {
+    setMessages([
+      {
+        id: '1',
+        role: UserRole.MODEL,
+        text: t('chat.initialMessage'),
+        timestamp: Date.now()
+      }
+    ]);
+  }, [language, t]);
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
@@ -26,7 +33,6 @@ export const AIChat: React.FC = () => {
   };
 
   useEffect(() => {
-    // Only auto-scroll if we have more than the initial message to avoid layout shifts on load
     if (messages.length > 1) {
       scrollToBottom();
     }
@@ -47,7 +53,8 @@ export const AIChat: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
-    const responseText = await generateChatResponse(messages, userMessage.text);
+    // Pass the current language to the API service
+    const responseText = await generateChatResponse(messages, userMessage.text, language);
 
     const botMessage: ChatMessage = {
       id: (Date.now() + 1).toString(),
@@ -68,10 +75,10 @@ export const AIChat: React.FC = () => {
           <div className="text-center mb-12">
              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">Gemini 2.5 Active</span>
+                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">{t('chat.status')}</span>
              </div>
-             <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">Interactive Dossier</h2>
-             <p className="text-slate-400 font-light">Ask specific questions about work history, methodology, or technical skills.</p>
+             <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">{t('chat.title')}</h2>
+             <p className="text-slate-400 font-light">{t('chat.subtitle')}</p>
           </div>
 
           {/* Chat Interface Container */}
@@ -84,7 +91,7 @@ export const AIChat: React.FC = () => {
                    <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
                    <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
                 </div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase">Secure_Connection_Established</div>
+                <div className="text-[10px] font-mono text-slate-500 uppercase">{t('chat.connection')}</div>
              </div>
 
              {/* Messages Area */}
@@ -123,7 +130,7 @@ export const AIChat: React.FC = () => {
                          <Terminal className="w-5 h-5 text-emerald-400" />
                       </div>
                       <div className="flex items-center gap-2 p-4">
-                         <span className="text-xs font-mono text-emerald-500">PROCESSING_REQUEST...</span>
+                         <span className="text-xs font-mono text-emerald-500">{t('chat.processing')}</span>
                       </div>
                    </div>
                 )}
@@ -137,7 +144,7 @@ export const AIChat: React.FC = () => {
                       type="text"
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
-                      placeholder="Enter command or question..."
+                      placeholder={t('chat.placeholder')}
                       className="relative w-full bg-black/50 text-white placeholder-slate-600 border border-white/10 rounded-xl py-4 pl-6 pr-14 focus:outline-none focus:border-emerald-500/40 focus:bg-black/70 transition-all font-mono text-sm"
                    />
                    <button 
@@ -149,7 +156,7 @@ export const AIChat: React.FC = () => {
                    </button>
                 </form>
                 <div className="text-center mt-3">
-                   <span className="text-[10px] text-slate-600 font-mono">AI can make errors. Verify important info.</span>
+                   <span className="text-[10px] text-slate-600 font-mono">{t('chat.disclaimer')}</span>
                 </div>
              </div>
           </div>

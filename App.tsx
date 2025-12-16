@@ -5,6 +5,7 @@ import { Expertise } from './components/sections/Expertise';
 import { Experience } from './components/sections/Experience';
 import { AIChat } from './components/sections/AIChat';
 import { Mail, Linkedin, FileText } from 'lucide-react';
+import { useLanguage } from './contexts/LanguageContext';
 
 // CONFIGURATION: Set to true to enable the colorful background blobs
 const ENABLE_AURORA = false;
@@ -22,6 +23,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const App: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: -500, y: -500 });
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Ensure page starts at top on refresh/load
@@ -102,7 +104,7 @@ const App: React.FC = () => {
               <div className="text-center md:text-left space-y-3">
                  <div className="text-2xl font-serif font-bold text-white">Roberto E. C. Freitas, CFP®</div>
                  <p className="text-slate-400 text-sm max-w-md font-light">
-                    Bridging sophisticated financial planning with operational excellence.
+                    {t('footer.desc')}
                  </p>
               </div>
               
@@ -116,14 +118,16 @@ const App: React.FC = () => {
                  <a href="https://www.linkedin.com/in/robertoecf/" target="_blank" rel="noreferrer" className="group p-4 rounded-full bg-white/5 border border-ethereal-border hover:bg-ethereal-blue/50 hover:border-[#0077b5] hover:scale-110 transition-all duration-500">
                     <Linkedin className="w-5 h-5 text-slate-400 group-hover:text-white" />
                  </a>
+                 {/*
                  <a href="/resume.pdf" className="group p-4 rounded-full bg-white/5 border border-ethereal-border hover:bg-white/20 hover:border-white hover:scale-110 transition-all duration-500">
                     <FileText className="w-5 h-5 text-slate-400 group-hover:text-white" />
                  </a>
+                 */}
               </div>
            </div>
            <div className="max-w-7xl mx-auto px-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-slate-600 uppercase tracking-widest">
-              <p>© {new Date().getFullYear()} SYSTEM_ONLINE</p>
-              <p className="text-center md:text-right">CFP® MARK OWNED BY FPSB</p>
+              <p>© {new Date().getFullYear()} {t('footer.system')}</p>
+              <p className="text-center md:text-right">{t('footer.mark')}</p>
            </div>
         </footer>
       </div>

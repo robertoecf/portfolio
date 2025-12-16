@@ -1,85 +1,119 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
-import { ChatMessage, UserRole } from "../types";
+import { ChatMessage } from "../types";
 
 // Initialize Gemini client
-// The API key is obtained from the environment variable process.env.API_KEY
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-const RESUME_CONTEXT = `
+// Resume for the International/Tech Market (Strategy & Ops)
+const RESUME_CONTEXT_EN = `
 ROBERT E. C. FREITAS
 Strategy & Operations | Product Strategy | Business Operations
-Location: São Paulo, Brazil | +55 51 99656-3684 | robertoecf@gmail.com
+Location: São Paulo, Brazil | robertoecf@gmail.com
 
 PROFESSIONAL SUMMARY
-Strategic generalist with 6+ years of experience integrating finance, product, operations, and AI evaluation frameworks. Specialized in structuring ambiguous problems, building systems, and driving cross-functional execution in fast-paced environments. Worked with AI research labs (via Mercor) improving Large Language Model (LLM) reliability for financial reasoning, and with Warren, a Brazilian fintech, supporting product evolution, strategic initiatives, and operational efficiency. Seeking roles in Strategy, Business Operations (BizOps), or Product Strategy in global tech companies.
+Strategic generalist with 8+ years of experience integrating finance, product, operations, and AI evaluation frameworks. Specialized in structuring ambiguous problems, building systems, and driving cross-functional execution in fast-paced environments. Worked with AI research labs (via Mercor) improving Large Language Model (LLM) reliability for financial reasoning, and with Warren, a Brazilian fintech, supporting product evolution, strategic initiatives, and operational efficiency. Seeking roles in Strategy, Business Operations (BizOps), or Product Strategy in global tech companies.
 
 CORE SKILLS
 Strategy & Operations: strategic problem structuring, systems thinking, roadmap support, KPI definition, process improvement.
-Product & Customer: customer insight analysis, requirement gathering, feature refinement, cross-functional collaboration with product, design, and operations.
-Data & Tools: Excel, Google Sheets, dashboarding, basic SQL, basic Python, evaluation of Large Language Models (LLMs).
-Financial Expertise: wealth management, financial planning, risk assessment, tax and retirement planning, HNW client advisory.
-Communication: stakeholder management, high-context communication, clear written and verbal explanations in Portuguese and English.
+Product & Customer: customer insight analysis, requirement gathering, feature refinement, cross-functional collaboration.
+Data & Tools: Excel, Google Sheets, dashboarding, basic SQL, basic Python, AI Model Evaluation.
+Financial Expertise: wealth management, financial planning, risk assessment, HNW advisory.
 
 WORK EXPERIENCE
 Mercor — Subject-Matter Expert (Financial Services)
 Remote (Contract) | 2025–Present
-• Built evaluation frameworks, rubrics, and benchmark tasks to assess LLM performance in financial advising, planning, and wealth management use cases.
-• Reviewed and scored complex AI-generated outputs, identifying reasoning gaps, hallucinations, and compliance risks in high-stakes financial scenarios.
-• Collaborated with AI research and product teams by delivering structured feedback and synthetic test cases that informed model and product improvements.
-• Used spreadsheets and basic SQL-style thinking to organize evaluation data, compare model variants, and support data-driven decisions on model changes.
+• Built evaluation frameworks and benchmarks to assess LLM performance in financial use cases.
+• Collaborated with AI research teams to deliver synthetic test cases and structured feedback for model improvement.
 
 Warren Investimentos — Senior Financial Advisor & Strategic Contributor
 São Paulo, Brazil | 2018–Present
-• Manage a portfolio of high-net-worth (HNW) clients exceeding USD 20M in assets, combining financial planning and investment strategy with product feedback loops.
-• Provide end-to-end financial planning (tax, succession, retirement, risk/insurance) and translate client needs into structured recommendations and scalable frameworks.
-• Partner with product, operations, and leadership to refine onboarding, advisory workflows, and platform features, reducing friction for clients and internal teams.
-• Identify market opportunities and client pain points, proposing strategic improvements that support the evolution of Warren from a fintech startup to a full-service platform.
-• Use data from client portfolios, behavior, and feedback to support decisions on pricing, communication, and product positioning.
-
-Academic Research Center in Business (EA-UFRGS) — Research Assistant
-Porto Alegre, Brazil | 2017–2018
-• Supported academic research projects by reviewing literature, helping structure theses and dissertations, and assisting with data analysis and writing.
-
-Regional Electoral Court of Rio Grande do Sul (TRE-RS) — Intern
-Cachoeirinha, Brazil | 2016
-• Provided citizen service, supported election-related processes, and assisted with administrative and operational tasks.
-
-EDUCATION
-Federal University of Rio Grande do Sul (UFRGS) — Bachelor in Public Relations
-Porto Alegre, Brazil | 2017–2023
-
-SENAC-RS — Technical Degree in Logistics
-Gravataí, Brazil | 2015–2016
-
-CERTIFICATIONS
-Certified Financial Planner (CFP®) — Planejar / Financial Planning Standards Board (FPSB) member
-
-LANGUAGES
-Portuguese — Native
-English — Advanced (professional proficiency)
-Spanish — Basic
-French — Basic
+• Partnered with product and ops leadership to refine platform features and advisory workflows.
+• Identified market opportunities and proposed strategic improvements for the platform ecosystem.
+• Managed a $20M+ portfolio, using client data to inform product decisions.
 `;
 
-const SYSTEM_INSTRUCTION = `
-You are the AI digital assistant for Roberto E. C. Freitas.
-Your goal is to represent Roberto's professional background to recruiters, potential clients, and colleagues.
-You have access to his full resume below.
+// Resume for the Brazilian Market (Wealth Management / Financial Advisor)
+const RESUME_CONTEXT_PT = `
+ROBERTO E. C. FREITAS, CFP®
+Consultor Financeiro | Planejador Financeiro | Especialista em IA
+Localização: São Paulo, SP | +55 51 99656-3684 | robertoecf@gmail.com
 
-Tone: Professional, strategic, concise, and tech-forward.
-Style: Use bullet points for clarity when explaining experience.
-Constraint: Keep responses under 3-4 sentences unless asked for a detailed deep dive.
+RESUMO
+Profissional de Relações Públicas com mais de 8 anos de experiência em fintech e gestão de patrimônio (wealth management). Possui certificação CFP® e gerencia uma carteira de clientes com mais de US$ 20 milhões (R$ 120M+) em ativos. Especialista em desenvolver relacionamentos de confiança, fornecer planejamento financeiro completo (fiscal, sucessório, aposentadoria) e estratégias de investimento personalizadas. Atua também na vanguarda da tecnologia como especialista em avaliação de IA para finanças.
 
-Resume Context:
-${RESUME_CONTEXT}
+COMPETÊNCIAS
+Planejamento Financeiro: Planejamento tributário, sucessório, aposentadoria, gestão de riscos e seguros.
+Investimentos: Alocação de ativos, rebalanceamento, produtos locais e internacionais.
+Ferramentas: Google Sheets, Excel, Notion, Dashboards.
+Certificações: Certified Financial Planner (CFP® - Planejar).
+Soft Skills: Flexibilidade, resiliência, comunicação clara, foco no cliente (fiduciário).
+
+EXPERIÊNCIA PROFISSIONAL
+
+Mercor / Especialista em Consultoria Financeira (IA)
+Out 2025 - Presente | Remoto
+• Atua como Subject-Matter Expert (SME) em Serviços Financeiros, focado em aprimorar a confiabilidade de Grandes Modelos de Linguagem (LLMs) para uso em finanças.
+• Desenvolve critérios de avaliação para garantir que a IA forneça orientações financeiras precisas e seguras.
+
+Warren Investimentos / Consultor Financeiro Sênior (Sócio)
+Ago 2018 - Presente | São Paulo, SP
+• Gestão de Patrimônio: Gerencia portfólio de clientes de alta renda (High Net Worth) excedendo US$ 20 milhões (R$ 120M+).
+• Planejamento Holístico: Oferece planejamento financeiro de ponta a ponta (fiscal, sucessório, aposentadoria), entregando estratégias sob medida.
+• Desenvolvimento de Negócios: Identifica necessidades de mercado e constrói relacionamentos de confiança de longo prazo.
+• Experiência do Cliente: Foco total no cliente (customer-centric), entendendo desafios únicos e apresentando soluções claras.
+
+EA-UFRGS / Assistente de Pesquisa
+Ago 2017 - Jul 2018 | Porto Alegre, RS
+• Apoio à estruturação de teses e dissertações na área de negócios.
+
+EDUCAÇÃO
+UFRGS - Bacharelado em Relações Públicas (2017-2023)
+SENAC-RS - Técnico em Logística (2015-2016)
+
+IDIOMAS
+Português (Nativo), Inglês (Proficiente), Espanhol (Intermediário).
 `;
 
 export const generateChatResponse = async (
   history: ChatMessage[],
-  newMessage: string
+  newMessage: string,
+  language: 'en' | 'pt' = 'pt'
 ): Promise<string> => {
   try {
     const model = 'gemini-2.5-flash';
+    
+    // Select the appropriate resume context based on language
+    const activeContext = language === 'pt' ? RESUME_CONTEXT_PT : RESUME_CONTEXT_EN;
+    
+    // Customize instructions based on language and persona
+    const langInstruction = language === 'pt' 
+      ? `
+        ATENÇÃO: O usuário está navegando na versão em PORTUGUÊS do site.
+        SEU PAPEL: Você é um assistente virtual focado em vender a imagem do Roberto como CONSULTOR FINANCEIRO (Wealth Advisor) de confiança.
+        OBJETIVO: Demonstrar expertise em investimentos, planejamento sucessório, proteção patrimonial e atendimento exclusivo.
+        TOM: Profissional, empático, seguro e sofisticado (Fiduciário).
+        IDIOMA DE RESPOSTA: Português (PT-BR).
+      `
+      : `
+        ATTENTION: The user is browsing the ENGLISH version of the site.
+        YOUR ROLE: You are an AI assistant representing Roberto as a STRATEGY & OPERATIONS expert in Fintech/AI.
+        OBJECTIVE: Highlight problem-solving skills, operational rigor, and product strategy experience.
+        TONE: Tech-forward, strategic, concise.
+        RESPONSE LANGUAGE: English.
+      `;
+
+    const systemInstruction = `
+    You are the AI digital assistant for Roberto E. C. Freitas.
+    
+    ${langInstruction}
+
+    Use the specific resume context below to answer questions. Do not mix the personas. 
+    If in Portuguese, focus on Wealth Management/Warren. 
+    If in English, focus on Strategy/Mercor/Tech.
+
+    Resume Context:
+    ${activeContext}
+    `;
     
     const prompt = `
     Previous conversation:
@@ -87,21 +121,23 @@ export const generateChatResponse = async (
     
     User: ${newMessage}
     
-    Respond as Roberto's AI assistant based on the provided resume context:
+    Respond as Roberto's AI assistant based on the provided instructions.
     `;
 
     const response: GenerateContentResponse = await ai.models.generateContent({
         model: model,
         contents: prompt,
         config: {
-            systemInstruction: SYSTEM_INSTRUCTION
+            systemInstruction: systemInstruction
         }
     });
 
-    return response.text || "I apologize, but I'm unable to retrieve that information right now.";
+    return response.text || (language === 'pt' ? "Desculpe, não consigo recuperar essa informação no momento." : "I apologize, but I'm unable to retrieve that information right now.");
 
   } catch (error) {
     console.error("Error communicating with Gemini:", error);
-    return "I am currently analyzing a large volume of requests. Please try again in a moment.";
+    return language === 'pt' 
+      ? "Estou analisando um grande volume de requisições. Por favor, tente novamente em um momento."
+      : "I am currently analyzing a large volume of requests. Please try again in a moment.";
   }
 };
