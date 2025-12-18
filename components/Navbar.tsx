@@ -64,7 +64,7 @@ export const Navbar: React.FC = () => {
           </div>
           
           <div className="hidden sm:block">
-            <div className="text-base font-medium text-white tracking-tight leading-tight">Roberto E. C. Freitas</div>
+            <div className="text-base font-medium text-white tracking-tight leading-tight">Roberto E. C. Freitas, CFP®</div>
             <div className="flex items-center gap-2 text-[10px] font-mono text-ethereal-orange tracking-widest uppercase mt-0.5">
               <span>{t('nav.role')}</span>
               <span className="w-1 h-1 rounded-full bg-slate-600" />

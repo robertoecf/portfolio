@@ -66,7 +66,7 @@ export const Hero: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] font-mono text-slate-500 mb-1">{t('hero.hud.location')}</div>
-                    <div className="text-white text-sm font-medium">São Paulo, BR</div>
+                    <div className="text-white text-sm font-medium">São Paulo · SP · Brasil.</div>
                   </div>
                 </div>
 
@@ -74,7 +74,7 @@ export const Hero: React.FC = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-ethereal-blue/50 transition-colors duration-300">
                     <Cpu className="w-5 h-5 text-ethereal-blue mb-2" />
-                    <div className="text-2xl font-bold text-white">98.2%</div>
+                    <div className="text-2xl font-bold text-white">CFP®, CEA</div>
                     <div className="text-[10px] font-mono text-slate-400 mt-1">{t('hero.hud.evalAcc')}</div>
                   </div>
                   <div className="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-ethereal-green/50 transition-colors duration-300">

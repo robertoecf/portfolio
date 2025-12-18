@@ -138,18 +138,18 @@ const translations = {
     hero: {
       systemReady: 'Consultoria_Patrimonial_Ativa',
       roles: {
-        strategy: 'Consultor Financeiro',
-        ops: 'Planejador CFP®',
-        product: 'Expert em IA'
+        strategy: 'Consultor & Planejador Financeiro',
+        ops: 'Especialista em Investimentos',
+        product: 'Gestor Patrimonial'
       },
       description: 'Consultor Financeiro (CFP®) com mais de 8 anos de experiência em fintechs e wealth management. Especialista em construção de patrimônio, planejamento sucessório e estratégias de investimento para clientes de alta renda.',
       viewExp: 'Ver Trajetória',
       initChat: 'FALAR_COM_IA',
       hud: {
         status: 'DISPONIBILIDADE',
-        optimal: 'ACEITANDO_CLIENTES',
-        location: 'SÃO PAULO, SP',
-        evalAcc: 'CERTIFICAÇÃO',
+        optimal: 'Online',
+        location: 'Local',
+        evalAcc: 'CERTIFIÇÕES',
         aumValue: '+R$ 120M',
         aum: 'ATIVOS_SOB_GESTÃO'
       }
