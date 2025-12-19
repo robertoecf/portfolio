@@ -66,7 +66,7 @@ export const Hero: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] font-mono text-slate-500 mb-1">{t('hero.hud.location')}</div>
-                    <div className="text-white text-sm font-medium">São Paulo · SP · Brasil.</div>
+                    <div className="text-white text-sm font-medium">São Paulo · SP · Brasil</div>
                   </div>
                 </div>
 
