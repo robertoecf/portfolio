@@ -17,5 +17,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/server.mjs ./server.mjs
 COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/public ./public
 EXPOSE 8080
 CMD ["node", "server.mjs"]

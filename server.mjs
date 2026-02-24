@@ -12,6 +12,7 @@ const port = Number(process.env.PORT || 8080);
 app.use(express.json({ limit: '1mb' }));
 
 const distDir = path.join(__dirname, 'dist');
+const publicDir = path.join(__dirname, 'public');
 app.use(express.static(distDir, { extensions: ['html'] }));
 
 const staticFileRoutes = [
@@ -24,8 +25,14 @@ const staticFileRoutes = [
 ];
 
 for (const route of staticFileRoutes) {
-  app.get(route, (_req, res) => {
-    res.sendFile(path.join(distDir, route.replace(/^\//, '')));
+  app.get(route, (_req, res, next) => {
+    const rel = route.replace(/^\//, '');
+    res.sendFile(path.join(distDir, rel), (err) => {
+      if (!err) return;
+      res.sendFile(path.join(publicDir, rel), (err2) => {
+        if (err2) next();
+      });
+    });
   });
 }
 
