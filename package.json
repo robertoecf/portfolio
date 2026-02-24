@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr entry-server.tsx --outDir dist/server && node prerender.mjs",
+    "build:client": "vite build",
     "build:pages": "BASE_PATH=/portfolio/ vite build",
     "preview": "vite preview",
     "start": "node server.mjs"
