@@ -13,6 +13,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const { render } = await import('./dist/server/entry-server.js');
 
 const template = readFileSync(join(__dirname, 'dist/index.html'), 'utf-8');
+
+// Save the clean template before SSR injection so the runtime server can
+// use it to render fresh HTML per-request without a stale pre-rendered div.
+writeFileSync(join(__dirname, 'dist/template.html'), template);
+
 const appHtml = render();
 
 const html = template.replace(
@@ -21,4 +26,4 @@ const html = template.replace(
 );
 
 writeFileSync(join(__dirname, 'dist/index.html'), html);
-console.log('[prerender] index.html successfully pre-rendered to static HTML.');
+console.log('[prerender] template.html saved and index.html pre-rendered to static HTML.');
