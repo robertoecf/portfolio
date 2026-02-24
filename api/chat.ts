@@ -24,6 +24,17 @@ export default async function handler(req: any, res: any) {
 
   try {
     const body = (req.body || {}) as ReqBody;
+
+    // Input validation — prevent abuse and excessive API costs
+    if (!body.newMessage || typeof body.newMessage !== 'string') {
+      return res.status(400).json({ error: 'invalid_message' });
+    }
+    if (body.newMessage.length > 500) {
+      return res.status(400).json({ error: 'message_too_long' });
+    }
+    if (!Array.isArray(body.history) || body.history.length > 20) {
+      return res.status(400).json({ error: 'history_too_long' });
+    }
     const ai = new GoogleGenAI({ apiKey });
 
     const prompt = `Previous conversation:\n${(body.history || [])
