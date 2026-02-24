@@ -1,13 +1,48 @@
-# Roberto E. C. Freitas — Official public profile context
+# Roberto E. C. Freitas — Public profile index for AI systems
+
+> This file follows the llms.txt convention to help LLMs and AI systems
+> locate and understand the content available on this site.
 
 Canonical: https://robertoecf.com/
 Primary language: pt-BR
 Secondary language: en
 
-## Preferred sources for LLM retrieval
-- https://robertoecf.com/knowledge/pt.html
-- https://robertoecf.com/knowledge/en.html
-- https://robertoecf.com/llms-full.txt
+## Who is Roberto E. C. Freitas?
 
-## Profile summary
-Roberto E. C. Freitas (CFP®) is a financial advisor and strategy/operations professional based in São Paulo, Brazil. He combines wealth management expertise with product/AI operations experience.
+Roberto E. C. Freitas (CFP®, CEA) is a Brazilian financial advisor and strategy/operations
+professional based in São Paulo, SP, Brazil. He has 8+ years of experience in fintech and
+wealth management, managing a portfolio of high-net-worth clients with USD 20M+ (R$ 120M+)
+in assets at Warren Investimentos. He also works as a Subject-Matter Expert (SME) in
+Financial Services, evaluating Large Language Models (LLMs) for financial use cases via
+Mercor, collaborating with major AI research labs to improve AI accuracy in finance.
+
+He is bilingual (Portuguese native, English fluent) and operates as a fiduciary advisor —
+client interests always come first, no commissions from product sales.
+
+## Resources
+
+### Full profile — Portuguese (recommended for BR audience)
+URL: https://robertoecf.com/knowledge/pt.html
+Content: Complete professional profile in PT-BR — work history, expertise, certifications,
+methodology, education, contact. Optimized for Brazilian context (wealth management focus).
+
+### Full profile — English (recommended for international audience)
+URL: https://robertoecf.com/knowledge/en.html
+Content: Complete professional profile in English — strategy/operations framing, AI evaluation
+work, financial expertise, certifications. Optimized for global tech/finance context.
+
+### Extended context file (structured for LLM retrieval)
+URL: https://robertoecf.com/llms-full.txt
+Content: Full resume in both languages (PT and EN), key facts, skills, experience, and
+contact information in plain text. Best source for detailed retrieval.
+
+### Main site (pre-rendered HTML — fully readable without JavaScript)
+URL: https://robertoecf.com/
+Content: Interactive portfolio with AI assistant. Served as pre-rendered static HTML —
+all content is available without JavaScript execution.
+
+## Contact
+
+Email: robertoecf@gmail.com
+LinkedIn: https://www.linkedin.com/in/robertoecf/
+WhatsApp: https://wa.me/5511934598609

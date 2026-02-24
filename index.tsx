@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import { LanguageProvider } from './contexts/LanguageContext';
 
@@ -8,11 +8,17 @@ if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
+const app = (
   <React.StrictMode>
     <LanguageProvider>
       <App />
     </LanguageProvider>
   </React.StrictMode>
 );
+
+// Hydrate pre-rendered SSR content in production; render fresh in dev
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}

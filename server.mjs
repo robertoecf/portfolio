@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { existsSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { GoogleGenAI } from '@google/genai';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -14,6 +16,22 @@ app.use(express.json({ limit: '1mb' }));
 const distDir = path.join(__dirname, 'dist');
 const publicDir = path.join(__dirname, 'public');
 app.use(express.static(distDir, { extensions: ['html'] }));
+
+// Runtime SSR: load the server bundle produced by `vite build --ssr`.
+// When present, every HTML request is rendered fresh via renderToString so
+// crawlers and LLMs always receive fully-populated HTML even if the
+// pre-rendered dist/index.html is stale or absent.
+let ssrRender = null;
+const ssrBundle = path.join(distDir, 'server/entry-server.js');
+if (existsSync(ssrBundle)) {
+  try {
+    const { render } = await import(ssrBundle);
+    ssrRender = render;
+    console.log('[ssr] runtime renderer loaded');
+  } catch (err) {
+    console.warn('[ssr] failed to load renderer, falling back to static HTML:', err.message);
+  }
+}
 
 const staticFileRoutes = [
   '/sitemap.xml',
@@ -76,7 +94,19 @@ app.get('/healthz', (_req, res) => {
   res.status(200).send('ok');
 });
 
-app.get('*', (_req, res) => {
+app.get('*', async (_req, res) => {
+  // Use runtime SSR when the bundle is available (template.html is the clean
+  // shell saved by prerender.mjs before it injected the build-time HTML).
+  if (ssrRender) {
+    try {
+      const template = await readFile(path.join(distDir, 'template.html'), 'utf-8');
+      const appHtml = ssrRender();
+      const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+      return res.setHeader('Content-Type', 'text/html; charset=utf-8').send(html);
+    } catch (err) {
+      console.error('[ssr] render error, falling back to static file:', err.message);
+    }
+  }
   res.sendFile(path.join(distDir, 'index.html'));
 });
 
