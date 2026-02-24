@@ -1,8 +1,4 @@
-import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { ChatMessage } from "../types";
-
-// Initialize Gemini client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // Resume for the International/Tech Market (Strategy & Ops)
 const RESUME_CONTEXT_EN = `
@@ -80,64 +76,25 @@ export const generateChatResponse = async (
   language: 'en' | 'pt' = 'pt'
 ): Promise<string> => {
   try {
-    const model = 'gemini-2.5-flash';
-    
-    // Select the appropriate resume context based on language
     const activeContext = language === 'pt' ? RESUME_CONTEXT_PT : RESUME_CONTEXT_EN;
-    
-    // Customize instructions based on language and persona
-    const langInstruction = language === 'pt' 
-      ? `
-        ATENÇÃO: O usuário está navegando na versão em PORTUGUÊS do site.
-        SEU PAPEL: Você é um assistente virtual focado em vender a imagem do Roberto como CONSULTOR FINANCEIRO (Wealth Advisor) de confiança.
-        OBJETIVO: Demonstrar expertise em investimentos, planejamento sucessório, proteção patrimonial e atendimento exclusivo.
-        TOM: Profissional, empático, seguro e sofisticado (Fiduciário).
-        IDIOMA DE RESPOSTA: Português (PT-BR).
-      `
-      : `
-        ATTENTION: The user is browsing the ENGLISH version of the site.
-        YOUR ROLE: You are an AI assistant representing Roberto as a STRATEGY & OPERATIONS expert in Fintech/AI.
-        OBJECTIVE: Highlight problem-solving skills, operational rigor, and product strategy experience.
-        TONE: Tech-forward, strategic, concise.
-        RESPONSE LANGUAGE: English.
-      `;
-
-    const systemInstruction = `
-    You are the AI digital assistant for Roberto E. C. Freitas.
-    
-    ${langInstruction}
-
-    Use the specific resume context below to answer questions. Do not mix the personas. 
-    If in Portuguese, focus on Wealth Management/Warren. 
-    If in English, focus on Strategy/Mercor/Tech.
-
-    Resume Context:
-    ${activeContext}
-    `;
-    
-    const prompt = `
-    Previous conversation:
-    ${history.map(h => `${h.role}: ${h.text}`).join('\n')}
-    
-    User: ${newMessage}
-    
-    Respond as Roberto's AI assistant based on the provided instructions.
-    `;
-
-    const response: GenerateContentResponse = await ai.models.generateContent({
-        model: model,
-        contents: prompt,
-        config: {
-            systemInstruction: systemInstruction
-        }
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ history, newMessage, language, activeContext })
     });
 
-    return response.text || (language === 'pt' ? "Desculpe, não consigo recuperar essa informação no momento." : "I apologize, but I'm unable to retrieve that information right now.");
+    if (!res.ok) {
+      throw new Error(`chat api ${res.status}`);
+    }
 
+    const data = await res.json();
+    return data?.text || (language === 'pt'
+      ? 'Desculpe, não consigo recuperar essa informação no momento.'
+      : "I apologize, but I'm unable to retrieve that information right now.");
   } catch (error) {
-    console.error("Error communicating with Gemini:", error);
-    return language === 'pt' 
-      ? "Estou analisando um grande volume de requisições. Por favor, tente novamente em um momento."
-      : "I am currently analyzing a large volume of requests. Please try again in a moment.";
+    console.error('Error communicating with /api/chat:', error);
+    return language === 'pt'
+      ? 'Chat temporariamente indisponível. Você pode me chamar em robertoecf@gmail.com ou no LinkedIn.'
+      : 'Chat is temporarily unavailable. You can reach me at robertoecf@gmail.com or LinkedIn.';
   }
 };

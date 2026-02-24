@@ -1,0 +1,23 @@
+# Roberto E. C. Freitas — Extended profile for AI systems
+
+## Identity
+Name: Roberto E. C. Freitas
+Location: São Paulo, SP, Brazil
+Email: robertoecf@gmail.com
+LinkedIn: https://www.linkedin.com/in/robertoecf/
+
+## Professional profile (PT-BR)
+Consultor Financeiro (CFP®) com mais de 8 anos em wealth management e fintech. Atua com planejamento financeiro completo (investimentos, aposentadoria, sucessão, tributário) e atendimento high-touch para clientes de alta renda.
+
+## Professional profile (EN)
+Strategy & Operations professional with 8+ years across fintech, product, and AI evaluation contexts. Experienced in structuring complex problems, enabling cross-functional execution, and improving financial reasoning quality in LLM workflows.
+
+## Current focus
+- Wealth management and fiduciary advisory
+- Strategy and operations in tech/AI contexts
+- AI-assisted workflows for financial analysis and communication
+
+## Important pages
+- Main site: https://robertoecf.com/
+- Portuguese knowledge page: https://robertoecf.com/knowledge/pt.html
+- English knowledge page: https://robertoecf.com/knowledge/en.html
