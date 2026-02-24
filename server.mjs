@@ -14,6 +14,21 @@ app.use(express.json({ limit: '1mb' }));
 const distDir = path.join(__dirname, 'dist');
 app.use(express.static(distDir, { extensions: ['html'] }));
 
+const staticFileRoutes = [
+  '/sitemap.xml',
+  '/robots.txt',
+  '/llms.txt',
+  '/llms-full.txt',
+  '/knowledge/pt.html',
+  '/knowledge/en.html',
+];
+
+for (const route of staticFileRoutes) {
+  app.get(route, (_req, res) => {
+    res.sendFile(path.join(distDir, route.replace(/^\//, '')));
+  });
+}
+
 const langInstruction = (language = 'pt') =>
   language === 'pt'
     ? 'ATENÇÃO: Responda em Português (PT-BR) como assistente profissional de Roberto com foco em consultoria financeira e planejamento patrimonial.'
