@@ -1,0 +1,13 @@
+# Roberto E. C. Freitas — Official public profile context
+
+Canonical: https://robertoecf.com/
+Primary language: pt-BR
+Secondary language: en
+
+## Preferred sources for LLM retrieval
+- https://robertoecf.com/knowledge/pt.html
+- https://robertoecf.com/knowledge/en.html
+- https://robertoecf.com/llms-full.txt
+
+## Profile summary
+Roberto E. C. Freitas (CFP®) is a financial advisor and strategy/operations professional based in São Paulo, Brazil. He combines wealth management expertise with product/AI operations experience.
