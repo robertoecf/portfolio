@@ -5,29 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr entry-server.tsx --outDir dist/server && node prerender.mjs",
-    "build:client": "vite build",
-    "build:pages": "BASE_PATH=/portfolio/ vite build",
-    "preview": "vite preview",
-    "start": "node server.mjs"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "^1.30.0",
-    "express": "^4.21.2",
     "lucide-react": "^0.554.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "recharts": "^3.4.1"
+    "recharts": "^3.4.1",
+    "@google/genai": "^1.30.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
-  },
-  "overrides": {
-    "minimatch": "^10.2.1",
-    "glob": "^11.0.0",
-    "rimraf": "^6.0.0"
   }
 }

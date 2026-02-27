@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/chat.ts": {
-      "runtime": "@vercel/node"
-    }
-  }
-}
