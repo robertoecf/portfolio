@@ -248,8 +248,16 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const getDefaultLanguage = (): Language => {
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname.endsWith('.com.br')) return 'pt';
+  }
+  return 'en';
+};
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('pt');
+  const [language, setLanguage] = useState<Language>(getDefaultLanguage);
 
   const t = (path: string) => {
     return path.split('.').reduce((obj, key) => obj && obj[key], translations[language]);
