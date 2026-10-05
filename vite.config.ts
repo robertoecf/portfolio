@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import { localizeIndexHtml, staticSeoFiles } from './content/seo';
 
 const CONTENT_TYPES: Record<string, string> = {
@@ -37,7 +38,7 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0',
   },
-  plugins: [react(), seoFromProfile()],
+  plugins: [react(), tailwindcss(), seoFromProfile()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),

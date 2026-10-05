@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { PERSON } from '../content/profile';
 
 const FlagUS = () => (
-  <svg viewBox="0 0 60 30" className="w-6 h-3.5 rounded-sm shadow-sm" preserveAspectRatio="none">
+  <svg viewBox="0 0 60 30" className="w-6 h-3.5 rounded-xs shadow-xs" preserveAspectRatio="none">
     <rect width="60" height="30" fill="#bf0a30"/>
     <rect width="60" height="4" y="4" fill="#fff"/>
     <rect width="60" height="4" y="12" fill="#fff"/>
@@ -18,7 +18,7 @@ const FlagUS = () => (
 );
 
 const FlagBR = () => (
-  <svg viewBox="0 0 60 42" className="w-6 h-4 rounded-sm shadow-sm">
+  <svg viewBox="0 0 60 42" className="w-6 h-4 rounded-xs shadow-xs">
     <rect width="60" height="42" fill="#009c3b"/>
     <path d="M6,21 L30,4 L54,21 L30,38 Z" fill="#ffdf00"/>
     <circle cx="30" cy="21" r="10" fill="#002776"/>
@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
         
         <div className="flex items-center gap-4">
           {/* Profile Photo - Enlarged */}
-          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10 shadow-lg relative z-10 flex-shrink-0 group">
+          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10 shadow-lg relative z-10 shrink-0 group">
             <img 
               src={PERSON.photo}
               alt={PERSON.shortName}

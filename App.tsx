@@ -82,7 +82,7 @@ const App: React.FC = () => {
       {/* --- Layer 4: Content --- */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-grow">
+        <main className="grow">
           <Hero />
           <Expertise />
           <Experience />

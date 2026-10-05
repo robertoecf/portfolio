@@ -20,7 +20,7 @@ export const Hero: React.FC = () => {
           </div>
           
           <div className="space-y-2">
-            <h1 className="text-6xl sm:text-8xl font-bold tracking-tighter text-white leading-[0.9] mix-blend-overlay opacity-90">
+            <h1 className="text-6xl sm:text-8xl font-bold tracking-tighter text-white leading-[0.9] sm:leading-none mix-blend-overlay opacity-90">
               Roberto<br />
               Freitas
             </h1>

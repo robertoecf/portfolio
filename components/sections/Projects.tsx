@@ -42,7 +42,7 @@ export const Projects: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 border-b border-ethereal-border pb-8">
           <div className="max-w-2xl">
             <h2 className="text-xs font-mono text-ethereal-orange mb-4 tracking-[0.2em] uppercase">{t('projects.label')}</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight">{t('projects.title')}</h3>
+            <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight md:leading-none">{t('projects.title')}</h3>
           </div>
           <p className="text-slate-400 max-w-xs text-sm leading-relaxed">{t('projects.desc')}</p>
         </div>
@@ -83,7 +83,7 @@ export const Projects: React.FC = () => {
                   {project.status && <span className="text-[10px] font-mono text-emerald-400 whitespace-nowrap">{project.status}</span>}
                 </div>
                 <h4 className="text-lg font-bold text-white">{project.name}</h4>
-                <p className="text-sm text-slate-400 leading-relaxed flex-grow">{project.description[language]}</p>
+                <p className="text-sm text-slate-400 leading-relaxed grow">{project.description[language]}</p>
                 <Tags tags={project.tags} />
                 <ProjectLinks project={project} />
               </article>

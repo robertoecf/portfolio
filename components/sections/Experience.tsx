@@ -60,7 +60,7 @@ export const Experience: React.FC = () => {
 
         <div className="space-y-8 relative">
           {/* Vertical Line Desktop */}
-          <div className="absolute left-[25%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-ethereal-border to-transparent hidden md:block" />
+          <div className="absolute left-[25%] top-0 bottom-0 mb-0 w-px bg-gradient-to-b from-transparent via-ethereal-border to-transparent hidden md:block" />
 
           {EXPERIENCE.map((job) => (
             <ResumeItem
@@ -102,7 +102,7 @@ export const Experience: React.FC = () => {
                     ))}
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                         {LANGUAGES.map((lang) => (
-                          <div key={lang.name.en} className="p-3 rounded bg-black/40 border border-white/5">
+                          <div key={lang.name.en} className="p-3 rounded-sm bg-black/40 border border-white/5">
                               <div className="text-slate-300 text-sm font-medium">{lang.name[language]}</div>
                               <div className="text-slate-600 text-[10px] font-mono uppercase">{lang.level[language]}</div>
                           </div>

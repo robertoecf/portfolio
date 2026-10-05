@@ -44,7 +44,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 
 | Camada | Tecnologia |
 |--------|-----------|
-| Frontend | React 19, TypeScript, Tailwind CSS 3 (compilado no build), Lucide Icons |
+| Frontend | React 19, TypeScript, Tailwind CSS 4 (compilado no build via `@tailwindcss/vite`), Lucide Icons |
 | Build | Vite 6 + plugin local que gera os arquivos de SEO |
 | Backend | Cloudflare Pages Functions (`functions/`) |
 | IA | xAI Grok (`grok-3-mini`) |
@@ -70,8 +70,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 ├── App.tsx                    # Layout, background e footer
 ├── index.tsx                  # Entry point React
 ├── index.html                 # Template; o bloco seo:start/seo:end é gerado no build
-├── index.css                  # Tailwind + estilos globais
-├── tailwind.config.js         # Paleta e animações
+├── index.css                  # Tailwind: paleta, fontes e animações (@theme) + estilos globais
 ├── vite.config.ts             # Vite + geração dos arquivos de SEO
 ├── content/
 │   ├── profile.ts             # Fonte única: perfil, redes, projetos, carreira

@@ -1,8 +1,69 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-ethereal-dark: #050A10; /* Deepest background */
+  --color-ethereal-blue: #0F2A3C;
+  --color-ethereal-green: #2F3B29;
+  --color-ethereal-orange: #E48200;
+  --color-ethereal-purple: #2E1065; /* Added for Futuro vibe */
+  --color-ethereal-cyan: #0E7490; /* Added for Futuro vibe */
+  --color-ethereal-white: #FEFFFB;
+  --color-ethereal-glass: rgba(255, 255, 255, 0.03);
+  --color-ethereal-border: rgba(255, 255, 255, 0.08);
+
+  --font-sans: Inter, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-serif: Merriweather, serif;
+
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-aurora: aurora 25s linear infinite;
+  --animate-blob: blob 15s infinite;
+  --animate-pulse-glow: pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-in-up: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  @keyframes aurora {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.4; filter: blur(20px); }
+    50% { opacity: 0.8; filter: blur(25px); }
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@utility bg-tech-grid {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
 
 @layer base {
+  /* Keep Tailwind v3 defaults that v4 dropped: gray-200 default border color, pointer cursor on buttons. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
   body {
     background-color: #050A10;
     color: #FEFFFB;
