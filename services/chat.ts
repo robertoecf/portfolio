@@ -1,5 +1,8 @@
 import { ChatMessage } from "../types";
 
+// Must match the limit enforced by functions/api/chat.ts.
+export const MAX_MESSAGE_CHARS = 1000;
+
 export const generateChatResponse = async (
   history: ChatMessage[],
   newMessage: string,

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { languageForHost, type Lang } from '../content/profile';
 
-type Language = 'en' | 'pt';
+type Language = Lang;
 
 interface LanguageContextType {
   language: Language;
@@ -13,6 +14,7 @@ const translations = {
     nav: {
       expertise: 'Expertise',
       experience: 'Experience',
+      projects: 'Projects',
       contact: 'Contact',
       role: 'Strategy & Operations',
       industry: 'Fintech'
@@ -31,7 +33,7 @@ const translations = {
         status: 'CURRENT_STATUS',
         optimal: 'OPTIMAL_PERFORMANCE',
         location: 'LOCATION',
-        evalAcc: 'LLM_EVAL_ACCURACY',
+        certs: 'CERTIFICATIONS',
         aumValue: '$20M+',
         aum: 'AUM_MANAGED'
       }
@@ -45,74 +47,23 @@ const translations = {
         tech: 'technology',
         suffix: '.'
       },
-      desc: 'A multidisciplinary skillset honed through years of high-stakes advisory and AI operations.',
-      cards: {
-        strategy: {
-          title: 'Strategy & Ops',
-          items: ["Problem Structuring", "Systems Thinking", "Roadmap Support", "KPI Definition", "Process Improvement"]
-        },
-        product: {
-          title: 'Product & Customer',
-          items: ["Customer Insights", "Requirement Gathering", "Feature Refinement", "Cross-functional Collab", "User Feedback Loops"]
-        },
-        data: {
-          title: 'Data & AI',
-          items: ["LLM Evaluation", "Synthetic Test Cases", "Excel & Spreadsheets", "Dashboarding", "Basic SQL & Python"]
-        },
-        finance: {
-          title: 'Financial Expertise',
-          items: ["Wealth Management", "Risk Assessment", "Tax & Retirement", "HNW Advisory", "CFP® Certified"]
-        }
-      }
+      desc: 'A multidisciplinary skillset honed through years of high-stakes advisory and AI operations.'
     },
     experience: {
       title: 'Career History',
       logs: 'DATA_LOGS: 2017 — PRESENT',
-      jobs: {
-        mercor: {
-          title: 'Subject-Matter Expert (Financial Services)',
-          desc: [
-            "Built evaluation frameworks, rubrics, and benchmark tasks to assess LLM performance in financial advising, planning, and wealth management use cases.",
-            "Reviewed and scored complex AI-generated outputs, identifying reasoning gaps, hallucinations, and compliance risks in high-stakes financial scenarios.",
-            "Collaborated with AI research and product teams by delivering structured feedback and synthetic test cases that informed model and product improvements.",
-            "Used spreadsheets and basic SQL-style thinking to organize evaluation data, compare model variants, and support data-driven decisions on model changes."
-          ]
-        },
-        warren: {
-          title: 'Senior Financial Advisor & Strategic Contributor',
-          desc: [
-            "Manage a portfolio of high-net-worth (HNW) clients exceeding USD 20M in assets, combining financial planning and investment strategy with product feedback loops.",
-            "Provide end-to-end financial planning (tax, succession, retirement, risk/insurance) and translate client needs into structured recommendations and scalable frameworks.",
-            "Partner with product, operations, and leadership to refine onboarding, advisory workflows, and platform features, reducing friction for clients and internal teams.",
-            "Identify market opportunities and client pain points, proposing strategic improvements that support the evolution of Warren from a fintech startup to a full-service platform."
-          ]
-        },
-        ea: {
-          title: 'Research Assistant',
-          desc: [
-            "Supported academic research projects by reviewing literature, helping structure theses and dissertations, and assisting with data analysis and writing."
-          ]
-        }
-      },
-      education: {
-        title: 'Education_Background',
-        ufrgs: 'Bachelor in Public Relations',
-        senac: 'Technical Degree in Logistics'
-      },
-      credentials: {
-        title: 'Credentials & Locale',
-        cfp: 'CFP® Certified',
-        planner: 'Certified Financial Planner',
-        langs: {
-          pt: 'Portuguese',
-          ptLevel: 'Native',
-          en: 'English',
-          enLevel: 'Fluent'
-        }
-      }
+      education: 'Education_Background',
+      credentials: 'Credentials & Locale'
+    },
+    projects: {
+      label: 'Open_Source',
+      title: 'Things I build',
+      desc: 'Tools at the intersection of finance, data and AI agents. All open source.',
+      featured: 'Featured',
+      all: 'All repositories on GitHub'
     },
     chat: {
-      status: 'Gemini 2.5 Active',
+      status: 'AI Assistant Online',
       title: 'Interactive Dossier',
       subtitle: 'Ask specific questions about work history, methodology, or technical skills.',
       connection: 'Secure_Connection_Established',
@@ -131,6 +82,7 @@ const translations = {
     nav: {
       expertise: 'Especialidades',
       experience: 'Trajetória',
+      projects: 'Projetos',
       contact: 'Contato',
       role: 'Consultor Financeiro',
       industry: 'Wealth Mgmt'
@@ -149,7 +101,7 @@ const translations = {
         status: 'DISPONIBILIDADE',
         optimal: 'Online',
         location: 'Local',
-        evalAcc: 'CERTIFIÇÕES',
+        certs: 'CERTIFICAÇÕES',
         aumValue: '+R$ 120M',
         aum: 'ATIVOS_SOB_GESTÃO'
       }
@@ -163,70 +115,20 @@ const translations = {
         tech: 'inteligência',
         suffix: '.'
       },
-      desc: 'Uma abordagem holística que une planejamento financeiro rigoroso, gestão de investimentos global e tecnologia de ponta.',
-      cards: {
-        strategy: {
-          title: 'Planejamento Financeiro',
-          items: ["Planejamento Sucessório", "Eficiência Tributária", "Planejamento de Aposentadoria", "Gestão de Riscos e Seguros", "Fluxo de Caixa"]
-        },
-        product: {
-          title: 'Gestão de Investimentos',
-          items: ["Alocação de Ativos", "Estratégia Local e Global", "Rebalanceamento de Carteira", "Análise de Produtos", "Renda Fixa & Variável"]
-        },
-        data: {
-          title: 'Dados & Tecnologia',
-          items: ["Consolidação de Carteira", "Análise via IA", "Relatórios Personalizados", "Expertise em Fintech", "Avaliação de LLMs"]
-        },
-        finance: {
-          title: 'Relacionamento',
-          items: ["Atendimento High-Touch", "Fiduciário (Cliente em 1º)", "Transparência Total", "Acompanhamento Contínuo", "Consultoria Proativa"]
-        }
-      }
+      desc: 'Uma abordagem holística que une planejamento financeiro rigoroso, gestão de investimentos global e tecnologia de ponta.'
     },
     experience: {
       title: 'Histórico Profissional',
       logs: 'REGISTRO: 2017 — PRESENTE',
-      jobs: {
-        mercor: {
-          title: 'Especialista em Consultoria Financeira (IA)',
-          desc: [
-            "Atuo como Especialista (SME) em Serviços Financeiros, focado em aprimorar a precisão de LLMs para grandes laboratórios de pesquisa em IA (via Mercor).",
-            "Desenvolvo frameworks de avaliação para garantir que a IA forneça orientações financeiras precisas, éticas e alinhadas às melhores práticas de Wealth Management.",
-            "Contribuo para a evolução de ferramentas de IA que auxiliarão o futuro do planejamento financeiro global."
-          ]
-        },
-        warren: {
-          title: 'Consultor Financeiro Sênior & Sócio',
-          desc: [
-            "Gestão de carteira de clientes de alta renda (High Net Worth) com ativos superiores a USD 20 milhões (R$ 120M+).",
-            "Ofereço planejamento financeiro completo (fiscal, sucessório, aposentadoria), criando estratégias personalizadas alinhadas aos objetivos de vida do cliente.",
-            "Atuo no desenvolvimento de negócios, identificando necessidades de mercado e construindo relacionamentos de confiança de longo prazo.",
-            "Colaboro com equipes internas para refinar a plataforma da Warren, garantindo uma experiência de investimento premium e sem atritos."
-          ]
-        },
-        ea: {
-          title: 'Assistente de Pesquisa',
-          desc: [
-            "Apoio em projetos de pesquisa acadêmica, estruturação de teses e análise de dados no Centro de Pesquisa em Negócios da UFRGS."
-          ]
-        }
-      },
-      education: {
-        title: 'Formação',
-        ufrgs: 'Bacharel em Relações Públicas',
-        senac: 'Técnico em Logística'
-      },
-      credentials: {
-        title: 'Certificações',
-        cfp: 'Certificação CFP®',
-        planner: 'Planejador Financeiro Certificado',
-        langs: {
-          pt: 'Português',
-          ptLevel: 'Nativo',
-          en: 'Inglês',
-          enLevel: 'Proficiente'
-        }
-      }
+      education: 'Formação',
+      credentials: 'Certificações & Idiomas'
+    },
+    projects: {
+      label: 'Código_Aberto',
+      title: 'Projetos',
+      desc: 'Ferramentas na interseção entre finanças, dados e agentes de IA. Todas open source.',
+      featured: 'Destaque',
+      all: 'Todos os repositórios no GitHub'
     },
     chat: {
       status: 'Assistente Virtual',
@@ -248,13 +150,8 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const getDefaultLanguage = (): Language => {
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname.endsWith('.com.br')) return 'pt';
-  }
-  return 'en';
-};
+const getDefaultLanguage = (): Language =>
+  typeof window !== 'undefined' ? languageForHost(window.location.hostname) : 'en';
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(getDefaultLanguage);

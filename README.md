@@ -4,154 +4,139 @@
 
 **Consultor Financeiro CFP® | Strategy & Operations | Fintech & AI**
 
-[![Live Site](https://img.shields.io/badge/Live-robertoecf.com-000?style=flat-square&logo=vercel&logoColor=white)](https://robertoecf.com/)
+[![Live Site](https://img.shields.io/badge/Live-robertoecf.com-000?style=flat-square&logo=cloudflare&logoColor=white)](https://robertoecf.com/)
+[![PT-BR](https://img.shields.io/badge/PT--BR-robertoecf.com.br-009c3b?style=flat-square)](https://robertoecf.com.br/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-20+-43853D?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com/)
 
 </div>
 
 ---
 
-## Sumario
+## Sumário
 
 - [Sobre](#sobre)
 - [Features](#features)
 - [Stack](#stack)
+- [Onde editar o conteúdo](#onde-editar-o-conteúdo)
 - [Estrutura do projeto](#estrutura-do-projeto)
 - [Rodando localmente](#rodando-localmente)
-- [Variaveis de ambiente](#variaveis-de-ambiente)
+- [Variáveis de ambiente](#variáveis-de-ambiente)
 - [Deploy](#deploy)
-- [Reutilizando este repositorio](#reutilizando-este-repositorio)
 - [Contato](#contato)
 
 ## Sobre
 
-Portfolio pessoal e profissional bilíngue (PT/EN), com design inspirado em interfaces de comando e HUD. Desenvolvido com React 19 + TypeScript e servido por Express, inclui um assistente virtual com IA para interação em tempo real.
+Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces de comando e HUD. O idioma padrão depende do domínio: `robertoecf.com` abre em inglês (perfil Strategy & Operations) e `robertoecf.com.br` abre em português (perfil de consultoria patrimonial). Inclui um assistente virtual com IA que responde com base no mesmo conteúdo do site.
 
 ## Features
 
-- **Bilíngue** — alternância PT/EN com todas as traduções centralizadas em um único arquivo
-- **Chat com IA** — assistente virtual integrado via backend server-side (sem exposição de chaves no client)
-- **Design interativo** — grid responsivo ao mouse, animações laser, HUD card com métricas
-- **SEO & GEO** — `robots.txt`, `sitemap.xml`, `llms.txt`, JSON-LD Person, OpenGraph, hreflang
-- **Knowledge pages** — páginas HTML crawláveis em português e inglês para LLM discoverability
+- **Fonte única de dados** — perfil, redes, projetos, experiência e certificações vivem em `content/profile.ts` e alimentam o site, o chat e os arquivos de SEO
+- **Bilíngue por domínio** — `.com` em inglês, `.com.br` em português, com alternância manual PT/EN
+- **Projetos open source** — seção com os repositórios públicos, projeto em destaque e links para GitHub e npm
+- **Chat com IA** — assistente via Cloudflare Pages Function (xAI Grok), chave apenas no servidor, limites de tamanho de mensagem e histórico
+- **SEO e GEO** — `robots.txt`, `sitemap.xml` com hreflang, `llms.txt`, `llms-full.txt`, páginas `knowledge/` legíveis sem JavaScript, OpenGraph e JSON-LD `Person`, todos gerados no build
+- **Head por domínio** — middleware troca `lang`, título, descrição, canonical e JSON-LD para português em `robertoecf.com.br`
 
 ## Stack
 
 | Camada | Tecnologia |
 |--------|-----------|
-| Frontend | React 19, TypeScript, Tailwind CSS, Recharts, Lucide Icons |
-| Build | Vite 6 |
-| Backend | Express — API server-side para chat com IA |
-| IA | Google Gemini 2.5 Flash |
-| Deploy | Vercel · GitHub Pages · Docker |
+| Frontend | React 19, TypeScript, Tailwind CSS 4 (compilado no build via `@tailwindcss/vite`), Lucide Icons |
+| Build | Vite 7 + plugin local que gera os arquivos de SEO |
+| Backend | Cloudflare Pages Functions (`functions/`) |
+| IA | xAI Grok (`grok-3-mini`) |
+| Deploy | Cloudflare Pages |
+
+## Onde editar o conteúdo
+
+| O que mudar | Arquivo |
+|-------------|---------|
+| Nome, headline, resumo, localização, foto | `content/profile.ts` → `PERSON` |
+| Título e descrição para Google e redes sociais | `content/profile.ts` → `SEO` |
+| WhatsApp, email, LinkedIn, GitHub e novas redes | `content/profile.ts` → `CONTACT` e `SOCIALS` (ícone novo em `components/SocialLinks.tsx`) |
+| Projetos | `content/profile.ts` → `PROJECTS` (`featured: true` para o destaque) |
+| Experiência, competências, formação, certificações, idiomas | `content/profile.ts` |
+| Textos de interface (menu, títulos de seção, botões) | `contexts/LanguageContext.tsx` |
+| Persona e regras do assistente | `functions/api/chat.ts` |
+
+`robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt` e `knowledge/*.html` **não existem no repositório**: são gerados a partir de `content/profile.ts` em cada build (`content/seo.ts`). Basta editar o perfil.
 
 ## Estrutura do projeto
 
 ```
-├── App.tsx                  # Layout principal + background effects
-├── index.tsx                # Entry point React
-├── index.html               # HTML template
-├── server.mjs               # Express server (produção)
-├── vite.config.ts           # Config do Vite
-├── Dockerfile               # Multi-stage build (Node 20 Alpine)
+├── App.tsx                    # Layout, background e footer
+├── index.tsx                  # Entry point React
+├── index.html                 # Template; o bloco seo:start/seo:end é gerado no build
+├── index.css                  # Tailwind: paleta, fontes e animações (@theme) + estilos globais
+├── vite.config.ts             # Vite + geração dos arquivos de SEO
+├── content/
+│   ├── profile.ts             # Fonte única: perfil, redes, projetos, carreira
+│   └── seo.ts                 # Geradores: head, JSON-LD, llms.txt, sitemap, knowledge pages, contexto do chat
 ├── components/
-│   ├── Navbar.tsx            # Navegação + toggle de idioma
+│   ├── Navbar.tsx             # Navegação + troca de idioma
+│   ├── SocialLinks.tsx        # Ícones de contato e redes
 │   ├── sections/
-│   │   ├── Hero.tsx          # Seção hero com HUD animado
-│   │   ├── Expertise.tsx     # Cards de competências
-│   │   ├── Experience.tsx    # Timeline profissional
-│   │   └── AIChat.tsx        # Chat interativo com IA
-│   └── ui/
-│       └── Button.tsx        # Componente de botão reutilizável
+│   │   ├── Hero.tsx
+│   │   ├── Expertise.tsx
+│   │   ├── Experience.tsx
+│   │   ├── Projects.tsx
+│   │   └── AIChat.tsx
+│   └── ui/Button.tsx
 ├── contexts/
-│   └── LanguageContext.tsx   # Provider i18n (PT/EN) com todo o conteúdo textual
-├── public/
-│   ├── robots.txt
-│   ├── sitemap.xml
-│   ├── llms.txt
-│   └── knowledge/           # Páginas crawláveis (pt.html, en.html)
-├── .github/
-│   └── workflows/
-│       └── deploy-pages.yml  # CI/CD GitHub Pages
-└── docs/                    # Documentação interna
+│   └── LanguageContext.tsx    # Textos de interface PT/EN
+├── services/
+│   └── chat.ts                # Cliente do endpoint /api/chat
+├── functions/
+│   ├── _middleware.ts         # Head em português para robertoecf.com.br
+│   └── api/chat.ts            # Endpoint do assistente (xAI)
+└── public/
+    ├── _routes.json           # Limita as Functions a "/" e "/api/*"
+    └── profile.jpg
 ```
 
 ## Rodando localmente
 
-**Pré-requisitos:** Node.js 20+
+**Pré-requisitos:** Node.js 20.19+ ou 22.12+ (exigência do Vite 7)
 
 ```bash
-# 1. Clone o repositório
 git clone git@github.com:robertoecf/portfolio.git
 cd portfolio
-
-# 2. Instale as dependências
 npm install
 
-# 3. Crie o arquivo de variáveis de ambiente
-cp .env.example .env.local
-# Edite .env.local com sua chave (veja tabela abaixo)
-
-# 4. Inicie o servidor de desenvolvimento
+# Só o frontend (sem chat), em http://localhost:3000
 npm run dev
+
+# Frontend + Functions (chat e middleware), em http://localhost:8788
+cp .dev.vars.example .dev.vars   # preencha XAI_API_KEY
+npm run pages:dev
 ```
 
-O site estará disponível em `http://localhost:5173`.
+## Variáveis de ambiente
 
-Para rodar em modo produção local:
+| Variável | Obrigatória | Onde | Descrição |
+|----------|-------------|------|-----------|
+| `XAI_API_KEY` | Para o chat | `.dev.vars` local; secret no projeto Cloudflare Pages | Chave da API xAI |
 
-```bash
-npm run build && npm start
-```
-
-## Variaveis de ambiente
-
-| Variável | Obrigatória | Descrição |
-|----------|-------------|-----------|
-| `GEMINI_API_KEY` | Sim | Chave da API Google Gemini — necessária para o chat com IA |
-
-> Sem a chave, o site funciona normalmente mas o chat com IA ficará indisponível.
+Sem a chave o site funciona normalmente; apenas o chat responde com mensagem de indisponibilidade.
 
 ## Deploy
 
-### Vercel
+Cloudflare Pages com build command `npm run build` e output `dist`. Os dois domínios (`robertoecf.com` e `robertoecf.com.br`) apontam para o mesmo projeto.
 
-1. Conecte o repositório no Vercel
-2. Adicione `GEMINI_API_KEY` como variável de ambiente server-side
-3. Deploy automático a cada push na `main`
-
-### GitHub Pages (estático, sem chat IA)
-
-O workflow `.github/workflows/deploy-pages.yml` faz deploy automático usando `npm run build:pages`.
-
-### Docker
+Deploy manual:
 
 ```bash
-docker build -t portfolio .
-docker run -p 8080:8080 -e GEMINI_API_KEY="sua-chave" portfolio
+npm run pages:deploy
 ```
-
-## Reutilizando este repositorio
-
-Para usar como base para seu próprio portfolio:
-
-1. **Fork** o repositório
-2. Edite `contexts/LanguageContext.tsx` — **todo o conteúdo textual** (nome, experiências, competências, traduções) está centralizado neste único arquivo
-3. Substitua `profile.jpeg` pela sua foto
-4. Atualize `metadata.json` com suas informações
-5. Edite os arquivos em `public/` (`llms.txt`, `sitemap.xml`, knowledge pages) com seus dados
-6. Configure sua própria `GEMINI_API_KEY` — ou remova a seção `AIChat` do `App.tsx` se não quiser IA
-7. Ajuste as cores no Tailwind config para sua paleta
-
-> **Dica:** O conteúdo é 100% data-driven. Você não precisa mexer nos componentes React para trocar textos, experiências ou competências — tudo vem do `LanguageContext.tsx`.
 
 ## Contato
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Roberto_Freitas-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/robertoecf/)
+[![GitHub](https://img.shields.io/badge/GitHub-robertoecf-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/robertoecf)
 
 ## Licença
 
-Uso pessoal. Para reutilização, faça um fork e substitua o conteúdo pelo seu.
+Uso pessoal. Para reutilizar, faça um fork e substitua o conteúdo de `content/profile.ts` pelo seu.

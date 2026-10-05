@@ -1,6 +1,9 @@
 import React from 'react';
 import { Brain, Layout, Database, Coins } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { EXPERTISE } from '../../content/profile';
+
+const ICONS = { strategy: Brain, product: Layout, data: Database, finance: Coins };
 
 const SkillCard = ({ title, icon: Icon, skills, index }: { title: string, icon: any, skills: string[], index: string }) => (
   <div className="group relative p-8 glass-panel rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]">
@@ -30,7 +33,7 @@ const SkillCard = ({ title, icon: Icon, skills, index }: { title: string, icon: 
 );
 
 export const Expertise: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section id="expertise" className="py-32 px-6 relative">
@@ -38,8 +41,8 @@ export const Expertise: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 border-b border-ethereal-border pb-8">
            <div className="max-w-2xl">
              <h2 className="text-xs font-mono text-ethereal-orange mb-4 tracking-[0.2em] uppercase">{t('expertise.core')}</h2>
-             <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight">
-               {t('expertise.title.prefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-ethereal-green">{t('expertise.title.finance')}</span> {t('expertise.title.mid')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-ethereal-blue to-purple-400">{t('expertise.title.tech')}</span>{t('expertise.title.suffix')}
+             <h3 className="text-3xl md:text-5xl font-bold text-white leading-tight md:leading-none">
+               {t('expertise.title.prefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-ethereal-green">{t('expertise.title.finance')}</span> {t('expertise.title.mid')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-purple-400">{t('expertise.title.tech')}</span>{t('expertise.title.suffix')}
              </h3>
            </div>
            <p className="text-slate-400 max-w-xs text-sm leading-relaxed">
@@ -48,30 +51,15 @@ export const Expertise: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <SkillCard 
-            index="01"
-            title={t('expertise.cards.strategy.title')}
-            icon={Brain}
-            skills={t('expertise.cards.strategy.items')}
-          />
-          <SkillCard 
-            index="02"
-            title={t('expertise.cards.product.title')}
-            icon={Layout}
-            skills={t('expertise.cards.product.items')}
-          />
-          <SkillCard 
-            index="03"
-            title={t('expertise.cards.data.title')}
-            icon={Database}
-            skills={t('expertise.cards.data.items')}
-          />
-          <SkillCard 
-            index="04"
-            title={t('expertise.cards.finance.title')}
-            icon={Coins}
-            skills={t('expertise.cards.finance.items')}
-          />
+          {EXPERTISE.map((area, i) => (
+            <SkillCard
+              key={area.id}
+              index={String(i + 1).padStart(2, '0')}
+              title={area.title[language]}
+              icon={ICONS[area.id]}
+              skills={area.items[language]}
+            />
+          ))}
         </div>
       </div>
     </section>

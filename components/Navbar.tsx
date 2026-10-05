@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Terminal } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { PERSON } from '../content/profile';
 
 const FlagUS = () => (
-  <svg viewBox="0 0 60 30" className="w-6 h-3.5 rounded-sm shadow-sm" preserveAspectRatio="none">
+  <svg viewBox="0 0 60 30" className="w-6 h-3.5 rounded-xs shadow-xs" preserveAspectRatio="none">
     <rect width="60" height="30" fill="#bf0a30"/>
     <rect width="60" height="4" y="4" fill="#fff"/>
     <rect width="60" height="4" y="12" fill="#fff"/>
@@ -17,7 +18,7 @@ const FlagUS = () => (
 );
 
 const FlagBR = () => (
-  <svg viewBox="0 0 60 42" className="w-6 h-4 rounded-sm shadow-sm">
+  <svg viewBox="0 0 60 42" className="w-6 h-4 rounded-xs shadow-xs">
     <rect width="60" height="42" fill="#009c3b"/>
     <path d="M6,21 L30,4 L54,21 L30,38 Z" fill="#ffdf00"/>
     <circle cx="30" cy="21" r="10" fill="#002776"/>
@@ -47,10 +48,10 @@ export const Navbar: React.FC = () => {
         
         <div className="flex items-center gap-4">
           {/* Profile Photo - Enlarged */}
-          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10 shadow-lg relative z-10 flex-shrink-0 group">
+          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10 shadow-lg relative z-10 shrink-0 group">
             <img 
-              src="https://github.com/robertoecf.png" 
-              alt="Roberto Freitas" 
+              src={PERSON.photo}
+              alt={PERSON.shortName}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               onError={(e) => {
                 // Fallback visualization if image fails to load
@@ -64,7 +65,7 @@ export const Navbar: React.FC = () => {
           </div>
           
           <div className="hidden sm:block">
-            <div className="text-base font-medium text-white tracking-tight leading-tight">Roberto E. C. Freitas, CFP®</div>
+            <div className="text-base font-medium text-white tracking-tight leading-tight">{PERSON.displayName}</div>
             <div className="flex items-center gap-2 text-[10px] font-mono text-ethereal-orange tracking-widest uppercase mt-0.5">
               <span>{t('nav.role')}</span>
               <span className="w-1 h-1 rounded-full bg-slate-600" />
@@ -81,6 +82,8 @@ export const Navbar: React.FC = () => {
               onClick={() => setLanguage('en')} 
               className={`transition-all hover:scale-110 ${language === 'en' ? 'opacity-100 scale-105' : 'opacity-40 hover:opacity-100'}`}
               title="English (US)"
+              aria-label="English"
+              aria-pressed={language === 'en'}
             >
               <FlagUS />
             </button>
@@ -88,6 +91,8 @@ export const Navbar: React.FC = () => {
               onClick={() => setLanguage('pt')} 
               className={`transition-all hover:scale-110 ${language === 'pt' ? 'opacity-100 scale-105' : 'opacity-40 hover:opacity-100'}`}
               title="Português (BR)"
+              aria-label="Português"
+              aria-pressed={language === 'pt'}
             >
               <FlagBR />
             </button>
@@ -104,6 +109,12 @@ export const Navbar: React.FC = () => {
             className="px-5 py-2 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300"
           >
             {t('nav.experience')}
+          </a>
+          <a 
+            href="#projects" 
+            className="px-5 py-2 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300"
+          >
+            {t('nav.projects')}
           </a>
           <a 
             href="#contact" 
@@ -131,18 +142,22 @@ export const Navbar: React.FC = () => {
               <button 
                 onClick={() => setLanguage('en')} 
                 className={`transition-all ${language === 'en' ? 'opacity-100' : 'opacity-40'}`}
+                aria-label="English"
+                aria-pressed={language === 'en'}
               >
                 <FlagUS />
               </button>
               <button 
                 onClick={() => setLanguage('pt')} 
                 className={`transition-all ${language === 'pt' ? 'opacity-100' : 'opacity-40'}`}
+                aria-label="Português"
+                aria-pressed={language === 'pt'}
               >
                 <FlagBR />
               </button>
            </div>
            
-           <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-2">
+           <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-2" aria-label="Menu" aria-expanded={mobileOpen}>
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
            </button>
         </div>
@@ -152,6 +167,7 @@ export const Navbar: React.FC = () => {
            <div className="absolute top-full left-0 right-0 mt-4 mx-auto w-full bg-black/80 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 overflow-hidden animate-fade-in-up shadow-2xl">
               <a href="#expertise" onClick={() => setMobileOpen(false)} className="text-slate-300 text-sm hover:text-white">{t('nav.expertise')}</a>
               <a href="#experience" onClick={() => setMobileOpen(false)} className="text-slate-300 text-sm hover:text-white">{t('nav.experience')}</a>
+              <a href="#projects" onClick={() => setMobileOpen(false)} className="text-slate-300 text-sm hover:text-white">{t('nav.projects')}</a>
               <a href="#contact" onClick={() => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); setMobileOpen(false); }} className="text-slate-300 text-sm hover:text-white">{t('nav.contact')}</a>
               <button onClick={() => { document.getElementById('chat')?.scrollIntoView({ behavior: 'smooth' }); setMobileOpen(false); }} className="text-left text-ethereal-orange text-sm font-mono">AI_ASSISTANT</button>
            </div>

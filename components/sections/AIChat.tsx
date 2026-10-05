@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, Sparkles, User, Terminal } from 'lucide-react';
-import { generateChatResponse } from '../../services/gemini';
+import { Send, User, Terminal } from 'lucide-react';
+import { generateChatResponse, MAX_MESSAGE_CHARS } from '../../services/chat';
 import { ChatMessage, UserRole } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -102,7 +102,7 @@ export const AIChat: React.FC = () => {
                 {messages.map((msg) => (
                    <div key={msg.id} className={`flex gap-4 ${msg.role === UserRole.USER ? 'flex-row-reverse' : 'flex-row'}`}>
                       {/* Avatar */}
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 border ${
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
                           msg.role === UserRole.USER 
                           ? 'bg-slate-800 border-slate-700' 
                           : 'bg-emerald-500/10 border-emerald-500/30'
@@ -113,7 +113,7 @@ export const AIChat: React.FC = () => {
                       {/* Bubble */}
                       <div className={`max-w-[85%] p-5 rounded-2xl text-sm leading-relaxed relative ${
                          msg.role === UserRole.USER 
-                         ? 'bg-white/10 text-white rounded-tr-sm backdrop-blur-sm' 
+                         ? 'bg-white/10 text-white rounded-tr-sm backdrop-blur-xs' 
                          : 'bg-black/20 text-slate-300 border border-white/5 rounded-tl-sm'
                       }`}>
                          {/* Decorative corner accent for bot */}
@@ -126,7 +126,7 @@ export const AIChat: React.FC = () => {
                 
                 {isLoading && (
                    <div className="flex gap-4 animate-pulse">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
                          <Terminal className="w-5 h-5 text-emerald-400" />
                       </div>
                       <div className="flex items-center gap-2 p-4">
@@ -145,10 +145,13 @@ export const AIChat: React.FC = () => {
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       placeholder={t('chat.placeholder')}
-                      className="relative w-full bg-black/50 text-white placeholder-slate-600 border border-white/10 rounded-xl py-4 pl-6 pr-14 focus:outline-none focus:border-emerald-500/40 focus:bg-black/70 transition-all font-mono text-sm"
+                      maxLength={MAX_MESSAGE_CHARS}
+                      aria-label={t('chat.placeholder')}
+                      className="relative w-full bg-black/50 text-white placeholder:text-slate-600 border border-white/10 rounded-xl py-4 pl-6 pr-14 focus:outline-hidden focus:border-emerald-500/40 focus:bg-black/70 transition-all font-mono text-sm"
                    />
                    <button 
                       type="submit"
+                      aria-label="Send"
                       disabled={isLoading || !inputValue.trim()}
                       className="absolute right-2 top-2 bottom-2 aspect-square flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                    >
