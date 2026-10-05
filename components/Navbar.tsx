@@ -42,8 +42,8 @@ export const Navbar: React.FC = () => {
       <div className={`
         relative flex justify-between items-center px-8 py-4 rounded-full transition-all duration-500
         ${scrolled 
-          ? 'w-[90%] md:w-[880px] bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20' 
-          : 'w-[95%] md:w-[1200px] bg-transparent border border-transparent'}
+          ? 'w-[95%] max-w-[1080px] bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20' 
+          : 'w-[95%] max-w-[1200px] bg-transparent border border-transparent'}
       `}>
         
         <div className="flex items-center gap-4">
@@ -74,7 +74,7 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden xl:flex items-center gap-2">
           
           {/* Language Switcher */}
           <div className="flex items-center gap-3 mr-2 pr-4 border-r border-white/10">
@@ -136,7 +136,7 @@ export const Navbar: React.FC = () => {
           </button>
         </div>
 
-        <div className="md:hidden flex items-center gap-4">
+        <div className="xl:hidden flex items-center gap-4">
            {/* Mobile Language Switcher */}
            <div className="flex items-center gap-3">
               <button 

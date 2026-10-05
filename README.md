@@ -36,7 +36,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 - **Fonte única de dados** — perfil, redes, projetos, experiência e certificações vivem em `content/profile.ts` e alimentam o site, o chat e os arquivos de SEO
 - **Bilíngue por domínio** — `.com` em inglês, `.com.br` em português, com alternância manual PT/EN
 - **Projetos open source** — seção com os repositórios públicos, projeto em destaque e links para GitHub e npm
-- **Chat com IA** — assistente via Cloudflare Pages Function (xAI Grok), chave apenas no servidor, limites de tamanho de mensagem e histórico
+- **Chat com IA** — assistente via Cloudflare Pages Function (Cerebras, Qwen), chave apenas no servidor, limites de tamanho de mensagem e histórico
 - **SEO e GEO** — `robots.txt`, `sitemap.xml` com hreflang, `llms.txt`, `llms-full.txt`, páginas `knowledge/` legíveis sem JavaScript, OpenGraph e JSON-LD `Person`, todos gerados no build
 - **Head por domínio** — middleware troca `lang`, título, descrição, canonical e JSON-LD para português em `robertoecf.com.br`
 
@@ -47,7 +47,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 | Frontend | React 19, TypeScript, Tailwind CSS 4 (compilado no build via `@tailwindcss/vite`), Lucide Icons |
 | Build | Vite 7 + plugin local que gera os arquivos de SEO |
 | Backend | Cloudflare Pages Functions (`functions/`) |
-| IA | xAI Grok (`grok-4.3`) |
+| IA | Cerebras (`qwen-3.8-27b`) |
 | Deploy | Cloudflare Pages |
 
 ## Onde editar o conteúdo
@@ -91,7 +91,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 │   └── chat.ts                # Cliente do endpoint /api/chat
 ├── functions/
 │   ├── _middleware.ts         # Head em português para robertoecf.com.br
-│   └── api/chat.ts            # Endpoint do assistente (xAI)
+│   └── api/chat.ts            # Endpoint do assistente (Cerebras)
 └── public/
     ├── _routes.json           # Limita as Functions a "/" e "/api/*"
     └── profile.jpg
@@ -110,7 +110,7 @@ npm install
 npm run dev
 
 # Frontend + Functions (chat e middleware), em http://localhost:8788
-cp .dev.vars.example .dev.vars   # preencha XAI_API_KEY
+cp .dev.vars.example .dev.vars   # preencha CEREBRAS_API_KEY
 npm run pages:dev
 ```
 
@@ -118,7 +118,7 @@ npm run pages:dev
 
 | Variável | Obrigatória | Onde | Descrição |
 |----------|-------------|------|-----------|
-| `XAI_API_KEY` | Para o chat | `.dev.vars` local; secret no projeto Cloudflare Pages | Chave da API xAI |
+| `CEREBRAS_API_KEY` | Para o chat | `.dev.vars` local; secret no projeto Cloudflare Pages | Chave da API Cerebras |
 
 Sem a chave o site funciona normalmente; apenas o chat responde com mensagem de indisponibilidade.
 
