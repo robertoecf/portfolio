@@ -8,7 +8,7 @@
 [![PT-BR](https://img.shields.io/badge/PT--BR-robertoecf.com.br-009c3b?style=flat-square)](https://robertoecf.com.br/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com/)
 
 </div>
@@ -45,7 +45,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 | Camada | Tecnologia |
 |--------|-----------|
 | Frontend | React 19, TypeScript, Tailwind CSS 4 (compilado no build via `@tailwindcss/vite`), Lucide Icons |
-| Build | Vite 6 + plugin local que gera os arquivos de SEO |
+| Build | Vite 7 + plugin local que gera os arquivos de SEO |
 | Backend | Cloudflare Pages Functions (`functions/`) |
 | IA | xAI Grok (`grok-3-mini`) |
 | Deploy | Cloudflare Pages |
@@ -99,7 +99,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 
 ## Rodando localmente
 
-**Pré-requisitos:** Node.js 20+
+**Pré-requisitos:** Node.js 20.19+ ou 22.12+ (exigência do Vite 7)
 
 ```bash
 git clone git@github.com:robertoecf/portfolio.git
