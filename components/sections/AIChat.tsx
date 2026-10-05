@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, User, Terminal } from 'lucide-react';
 import { generateChatResponse, MAX_MESSAGE_CHARS } from '../../services/chat';
 import { ChatMessage, UserRole } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -68,102 +67,48 @@ export const AIChat: React.FC = () => {
   };
 
   return (
-    <section id="chat" className="py-24 px-6 relative z-20">
-       <div className="max-w-4xl mx-auto">
-          
-          {/* Header */}
-          <div className="text-center mb-12">
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-md">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">{t('chat.status')}</span>
-             </div>
-             <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">{t('chat.title')}</h2>
-             <p className="text-slate-400 font-light">{t('chat.subtitle')}</p>
+    <section id="chat" className="bg-paper-deep border-y border-ink scroll-mt-14">
+      <div className="max-w-3xl mx-auto px-6 py-24">
+        <h2 className="text-[13px] uppercase tracking-[0.18em] text-teal">{t('chat.label')}</h2>
+        <p className="mt-4 font-serif text-[40px] sm:text-[52px] leading-[1.02]">{t('chat.title')}</p>
+        <p className="mt-4 text-body">{t('chat.subtitle')}</p>
+
+        <div className="mt-10 bg-paper border-2 border-ink shadow-[6px_6px_0_var(--color-ink)]">
+          <div ref={chatContainerRef} className="p-6 space-y-6 h-[420px] overflow-y-auto" aria-live="polite">
+            {messages.map((msg) => (
+              <div key={msg.id} className={msg.role === UserRole.USER ? 'pl-10 sm:pl-24' : 'pr-10 sm:pr-24'}>
+                <p className={`font-mono text-[11px] uppercase tracking-wide ${msg.role === UserRole.USER ? 'text-muted text-right' : 'text-teal'}`}>
+                  {msg.role === UserRole.USER ? t('chat.you') : t('chat.assistant')}
+                </p>
+                <p className={`mt-1 text-[15px] leading-relaxed whitespace-pre-line ${msg.role === UserRole.USER ? 'text-right font-serif italic text-[18px]' : 'text-body'}`}>
+                  {msg.text}
+                </p>
+              </div>
+            ))}
+            {isLoading && <p className="font-mono text-[12px] text-teal animate-pulse">{t('chat.processing')}</p>}
           </div>
 
-          {/* Chat Interface Container */}
-          <div className="glass-panel rounded-3xl overflow-hidden shadow-2xl flex flex-col min-h-[600px] border border-white/10 relative">
-             
-             {/* Top Bar */}
-             <div className="h-12 bg-white/5 border-b border-white/5 flex items-center px-6 justify-between">
-                <div className="flex gap-2">
-                   <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
-                   <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
-                   <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase">{t('chat.connection')}</div>
-             </div>
-
-             {/* Messages Area */}
-             <div 
-                ref={chatContainerRef}
-                className="flex-1 p-6 md:p-8 overflow-y-auto space-y-8 max-h-[500px]"
-             >
-                {messages.map((msg) => (
-                   <div key={msg.id} className={`flex gap-4 ${msg.role === UserRole.USER ? 'flex-row-reverse' : 'flex-row'}`}>
-                      {/* Avatar */}
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
-                          msg.role === UserRole.USER 
-                          ? 'bg-slate-800 border-slate-700' 
-                          : 'bg-emerald-500/10 border-emerald-500/30'
-                      }`}>
-                         {msg.role === UserRole.USER ? <User className="w-5 h-5 text-slate-400" /> : <Terminal className="w-5 h-5 text-emerald-400" />}
-                      </div>
-                      
-                      {/* Bubble */}
-                      <div className={`max-w-[85%] p-5 rounded-2xl text-sm leading-relaxed relative ${
-                         msg.role === UserRole.USER 
-                         ? 'bg-white/10 text-white rounded-tr-sm backdrop-blur-xs' 
-                         : 'bg-black/20 text-slate-300 border border-white/5 rounded-tl-sm'
-                      }`}>
-                         {/* Decorative corner accent for bot */}
-                         {msg.role === UserRole.MODEL && <div className="absolute -top-[1px] -left-[1px] w-2 h-2 border-t border-l border-emerald-500/50" />}
-                         
-                         {msg.text}
-                      </div>
-                   </div>
-                ))}
-                
-                {isLoading && (
-                   <div className="flex gap-4 animate-pulse">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                         <Terminal className="w-5 h-5 text-emerald-400" />
-                      </div>
-                      <div className="flex items-center gap-2 p-4">
-                         <span className="text-xs font-mono text-emerald-500">{t('chat.processing')}</span>
-                      </div>
-                   </div>
-                )}
-             </div>
-
-             {/* Input Area */}
-             <div className="p-4 bg-black/20 border-t border-white/5">
-                <form onSubmit={handleSendMessage} className="relative group">
-                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity blur-md" />
-                   <input
-                      type="text"
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      placeholder={t('chat.placeholder')}
-                      maxLength={MAX_MESSAGE_CHARS}
-                      aria-label={t('chat.placeholder')}
-                      className="relative w-full bg-black/50 text-white placeholder:text-slate-600 border border-white/10 rounded-xl py-4 pl-6 pr-14 focus:outline-hidden focus:border-emerald-500/40 focus:bg-black/70 transition-all font-mono text-sm"
-                   />
-                   <button 
-                      type="submit"
-                      aria-label="Send"
-                      disabled={isLoading || !inputValue.trim()}
-                      className="absolute right-2 top-2 bottom-2 aspect-square flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                   >
-                      <Send className="w-5 h-5" />
-                   </button>
-                </form>
-                <div className="text-center mt-3">
-                   <span className="text-[10px] text-slate-600 font-mono">{t('chat.disclaimer')}</span>
-                </div>
-             </div>
-          </div>
-       </div>
+          <form onSubmit={handleSendMessage} className="flex border-t-2 border-ink">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder={t('chat.placeholder')}
+              maxLength={MAX_MESSAGE_CHARS}
+              aria-label={t('chat.placeholder')}
+              className="flex-1 min-w-0 bg-transparent px-5 py-4 text-[15px] placeholder:text-muted focus:outline-none focus:bg-paper-deep"
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !inputValue.trim()}
+              className="px-6 bg-ink text-paper text-sm border-l-2 border-ink hover:bg-teal transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {t('chat.send')}
+            </button>
+          </form>
+        </div>
+        <p className="mt-4 text-[12px] text-muted">{t('chat.disclaimer')}</p>
+      </div>
     </section>
   );
 };

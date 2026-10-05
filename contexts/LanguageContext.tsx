@@ -11,141 +11,93 @@ interface LanguageContextType {
 
 const translations = {
   en: {
-    nav: {
-      expertise: 'Expertise',
-      experience: 'Experience',
-      projects: 'Projects',
-      contact: 'Contact',
-      role: 'Strategy & Operations',
-      industry: 'Fintech'
-    },
+    nav: { work: 'Work', career: 'Career', ask: 'Ask', contact: 'Contact' },
     hero: {
-      systemReady: 'System_Ready_For_Work',
-      roles: {
-        strategy: 'Strategy',
-        ops: 'Operations',
-        product: 'Product'
-      },
-      description: '8+ years integrating financial rigor with product velocity. Specialized in structuring ambiguous problems and driving cross-functional execution in AI and Fintech environments.',
-      viewExp: 'View Experience',
-      initChat: 'INIT_CHAT_PROTOCOL',
-      hud: {
-        status: 'CURRENT_STATUS',
-        optimal: 'OPTIMAL_PERFORMANCE',
-        location: 'LOCATION',
-        certs: 'CERTIFICATIONS',
-        aumValue: '$20M+',
-        aum: 'AUM_MANAGED'
-      }
+      kicker: 'CFP® financial planner · Software builder',
+      title: 'I’ve spent eight years planning family wealth.',
+      titleAccent: 'Now I build the software my profession still doesn’t have.',
+      notes: ['CFP® (Planejar) and CEA (ANBIMA)', 'Client book above USD 20M at Warren', 'LLM evaluation for finance via Mercor'],
+      caption: 'Fig. 1: Roberto Freitas, São Paulo',
+      sticker: 'CFP® who ships',
+      cta: 'See the work',
+      ctaHref: '#work',
+      secondary: 'Ask about Roberto',
+      secondaryHref: '#chat',
     },
-    expertise: {
-      core: 'Core_Competencies',
-      title: {
-        prefix: 'Bridging the gap between',
-        finance: 'finance',
-        mid: '&',
-        tech: 'technology',
-        suffix: '.'
-      },
-      desc: 'A multidisciplinary skillset honed through years of high-stakes advisory and AI operations.'
+    work: {
+      label: 'Index of work',
+      more: 'Also built',
+      pinned: 'Pinned · open source',
+      all: 'All repositories on GitHub',
     },
-    experience: {
-      title: 'Career History',
-      logs: 'DATA_LOGS: 2017 — PRESENT',
-      education: 'Education_Background',
-      credentials: 'Credentials & Locale'
-    },
-    projects: {
-      label: 'Open_Source',
-      title: 'Things I build',
-      desc: 'Tools at the intersection of finance, data and AI agents. All open source.',
-      featured: 'Featured',
-      all: 'All repositories on GitHub'
+    career: {
+      label: 'Career',
+      education: 'Education',
+      credentials: 'Credentials',
+      languages: 'Languages',
     },
     chat: {
-      status: 'AI Assistant Online',
-      title: 'Interactive Dossier',
-      subtitle: 'Ask specific questions about work history, methodology, or technical skills.',
-      connection: 'Secure_Connection_Established',
-      placeholder: 'Enter command or question...',
-      disclaimer: 'AI can make errors. Verify important info.',
-      initialMessage: "System initialized. I am Roberto's Digital Associate. Accessing professional archives... Ready for queries regarding Strategy, Operations, or Finance.",
-      processing: 'PROCESSING_REQUEST...'
+      label: 'Ask',
+      title: 'Ask about Roberto',
+      subtitle: 'An AI assistant that answers from his résumé: career, projects, how he works.',
+      you: 'You',
+      assistant: 'Assistant',
+      placeholder: 'e.g. What is Wealthuman OS?',
+      send: 'Send',
+      disclaimer: 'AI can make mistakes. For anything important, talk to Roberto.',
+      initialMessage: 'Hi. I can answer questions about Roberto’s career, his projects and how he works. What would you like to know?',
+      processing: 'Thinking…',
     },
     footer: {
-      desc: 'Bridging sophisticated financial planning with operational excellence.',
-      system: 'SYSTEM_ONLINE',
-      mark: 'CFP® MARK OWNED BY FPSB'
-    }
+      title: 'Let’s talk.',
+      desc: 'Product, AI for finance, or the software behind wealth planning.',
+      mark: 'CFP® is a mark owned by FPSB',
+    },
   },
   pt: {
-    nav: {
-      expertise: 'Especialidades',
-      experience: 'Trajetória',
-      projects: 'Projetos',
-      contact: 'Contato',
-      role: 'Consultor Financeiro',
-      industry: 'Wealth Mgmt'
-    },
+    nav: { work: 'Trabalho', career: 'Trajetória', ask: 'Pergunte', contact: 'Contato' },
     hero: {
-      systemReady: 'Consultoria_Patrimonial_Ativa',
-      roles: {
-        strategy: 'Consultor & Planejador Financeiro',
-        ops: 'Especialista em Investimentos',
-        product: 'Gestor Patrimonial'
-      },
-      description: 'Consultor Financeiro (CFP®) com mais de 8 anos de experiência em fintechs e wealth management. Especialista em construção de patrimônio, planejamento sucessório e estratégias de investimento para clientes de alta renda.',
-      viewExp: 'Ver Trajetória',
-      initChat: 'FALAR_COM_IA',
-      hud: {
-        status: 'DISPONIBILIDADE',
-        optimal: 'Online',
-        location: 'Local',
-        certs: 'CERTIFICAÇÕES',
-        aumValue: '+R$ 120M',
-        aum: 'ATIVOS_SOB_GESTÃO'
-      }
+      kicker: 'Planejador financeiro CFP® · Atendendo clientes desde 2018',
+      title: 'Planejo o patrimônio de famílias há oito anos.',
+      titleAccent: 'Com método, dados e as ferramentas que eu mesmo construo.',
+      notes: ['Planejamento completo: aposentadoria, sucessão, impostos e investimentos', 'CFP® (Planejar) e CEA (ANBIMA)', 'Carteira de clientes acima de US$ 20 mi na Warren', 'Avaliação de LLMs para finanças via Mercor'],
+      caption: 'Fig. 1: Roberto Freitas, São Paulo',
+      sticker: 'Atende clientes',
+      cta: 'Agende uma conversa',
+      ctaHref: '#contact',
+      secondary: 'Ver o trabalho',
+      secondaryHref: '#work',
     },
-    expertise: {
-      core: 'Soluções_Financeiras',
-      title: {
-        prefix: 'Protegendo e expandindo seu',
-        finance: 'patrimônio',
-        mid: 'com',
-        tech: 'inteligência',
-        suffix: '.'
-      },
-      desc: 'Uma abordagem holística que une planejamento financeiro rigoroso, gestão de investimentos global e tecnologia de ponta.'
+    work: {
+      label: 'Índice do trabalho',
+      more: 'Também construí',
+      pinned: 'Fixado · open source',
+      all: 'Todos os repositórios no GitHub',
     },
-    experience: {
-      title: 'Histórico Profissional',
-      logs: 'REGISTRO: 2017 — PRESENTE',
+    career: {
+      label: 'Trajetória',
       education: 'Formação',
-      credentials: 'Certificações & Idiomas'
-    },
-    projects: {
-      label: 'Código_Aberto',
-      title: 'Projetos',
-      desc: 'Ferramentas na interseção entre finanças, dados e agentes de IA. Todas open source.',
-      featured: 'Destaque',
-      all: 'Todos os repositórios no GitHub'
+      credentials: 'Certificações',
+      languages: 'Idiomas',
     },
     chat: {
-      status: 'Assistente Virtual',
-      title: 'Consultoria Interativa',
-      subtitle: 'Tire dúvidas sobre minha metodologia de trabalho, experiência com investimentos ou agende uma conversa.',
-      connection: 'Conexão_Segura',
-      placeholder: 'Ex: Como você trabalha com planejamento sucessório?',
-      disclaimer: 'A IA pode cometer erros. Para decisões financeiras, agende uma reunião.',
-      initialMessage: "Olá. Sou o assistente virtual do Roberto. Posso detalhar como ele ajuda famílias a proteger e multiplicar patrimônio. Sobre o que gostaria de saber?",
-      processing: 'ANALISANDO...'
+      label: 'Pergunte',
+      title: 'Pergunte sobre o Roberto',
+      subtitle: 'Um assistente de IA que responde a partir do currículo dele: carreira, projetos e forma de trabalhar.',
+      you: 'Você',
+      assistant: 'Assistente',
+      placeholder: 'Ex.: O que é o Wealthuman OS?',
+      send: 'Enviar',
+      disclaimer: 'A IA pode errar. Para decisões financeiras, converse com o Roberto.',
+      initialMessage: 'Olá. Posso responder perguntas sobre a carreira do Roberto, os projetos dele e a forma como ele trabalha. O que você quer saber?',
+      processing: 'Pensando…',
     },
     footer: {
-      desc: 'Consultoria financeira fiduciária, transparente e alinhada aos seus interesses.',
-      system: 'SISTEMA_ONLINE',
-      mark: 'MARCA CFP® PERTENCE À FPSB'
-    }
-  }
+      title: 'Vamos conversar.',
+      desc: 'Quer planejar seu patrimônio? Atendo pessoas e famílias em aposentadoria, sucessão, impostos e investimentos. Para software e parcerias, o contato é o mesmo.',
+      mark: 'A marca CFP® pertence à FPSB',
+    },
+  },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
