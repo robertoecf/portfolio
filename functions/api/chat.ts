@@ -99,7 +99,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         'Authorization': `Bearer ${env.XAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'grok-3-mini',
+        model: 'grok-4.3',
         messages: [
           { role: 'system', content: buildSystemInstruction(language) },
           ...history,

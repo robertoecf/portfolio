@@ -47,7 +47,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 | Frontend | React 19, TypeScript, Tailwind CSS 4 (compilado no build via `@tailwindcss/vite`), Lucide Icons |
 | Build | Vite 7 + plugin local que gera os arquivos de SEO |
 | Backend | Cloudflare Pages Functions (`functions/`) |
-| IA | xAI Grok (`grok-3-mini`) |
+| IA | xAI Grok (`grok-4.3`) |
 | Deploy | Cloudflare Pages |
 
 ## Onde editar o conteúdo
