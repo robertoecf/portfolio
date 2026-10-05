@@ -18,25 +18,27 @@ export const PERSON = {
   shortName: 'Roberto Freitas',
   displayName: 'Roberto E. C. Freitas, CFP®',
   photo: '/profile.jpg',
+  portrait: '/photos/roberto-portrait.jpg',
+  portraitSmile: '/photos/roberto-smile.jpg',
   location: { city: 'São Paulo', region: 'SP', country: 'BR', label: 'São Paulo · SP · Brasil' },
   headline: {
-    en: 'Strategy & Operations | Financial Advisor (CFP®) | LLM Evaluation',
-    pt: 'Consultor Financeiro (CFP®) | Planejador Patrimonial | Especialista em IA',
+    en: 'CFP® financial planner who builds software for wealth management',
+    pt: 'Planejador financeiro CFP® que constrói software para gestão patrimonial',
   } as Localized,
   summary: {
-    en: 'Strategic generalist with 8+ years of experience integrating finance, product, operations, and AI evaluation frameworks. Specialized in structuring ambiguous problems, building scalable systems, and driving cross-functional execution in fast-paced fintech environments. Holds the CFP® designation (Planejar / FPSB) and the CEA certification (ANBIMA). Manages a portfolio of high-net-worth clients exceeding USD 20M in assets at Warren Investimentos and works as a Subject-Matter Expert in Financial Services (via Mercor), improving LLM reliability for financial reasoning. Builds open-source tools for Brazilian financial data and AI coding agents. Seeking roles in Strategy, Business Operations (BizOps), or Product Strategy in global tech companies.',
-    pt: 'Profissional com mais de 8 anos de experiência em fintech e gestão de patrimônio (wealth management). Certificado CFP® (Planejar / FPSB) e CEA (ANBIMA). Gerencia carteira de clientes de alta renda (High Net Worth) com ativos superiores a USD 20 milhões (R$ 120M+). Especialista em construção e preservação de patrimônio, planejamento sucessório, eficiência tributária e estratégias de investimento personalizadas. Atua também como especialista em avaliação de IA para o setor financeiro (via Mercor) e desenvolve projetos open source de dados financeiros e ferramentas para agentes de IA.',
+    en: 'CFP® financial planner (Planejar / FPSB) and CEA (ANBIMA) with 8+ years in fintech and wealth management. Manages a book of high-net-worth clients exceeding USD 20M in assets at Warren Investimentos and works as a Subject-Matter Expert in Financial Services (via Mercor), improving LLM reliability for financial reasoning. Builds software for his own profession: Wealthuman OS, an operating system for wealth advisors that connects probabilistic planning, a family-centric CRM and AI agents; Futuro em Foco, a retirement simulator built on 1,001-path Monte Carlo projections; and OpenFinData, open-source infrastructure for Brazilian public financial data. Also builds open-source tools for AI coding agents.',
+    pt: 'Planejador financeiro CFP® (Planejar / FPSB) e CEA (ANBIMA), com mais de 8 anos em fintech e gestão de patrimônio (wealth management). Gerencia carteira de clientes de alta renda com ativos superiores a USD 20 milhões (R$ 120M+) na Warren Investimentos e atua como especialista em avaliação de IA para o setor financeiro (via Mercor). Constrói software para a própria profissão: o Wealthuman OS, sistema operacional do consultor patrimonial que une planejamento probabilístico, CRM centrado em família e agentes de IA; o Futuro em Foco, simulador de aposentadoria com projeções Monte Carlo de 1.001 trajetórias; e o OpenFinData, infraestrutura open source de dados financeiros públicos do Brasil. Também desenvolve ferramentas open source para agentes de IA.',
   } as Localized,
 };
 
 export const SEO = {
   title: {
-    en: 'Roberto E. C. Freitas, CFP® | Strategy & Operations · Fintech & AI',
-    pt: 'Roberto E. C. Freitas, CFP® | Consultor Financeiro e Planejador Patrimonial',
+    en: 'Roberto E. C. Freitas, CFP® | Financial planner who builds software',
+    pt: 'Roberto E. C. Freitas, CFP® | Planejador financeiro que constrói software',
   } as Localized,
   description: {
-    en: 'CFP® professional with 8+ years in fintech and wealth management. Strategy & operations, LLM evaluation for financial services, and open-source tools for financial data and AI agents.',
-    pt: 'Consultor financeiro CFP® com mais de 8 anos em fintech e wealth management. Planejamento patrimonial, sucessório e de investimentos, avaliação de IA para finanças e projetos open source.',
+    en: 'CFP® financial planner with 8+ years in wealth management, building software for the profession: Wealthuman OS, Futuro em Foco and OpenFinData.',
+    pt: 'Planejador financeiro CFP® com mais de 8 anos em gestão de patrimônio, construindo software para a profissão: Wealthuman OS, Futuro em Foco e OpenFinData.',
   } as Localized,
 };
 
@@ -73,12 +75,47 @@ export interface Project {
   featured?: boolean;
   category: Localized;
   description: Localized;
+  /** One-line proof shown in italics under the description. */
+  highlight?: Localized;
   tags: string[];
   status?: string;
   links: { label: string; url: string }[];
 }
 
+// Featured projects come first, in display order.
 export const PROJECTS: Project[] = [
+  {
+    id: 'wealthuman',
+    name: 'Wealthuman OS',
+    featured: true,
+    category: { en: 'Product · Wealth tech', pt: 'Produto · Wealth tech' },
+    description: {
+      en: 'Operating system for Brazilian wealth advisors. Connects probabilistic financial planning, a family-centric CRM and AI agents, automating the operational work so advisors have more time for clients.',
+      pt: 'Sistema operacional do consultor patrimonial brasileiro. Conecta planejamento financeiro probabilístico, CRM centrado em família e agentes de IA, e automatiza o operacional para sobrar tempo para o cliente.',
+    },
+    highlight: {
+      en: 'AI doesn’t replace the advisor. It removes the work that keeps the advisor from advising.',
+      pt: 'IA não substitui o assessor. Ela remove o trabalho que impede o assessor de ser assessor.',
+    },
+    tags: ['TypeScript', 'PostgreSQL', 'AI agents'],
+    links: [{ label: 'wealthuman.com.br', url: 'https://wealthuman.com.br' }],
+  },
+  {
+    id: 'futuro-em-foco',
+    name: 'Futuro em Foco',
+    featured: true,
+    category: { en: 'Product · Financial planning', pt: 'Produto · Planejamento financeiro' },
+    description: {
+      en: 'Retirement and wealth planning web app for Brazilian investors: projects retirement, maps the investor profile and emails a personalized plan.',
+      pt: 'Aplicação de planejamento financeiro e de aposentadoria para o investidor brasileiro: projeta a aposentadoria, identifica o perfil de investidor e envia um plano personalizado por e-mail.',
+    },
+    highlight: {
+      en: '1,001 Monte Carlo paths drawn on canvas, with pessimistic, median and optimistic scenarios.',
+      pt: '1.001 trajetórias Monte Carlo desenhadas em canvas, com cenários pessimista, mediano e otimista.',
+    },
+    tags: ['React', 'Monte Carlo', 'Supabase'],
+    links: [{ label: 'futuroemfoco.app.br', url: 'https://futuroemfoco.app.br' }],
+  },
   {
     id: 'openfindata',
     name: 'OpenFinData',
@@ -231,7 +268,7 @@ export const EXPERIENCE: Job[] = [
 ];
 
 export const formatPeriod = (job: Job, lang: Lang) =>
-  `${job.start} — ${job.end ?? (lang === 'pt' ? 'PRESENTE' : 'PRESENT')}`;
+  `${job.start} ${lang === 'pt' ? 'a' : 'to'} ${job.end ?? (lang === 'pt' ? 'hoje' : 'present')}`;
 
 export interface ExpertiseArea {
   id: 'strategy' | 'product' | 'data' | 'finance';
@@ -281,13 +318,13 @@ export const EDUCATION = [
     id: 'ufrgs',
     degree: { en: 'Bachelor in Public Relations', pt: 'Bacharel em Relações Públicas' } as Localized,
     school: { en: 'Federal University of Rio Grande do Sul (UFRGS)', pt: 'Universidade Federal do Rio Grande do Sul (UFRGS)' } as Localized,
-    period: '2017 — 2023',
+    period: { en: '2017 to 2023', pt: '2017 a 2023' } as Localized,
   },
   {
     id: 'senac',
     degree: { en: 'Technical Degree in Logistics', pt: 'Técnico em Logística' } as Localized,
     school: { en: 'SENAC-RS', pt: 'SENAC-RS' } as Localized,
-    period: '2015 — 2016',
+    period: { en: '2015 to 2016', pt: '2015 a 2016' } as Localized,
   },
 ];
 

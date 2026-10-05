@@ -121,7 +121,7 @@ export function resumeText(lang: Lang): string {
   lines.push(pt ? 'PROJETOS OPEN SOURCE' : 'OPEN-SOURCE PROJECTS');
   PROJECTS.forEach((p) => lines.push(`• ${p.name} (${p.links[0].url}): ${p.description[lang]}`));
   lines.push('', pt ? 'FORMAÇÃO' : 'EDUCATION');
-  EDUCATION.forEach((e) => lines.push(`${e.school[lang]} — ${e.degree[lang]} (${e.period})`));
+  EDUCATION.forEach((e) => lines.push(`${e.school[lang]} — ${e.degree[lang]} (${e.period[lang]})`));
   lines.push('', pt ? 'CERTIFICAÇÕES' : 'CERTIFICATIONS');
   CREDENTIALS.forEach((c) => lines.push(`${c.name[lang]} — ${c.detail[lang]} (${c.issuer})`));
   lines.push('', pt ? 'IDIOMAS' : 'LANGUAGES');
@@ -134,9 +134,9 @@ export function buildLlmsTxt(): string {
 
 > ${SEO.description.en}
 
-Roberto E. C. Freitas (CFP®, CEA) is a Brazilian financial advisor and strategy/operations professional based in São Paulo. 8+ years in fintech and wealth management (Warren Investimentos), Subject-Matter Expert evaluating LLMs for financial services (via Mercor), and maintainer of open-source tools for Brazilian financial data and AI coding agents.
+Roberto E. C. Freitas (CFP®, CEA) is a Brazilian financial planner based in São Paulo who builds software for wealth management. 8+ years in fintech and wealth management (Warren Investimentos), Subject-Matter Expert evaluating LLMs for financial services (via Mercor), builder of Wealthuman OS and Futuro em Foco, and maintainer of open-source tools for Brazilian financial data and AI coding agents.
 
-The English site (${home('en')}) frames the strategy/operations profile; the Portuguese site (${home('pt')}) frames the wealth-management advisory profile.
+The English site (${home('en')}) and the Portuguese site (${home('pt')}) present the same profile in each language.
 
 ## Profile
 
@@ -206,7 +206,7 @@ export function buildKnowledgePage(lang: Lang): string {
     ),
     section(
       pt ? 'Formação' : 'Education',
-      list(EDUCATION.map((e) => `${h(e.degree[lang])}, ${h(e.school[lang])} (${h(e.period)})`)),
+      list(EDUCATION.map((e) => `${h(e.degree[lang])}, ${h(e.school[lang])} (${h(e.period[lang])})`)),
     ),
     section(
       pt ? 'Certificações e idiomas' : 'Certifications & languages',
