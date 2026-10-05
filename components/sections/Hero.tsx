@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, Activity, Globe, Cpu } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { CREDENTIALS, PERSON } from '../../content/profile';
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
@@ -66,19 +67,19 @@ export const Hero: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] font-mono text-slate-500 mb-1">{t('hero.hud.location')}</div>
-                    <div className="text-white text-sm font-medium">São Paulo · SP · Brasil</div>
+                    <div className="text-white text-sm font-medium">{PERSON.location.label}</div>
                   </div>
                 </div>
 
                 {/* Metrics Grid */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-ethereal-blue/50 transition-colors duration-300">
-                    <Cpu className="w-5 h-5 text-ethereal-blue mb-2" />
-                    <div className="text-2xl font-bold text-white">CFP®, CEA</div>
-                    <div className="text-[10px] font-mono text-slate-400 mt-1">{t('hero.hud.evalAcc')}</div>
+                    <Cpu className="w-5 h-5 text-sky-400 mb-2" />
+                    <div className="text-2xl font-bold text-white">{CREDENTIALS.map((c) => c.short).join(', ')}</div>
+                    <div className="text-[10px] font-mono text-slate-400 mt-1">{t('hero.hud.certs')}</div>
                   </div>
                   <div className="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-ethereal-green/50 transition-colors duration-300">
-                    <Globe className="w-5 h-5 text-ethereal-green mb-2" />
+                    <Globe className="w-5 h-5 text-emerald-400 mb-2" />
                     <div className="text-2xl font-bold text-white">{t('hero.hud.aumValue')}</div>
                     <div className="text-[10px] font-mono text-slate-400 mt-1">{t('hero.hud.aum')}</div>
                   </div>

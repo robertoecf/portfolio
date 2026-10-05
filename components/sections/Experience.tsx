@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { CREDENTIALS, EDUCATION, EXPERIENCE, LANGUAGES, formatPeriod } from '../../content/profile';
 
 const ResumeItem = ({ 
   period, 
@@ -47,7 +48,7 @@ const ResumeItem = ({
 );
 
 export const Experience: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section id="experience" className="py-32 px-6 relative z-10">
@@ -61,65 +62,51 @@ export const Experience: React.FC = () => {
           {/* Vertical Line Desktop */}
           <div className="absolute left-[25%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-ethereal-border to-transparent hidden md:block" />
 
-          <ResumeItem 
-            period="2025 — PRESENT"
-            title={t('experience.jobs.mercor.title')}
-            company="Mercor"
-            description={t('experience.jobs.mercor.desc')}
-          />
-
-          <ResumeItem 
-            period="2018 — PRESENT"
-            title={t('experience.jobs.warren.title')}
-            company="Warren Investimentos"
-            description={t('experience.jobs.warren.desc')}
-          />
-
-          <ResumeItem 
-            period="2017 — 2018"
-            title={t('experience.jobs.ea.title')}
-            company="EA-UFRGS"
-            description={t('experience.jobs.ea.desc')}
-          />
+          {EXPERIENCE.map((job) => (
+            <ResumeItem
+              key={job.id}
+              period={formatPeriod(job, language)}
+              title={job.title[language]}
+              company={job.company}
+              description={job.bullets[language]}
+            />
+          ))}
         </div>
 
         <div className="mt-32 grid md:grid-cols-2 gap-8">
             <div className="glass-panel p-8 rounded-2xl">
-                <h3 className="font-mono text-xs text-ethereal-blue mb-6 uppercase tracking-widest">{t('experience.education.title')}</h3>
+                <h3 className="font-mono text-xs text-sky-400 mb-6 uppercase tracking-widest">{t('experience.education')}</h3>
                 <div className="space-y-6">
-                    <div className="group">
-                        <div className="text-white font-bold group-hover:text-ethereal-blue transition-colors">{t('experience.education.ufrgs')}</div>
-                        <div className="text-slate-500 text-sm mb-1">Federal University of Rio Grande do Sul (UFRGS)</div>
-                        <div className="text-slate-600 font-mono text-[10px]">2017 — 2023</div>
-                    </div>
-                    <div className="group">
-                        <div className="text-white font-bold group-hover:text-ethereal-blue transition-colors">{t('experience.education.senac')}</div>
-                        <div className="text-slate-500 text-sm mb-1">SENAC-RS</div>
-                        <div className="text-slate-600 font-mono text-[10px]">2015 — 2016</div>
-                    </div>
+                    {EDUCATION.map((edu) => (
+                      <div key={edu.id} className="group">
+                          <div className="text-white font-bold group-hover:text-sky-300 transition-colors">{edu.degree[language]}</div>
+                          <div className="text-slate-500 text-sm mb-1">{edu.school[language]}</div>
+                          <div className="text-slate-600 font-mono text-[10px]">{edu.period}</div>
+                      </div>
+                    ))}
                 </div>
             </div>
             
             <div className="glass-panel p-8 rounded-2xl">
-                <h3 className="font-mono text-xs text-emerald-500 mb-6 uppercase tracking-widest">{t('experience.credentials.title')}</h3>
+                <h3 className="font-mono text-xs text-emerald-500 mb-6 uppercase tracking-widest">{t('experience.credentials')}</h3>
                 <div className="space-y-8">
-                    <div>
-                        <div className="inline-flex items-center gap-2 text-emerald-400 font-bold mb-2">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                          {t('experience.credentials.cfp')}
-                        </div>
-                        <div className="text-slate-500 text-sm">{t('experience.credentials.planner')}</div>
-                        <div className="text-slate-600 text-xs mt-1">Planejar / Financial Planning Standards Board</div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 rounded bg-black/40 border border-white/5">
-                            <div className="text-slate-300 text-sm font-medium">{t('experience.credentials.langs.pt')}</div>
-                            <div className="text-slate-600 text-[10px] font-mono uppercase">{t('experience.credentials.langs.ptLevel')}</div>
-                        </div>
-                        <div className="p-3 rounded bg-black/40 border border-white/5">
-                            <div className="text-slate-300 text-sm font-medium">{t('experience.credentials.langs.en')}</div>
-                            <div className="text-slate-600 text-[10px] font-mono uppercase">{t('experience.credentials.langs.enLevel')}</div>
-                        </div>
+                    {CREDENTIALS.map((cred) => (
+                      <div key={cred.id}>
+                          <div className="inline-flex items-center gap-2 text-emerald-400 font-bold mb-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            {cred.name[language]}
+                          </div>
+                          <div className="text-slate-500 text-sm">{cred.detail[language]}</div>
+                          <div className="text-slate-600 text-xs mt-1">{cred.issuer}</div>
+                      </div>
+                    ))}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {LANGUAGES.map((lang) => (
+                          <div key={lang.name.en} className="p-3 rounded bg-black/40 border border-white/5">
+                              <div className="text-slate-300 text-sm font-medium">{lang.name[language]}</div>
+                              <div className="text-slate-600 text-[10px] font-mono uppercase">{lang.level[language]}</div>
+                          </div>
+                        ))}
                     </div>
                 </div>
             </div>
