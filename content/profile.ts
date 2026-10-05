@@ -73,6 +73,8 @@ export interface Project {
   id: string;
   name: string;
   featured?: boolean;
+  /** Pinned on github.com/robertoecf. Keep in sync with the profile pins. */
+  pinned?: boolean;
   category: Localized;
   description: Localized;
   /** One-line proof shown in italics under the description. */
@@ -82,7 +84,9 @@ export interface Project {
   links: { label: string; url: string }[];
 }
 
-// Featured projects come first, in display order.
+// Featured projects come first, in display order. The rest follow the
+// GitHub profile pins (pinned first, in pin order).
+// TODO: robertoecf/skills is private for now; add it here once it is public.
 export const PROJECTS: Project[] = [
   {
     id: 'wealthuman',
@@ -120,6 +124,7 @@ export const PROJECTS: Project[] = [
     id: 'openfindata',
     name: 'OpenFinData',
     featured: true,
+    pinned: true,
     category: { en: 'Financial data · Open source', pt: 'Dados financeiros · Open source' },
     description: {
       en: 'Open-source infrastructure for Brazilian public financial data. One auditable layer over BCB, CVM, B3, Tesouro, IBGE, IPEA, ANBIMA, SUSEP and more, exposed as an async Python library, REST API, CLI and MCP server for AI agents.',
@@ -130,8 +135,21 @@ export const PROJECTS: Project[] = [
     links: [{ label: 'GitHub', url: 'https://github.com/robertoecf/OpenFinData' }],
   },
   {
+    id: 'portfolio',
+    name: 'portfolio',
+    pinned: true,
+    category: { en: 'This site · Open source', pt: 'Este site · Open source' },
+    description: {
+      en: 'The site you are reading. One content file feeds the pages in both languages, the SEO and llms.txt files, and the context of the AI chat (Qwen on Cerebras, via Cloudflare Pages Functions).',
+      pt: 'O site que você está lendo. Um único arquivo de conteúdo alimenta as páginas nos dois idiomas, o SEO, os arquivos llms.txt e o contexto do chat com IA (Qwen na Cerebras, via Cloudflare Pages Functions).',
+    },
+    tags: ['React', 'Cloudflare', 'LLM'],
+    links: [{ label: 'GitHub', url: 'https://github.com/robertoecf/portfolio' }],
+  },
+  {
     id: 'adversarial-review',
     name: 'adversarial-review',
+    pinned: true,
     category: { en: 'AI agent tooling', pt: 'Ferramentas para agentes de IA' },
     description: {
       en: 'Cross-model adversarial review for coding agents (Claude Code, Codex, Pi, Grok). Routes plans and diffs to a different model family, so the reviewer never shares the author’s blind spots.',
@@ -140,6 +158,18 @@ export const PROJECTS: Project[] = [
     tags: ['Claude Code', 'Multi-LLM', 'Shell'],
     status: 'v0.9.9',
     links: [{ label: 'GitHub', url: 'https://github.com/robertoecf/adversarial-review' }],
+  },
+  {
+    id: 'writing-style',
+    name: 'writing-style',
+    pinned: true,
+    category: { en: 'AI agent tooling', pt: 'Ferramentas para agentes de IA' },
+    description: {
+      en: 'Claude Code skill that writes in specific author styles (Jack Butcher, Anthropic, Morgan Housel) plus a personal blend.',
+      pt: 'Skill para Claude Code que escreve em estilos de autores específicos (Jack Butcher, Anthropic, Morgan Housel) e em uma mistura pessoal.',
+    },
+    tags: ['Claude Code', 'Skill'],
+    links: [{ label: 'GitHub', url: 'https://github.com/robertoecf/writing-style' }],
   },
   {
     id: 'claude-code-statusbar',
@@ -176,17 +206,6 @@ export const PROJECTS: Project[] = [
     },
     tags: ['Obsidian', 'TypeScript'],
     links: [{ label: 'GitHub', url: 'https://github.com/robertoecf/obsidian-table-doctor' }],
-  },
-  {
-    id: 'writing-style',
-    name: 'writing-style',
-    category: { en: 'AI agent tooling', pt: 'Ferramentas para agentes de IA' },
-    description: {
-      en: 'Claude Code skill that writes in specific author styles (Jack Butcher, Anthropic, Morgan Housel) plus a personal blend.',
-      pt: 'Skill para Claude Code que escreve em estilos de autores específicos (Jack Butcher, Anthropic, Morgan Housel) e em uma mistura pessoal.',
-    },
-    tags: ['Claude Code', 'Skill'],
-    links: [{ label: 'GitHub', url: 'https://github.com/robertoecf/writing-style' }],
   },
 ];
 

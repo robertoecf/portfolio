@@ -25,6 +25,7 @@ const translations = {
     work: {
       label: 'Index of work',
       more: 'Also built',
+      pinned: 'Pinned · open source',
       all: 'All repositories on GitHub',
     },
     career: {
@@ -66,6 +67,7 @@ const translations = {
     work: {
       label: 'Índice do trabalho',
       more: 'Também construí',
+      pinned: 'Fixado · open source',
       all: 'Todos os repositórios no GitHub',
     },
     career: {
