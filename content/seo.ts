@@ -25,7 +25,7 @@ export const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const home = (lang: Lang) => `${SITE_URL[lang]}/`;
-const knowledgeUrl = (lang: Lang) => `${SITE_URL[lang]}/knowledge/${lang}.html`;
+const knowledgeUrl = (lang: Lang) => `${SITE_URL[lang]}/knowledge/${lang}`;
 const profileLinks = SOCIALS.filter((s) => s.profile);
 
 export function personJsonLd(lang: Lang) {
