@@ -15,11 +15,11 @@ export const Hero: React.FC = () => {
         </h1>
 
         <div className="flex flex-wrap gap-4">
-          <a href="#work" className="press [--press:var(--color-teal)] px-6 py-3 bg-ink text-paper text-sm border-2 border-ink">
+          <a href={t('hero.ctaHref')} className="press [--press:var(--color-teal)] px-6 py-3 bg-ink text-paper text-sm border-2 border-ink">
             {t('hero.cta')} ↓
           </a>
-          <a href="#chat" className="press px-6 py-3 bg-paper text-ink text-sm border-2 border-ink">
-            {t('hero.ask')}
+          <a href={t('hero.secondaryHref')} className="press px-6 py-3 bg-paper text-ink text-sm border-2 border-ink">
+            {t('hero.secondary')}
           </a>
         </div>
 

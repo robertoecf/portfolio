@@ -134,9 +134,9 @@ export function buildLlmsTxt(): string {
 
 > ${SEO.description.en}
 
-Roberto E. C. Freitas (CFP®, CEA) is a Brazilian financial planner based in São Paulo who builds software for wealth management. 8+ years in fintech and wealth management (Warren Investimentos), Subject-Matter Expert evaluating LLMs for financial services (via Mercor), builder of Wealthuman OS and Futuro em Foco, and maintainer of open-source tools for Brazilian financial data and AI coding agents.
+Roberto E. C. Freitas (CFP®, CEA) is a Brazilian financial planner based in São Paulo who builds software for wealth management and still advises clients. 8+ years in fintech and wealth management (Warren Investimentos), Subject-Matter Expert evaluating LLMs for financial services (via Mercor), builder of Wealthuman OS and Futuro em Foco, and maintainer of open-source tools for Brazilian financial data and AI coding agents.
 
-The English site (${home('en')}) and the Portuguese site (${home('pt')}) present the same profile in each language.
+The English site (${home('en')}) and the Portuguese site (${home('pt')}) share the same facts with a different emphasis: the English site leads with the software he builds; the Portuguese site leads with his financial planning practice for clients.
 
 ## Profile
 
