@@ -2,7 +2,7 @@ import type { Lang } from '../../content/profile';
 import { resumeText } from '../../content/seo';
 
 interface Env {
-  XAI_API_KEY: string;
+  CEREBRAS_API_KEY: string;
 }
 
 interface ChatRequestBody {
@@ -55,7 +55,7 @@ function buildSystemInstruction(language: Lang): string {
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  if (!env.XAI_API_KEY) {
+  if (!env.CEREBRAS_API_KEY) {
     return new Response(JSON.stringify({ error: 'API key not configured' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
@@ -92,14 +92,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }));
 
   try {
-    const response = await fetch('https://api.x.ai/v1/chat/completions', {
+    const response = await fetch('https://api.cerebras.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${env.XAI_API_KEY}`,
+        'Authorization': `Bearer ${env.CEREBRAS_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'grok-4.3',
+        model: 'qwen-3.8-27b',
+        reasoning_effort: 'none',
         messages: [
           { role: 'system', content: buildSystemInstruction(language) },
           ...history,
@@ -110,8 +111,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('xAI API error:', errorText);
-      return new Response(JSON.stringify({ error: 'xAI API request failed' }), {
+      console.error('Cerebras API error:', errorText);
+      return new Response(JSON.stringify({ error: 'Cerebras API request failed' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -130,7 +131,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error calling xAI API:', error);
+    console.error('Error calling Cerebras API:', error);
 
     const errorMessage = language === 'pt'
       ? 'Estou analisando um grande volume de requisições. Por favor, tente novamente em um momento.'
