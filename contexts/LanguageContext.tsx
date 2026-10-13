@@ -13,7 +13,7 @@ const translations = {
   en: {
     nav: { work: 'Work', career: 'Career', ask: 'Ask', contact: 'Contact' },
     hero: {
-      kicker: 'CFP® financial planner · Software builder',
+      kicker: 'Financial planner · Software builder',
       title: 'I’ve spent eight years planning family wealth.',
       titleAccent: 'Now I build the software my profession still doesn’t have.',
       lede: '',
@@ -56,7 +56,7 @@ const translations = {
   pt: {
     nav: { work: 'Trabalho', career: 'Trajetória', ask: 'Pergunte', contact: 'Contato' },
     hero: {
-      kicker: 'Planejador financeiro CFP® · Atendendo clientes desde 2018',
+      kicker: 'Planejador financeiro · Atendendo clientes desde 2018',
       title: 'Cuido do patrimônio de famílias há oito anos.',
       titleAccent: 'Com método, dados e as ferramentas que eu mesmo construo.',
       lede: 'Meu trabalho é ajudar pessoas e famílias a tomarem decisões melhores e alcançarem seus objetivos de vida.',
