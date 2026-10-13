@@ -47,7 +47,6 @@ export const Hero: React.FC = () => {
         >
           {t('hero.sticker')}
         </span>}
-        <figcaption className="mt-3 font-serif italic text-[13px] text-muted">{t('hero.caption')}</figcaption>
       </figure>
     </section>
   );
