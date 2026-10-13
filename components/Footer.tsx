@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
             className="w-28 sm:w-36 aspect-square object-cover object-top border-2 border-paper"
           />
           <div>
-            <p className="font-serif text-[48px] sm:text-[72px] leading-none">{t('footer.title')}</p>
+            <p className="font-serif text-[44px] leading-none">{t('footer.title')}</p>
             <p className="mt-4 text-paper/70">{t('footer.desc')}</p>
           </div>
         </div>
