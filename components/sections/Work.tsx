@@ -4,7 +4,6 @@ import { GITHUB_URL, PROJECTS, type Project } from '../../content/profile';
 
 const featured = PROJECTS.filter((p) => p.featured);
 const pinned = PROJECTS.filter((p) => !p.featured && p.pinned);
-const others = PROJECTS.filter((p) => !p.featured && !p.pinned);
 
 // One loud card per pinned repo: ink, teal, then paper.
 const PINNED_SKINS = [
@@ -77,20 +76,6 @@ export const Work: React.FC = () => {
               <span className="opacity-70">{p.tags.join(' / ')}</span>
               <ExtraLinks p={p} />
               <span aria-hidden="true" className="text-xl leading-none">↗</span>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <ul className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-        {others.map((p) => (
-          <li key={p.id} className="relative flex flex-col p-5 border-2 border-ink bg-paper-deep hover:bg-paper transition-colors">
-            <StretchedName p={p} className="font-serif text-[24px] leading-tight break-words hover:italic" />
-            <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-muted">{p.category[language]}</p>
-            <p className="mt-3 text-[13px] leading-relaxed text-body">{p.description[language]}</p>
-            <div className="mt-auto pt-4 flex items-center justify-between gap-3 font-mono text-[11px] text-muted">
-              <span>{p.tags.join(' / ')}</span>
-              <ExtraLinks p={p} />
             </div>
           </li>
         ))}
