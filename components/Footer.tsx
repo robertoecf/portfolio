@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
   return (
     <footer id="contact" className="bg-ink text-paper scroll-mt-14">
       <div className="max-w-6xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
-        <div className="md:col-span-7 flex items-end gap-6">
+        <div className="md:col-span-7 flex items-start gap-6">
           <img
             src={PERSON.portraitSmile}
             alt=""
