@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
           />
           <div>
             <p className="font-serif text-[44px] leading-none">{t('footer.title')}</p>
-            <p className="mt-4 text-paper/90">{t('footer.desc')}</p>
+            <p className="mt-4 text-paper-deep">{t('footer.desc')}</p>
           </div>
         </div>
         <div className="md:col-span-5">
