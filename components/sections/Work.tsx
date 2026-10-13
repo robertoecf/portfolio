@@ -64,7 +64,7 @@ export const Work: React.FC = () => {
         {pinned.map((p, i) => (
           <li
             key={p.id}
-            className={`press relative flex flex-col min-h-[340px] p-6 border-2 border-ink ${PINNED_SKINS[i % PINNED_SKINS.length]} ${i === 1 ? 'md:-translate-y-4' : ''}`}
+            className={`press relative flex flex-col min-h-[340px] p-6 border-2 border-ink ${PINNED_SKINS[i % PINNED_SKINS.length]}`}
           >
             <div className="flex items-start justify-between gap-3 font-mono text-[11px] uppercase tracking-wide">
               <span className="px-2 py-1 border border-current">{t('work.pinned')}</span>
