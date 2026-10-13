@@ -14,28 +14,28 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const STYLE: Record<SocialId, { Icon: React.FC<{ className?: string }>; hover: string; iconHover: string }> = {
-  whatsapp: { Icon: WhatsAppIcon, hover: 'hover:bg-emerald-500/20 hover:border-emerald-500', iconHover: 'group-hover:text-emerald-500' },
-  email: { Icon: Mail, hover: 'hover:bg-ethereal-orange/20 hover:border-ethereal-orange', iconHover: 'group-hover:text-ethereal-orange' },
-  linkedin: { Icon: Linkedin, hover: 'hover:bg-ethereal-blue/50 hover:border-[#0077b5]', iconHover: 'group-hover:text-white' },
-  github: { Icon: Github, hover: 'hover:bg-white/10 hover:border-white/60', iconHover: 'group-hover:text-white' },
+const ICONS: Record<SocialId, React.FC<{ className?: string }>> = {
+  whatsapp: WhatsAppIcon,
+  email: Mail,
+  linkedin: Linkedin,
+  github: Github,
 };
 
 export const SocialLinks: React.FC = () => (
-  <ul className="flex flex-wrap justify-center gap-6">
+  <ul className="space-y-3">
     {SOCIALS.map(({ id, label, url, handle }) => {
-      const { Icon, hover, iconHover } = STYLE[id];
+      const Icon = ICONS[id];
       const external = !url.startsWith('mailto:');
       return (
         <li key={id}>
           <a
             href={url}
             {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            aria-label={`${label}: ${handle}`}
-            title={`${label}: ${handle}`}
-            className={`group block p-4 rounded-full bg-white/5 border border-ethereal-border hover:scale-110 transition-all duration-500 ${hover}`}
+            className="group flex items-center gap-4 text-[17px]"
           >
-            <Icon className={`w-5 h-5 text-slate-400 ${iconHover}`} />
+            <Icon className="w-5 h-5 text-paper/60 group-hover:text-teal-strong transition-colors" />
+            <span className="w-24 text-[12px] uppercase tracking-[0.14em] text-paper/60">{label}</span>
+            <span className="underline underline-offset-4 decoration-paper/30 group-hover:decoration-teal-strong">{handle}</span>
           </a>
         </li>
       );
