@@ -14,6 +14,8 @@ export const Hero: React.FC = () => {
           {t('hero.title')}<br /><em className="text-teal">{t('hero.titleAccent')}</em>
         </h1>
 
+        {t('hero.lede') && <p className="max-w-xl text-[18px] leading-relaxed text-body">{t('hero.lede')}</p>}
+
         <div className="flex flex-wrap gap-4">
           <a href={t('hero.ctaHref')} className="press [--press:var(--color-teal)] px-6 py-3 bg-ink text-paper text-sm border-2 border-ink">
             {t('hero.cta')} ↓
