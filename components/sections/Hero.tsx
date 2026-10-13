@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
         <p className="text-[13px] uppercase tracking-[0.18em] text-teal">{t('hero.kicker')}</p>
 
         <h1 className="font-serif text-[44px] sm:text-[64px] leading-[1.02] tracking-[-0.01em]">
-          {t('hero.title')} <em className="text-teal">{t('hero.titleAccent')}</em>
+          {t('hero.title')}<br /><em className="text-teal">{t('hero.titleAccent')}</em>
         </h1>
 
         <div className="flex flex-wrap gap-4">
