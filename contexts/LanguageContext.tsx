@@ -93,8 +93,8 @@ const translations = {
       processing: 'Pensando…',
     },
     footer: {
-      title: 'Vamos conversar.',
-      desc: 'Estou aceitando novos clientes. Atendo pessoas e famílias em aposentadoria, sucessão, impostos e investimentos. Para software e parcerias, o contato é o mesmo.',
+      title: 'Vamos conversar?',
+      desc: 'Ajudo pessoas e famílias a cuidarem bem do seu patrimônio e alcançarem seus objetivos de vida. Se você tem qualquer dúvida sobre planejamento financeiro, acumulação, aposentadoria, perpetuidade, sucessão, impostos ou investimentos, já vale o papo.',
       mark: 'A marca CFP® pertence à FPSB',
     },
   },
