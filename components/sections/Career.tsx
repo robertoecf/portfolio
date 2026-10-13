@@ -18,14 +18,14 @@ export const Career: React.FC = () => {
           </div>
           <div className="col-span-12 sm:col-span-9">
             <h3 className="font-serif text-[30px] leading-tight">{job.title[language]}</h3>
-            <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-body">
+            {job.bullets[language].length > 0 && <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-body">
               {job.bullets[language].map((b) => (
                 <li key={b} className="pl-5 relative">
                   <span aria-hidden="true" className="absolute left-0 top-[0.6em] w-1.5 h-1.5 bg-teal" />
                   {b}
                 </li>
               ))}
-            </ul>
+            </ul>}
           </div>
         </article>
       ))}

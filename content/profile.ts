@@ -26,8 +26,8 @@ export const PERSON = {
     pt: 'Planejador financeiro CFP® | Planejamento patrimonial, sucessório e de investimentos',
   } as Localized,
   summary: {
-    en: 'CFP® financial planner (Planejar / FPSB) and CEA (ANBIMA) with 8+ years in fintech and wealth management. Manages a book of high-net-worth clients exceeding USD 20M in assets at Warren Investimentos and works as a Subject-Matter Expert in Financial Services (via Mercor), improving LLM reliability for financial reasoning. Builds software for his own profession: Wealthuman OS, an operating system for wealth advisors that connects probabilistic planning, a family-centric CRM and AI agents; Futuro em Foco, a retirement simulator built on 1,001-path Monte Carlo projections; and OpenFinData, open-source infrastructure for Brazilian public financial data. Also builds open-source tools for AI coding agents.',
-    pt: 'Planejador financeiro CFP® (Planejar / FPSB) e CEA (ANBIMA), com mais de 8 anos em fintech e gestão de patrimônio (wealth management). Atende pessoas e famílias com planejamento financeiro completo: aposentadoria, sucessão, eficiência tributária, proteção e investimentos. Gerencia carteira de clientes de alta renda com ativos superiores a R$ 100 milhões na Warren Investimentos. Usa tecnologia para atender melhor: constrói o Wealthuman OS, sistema operacional do consultor patrimonial que une planejamento probabilístico, CRM centrado em família e agentes de IA, e o Futuro em Foco, simulador de aposentadoria com projeções Monte Carlo de 1.001 trajetórias. Também atua como especialista em avaliação de IA para o setor financeiro (via Mercor) e mantém o OpenFinData, infraestrutura open source de dados financeiros públicos do Brasil.',
+    en: 'CFP® financial planner (Planejar / FPSB) and CEA (ANBIMA) with 8+ years in fintech and wealth management. Partner and investment consultant at Monvanti Investimentos; previously partner and investment advisor at Warren Investimentos (2018 to 2026), managing a book of high-net-worth clients exceeding USD 20M in assets. Works as a Subject-Matter Expert in Financial Services (via Mercor), improving LLM reliability for financial reasoning. Builds software for his own profession: Wealthuman OS, an operating system for wealth advisors that connects probabilistic planning, a family-centric CRM and AI agents; Futuro em Foco, a retirement simulator built on 1,001-path Monte Carlo projections; and OpenFinData, open-source infrastructure for Brazilian public financial data. Also builds open-source tools for AI coding agents.',
+    pt: 'Planejador financeiro CFP® (Planejar / FPSB) e CEA (ANBIMA), com mais de 8 anos em fintech e gestão de patrimônio (wealth management). Atende pessoas e famílias com planejamento financeiro completo: aposentadoria, sucessão, eficiência tributária, proteção e investimentos. Sócio e consultor de investimentos na Monvanti Investimentos. Antes, foi sócio e assessor de investimentos na Warren Investimentos (2018 a 2026), com carteira de clientes de alta renda acima de R$ 100 milhões. Usa tecnologia para atender melhor: constrói o Wealthuman OS, sistema operacional do consultor patrimonial que une planejamento probabilístico, CRM centrado em família e agentes de IA, e o Futuro em Foco, simulador de aposentadoria com projeções Monte Carlo de 1.001 trajetórias. Também atua como especialista em avaliação de IA para o setor financeiro (via Mercor) e mantém o OpenFinData, infraestrutura open source de dados financeiros públicos do Brasil.',
   } as Localized,
 };
 
@@ -222,6 +222,17 @@ export interface Job {
 
 export const EXPERIENCE: Job[] = [
   {
+    id: 'monvanti',
+    company: 'Monvanti Investimentos',
+    start: '2026',
+    location: { en: 'São Paulo, Brazil', pt: 'São Paulo, SP' },
+    title: {
+      en: 'Partner & Investment Consultant',
+      pt: 'Sócio & Consultor de Investimentos',
+    },
+    bullets: { en: [], pt: [] },
+  },
+  {
     id: 'mercor',
     company: 'Mercor',
     start: '2025',
@@ -248,23 +259,24 @@ export const EXPERIENCE: Job[] = [
     id: 'warren',
     company: 'Warren Investimentos',
     start: '2018',
+    end: '2026',
     location: { en: 'São Paulo, Brazil', pt: 'São Paulo, SP' },
     title: {
-      en: 'Senior Financial Advisor & Strategic Contributor',
-      pt: 'Consultor Financeiro Sênior & Sócio',
+      en: 'Partner & Investment Advisor',
+      pt: 'Sócio & Assessor de Investimentos',
     },
     bullets: {
       en: [
-        'Manage a portfolio of high-net-worth (HNW) clients exceeding USD 20M in assets, combining financial planning and investment strategy with product feedback loops.',
-        'Provide end-to-end financial planning (tax, succession, retirement, risk/insurance) and translate client needs into structured recommendations and scalable frameworks.',
-        'Partner with product, operations, and leadership to refine onboarding, advisory workflows, and platform features, reducing friction for clients and internal teams.',
-        'Identify market opportunities and client pain points, proposing strategic improvements that support the evolution of Warren from a fintech startup to a full-service platform.',
+        'Managed a portfolio of high-net-worth (HNW) clients exceeding USD 20M in assets, combining financial planning and investment strategy with product feedback loops.',
+        'Provided end-to-end financial planning (tax, succession, retirement, risk/insurance) and translate client needs into structured recommendations and scalable frameworks.',
+        'Partnered with product, operations, and leadership to refine onboarding, advisory workflows, and platform features, reducing friction for clients and internal teams.',
+        'Identified market opportunities and client pain points, proposing strategic improvements that support the evolution of Warren from a fintech startup to a full-service platform.',
       ],
       pt: [
         'Gestão de carteira de clientes de alta renda (High Net Worth) com ativos superiores a R$ 100 milhões.',
-        'Ofereço planejamento financeiro completo (fiscal, sucessório, aposentadoria), criando estratégias personalizadas alinhadas aos objetivos de vida do cliente.',
-        'Atuo no desenvolvimento de negócios, identificando necessidades de mercado e construindo relacionamentos de confiança de longo prazo.',
-        'Colaboro com equipes internas para refinar a plataforma da Warren, garantindo uma experiência de investimento premium e sem atritos.',
+        'Ofereci planejamento financeiro completo (fiscal, sucessório, aposentadoria), criando estratégias personalizadas alinhadas aos objetivos de vida do cliente.',
+        'Atuei no desenvolvimento de negócios, identificando necessidades de mercado e construindo relacionamentos de confiança de longo prazo.',
+        'Colaborei com equipes internas para refinar a plataforma da Warren, garantindo uma experiência de investimento premium e sem atritos.',
       ],
     },
   },
