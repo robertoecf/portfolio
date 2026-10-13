@@ -49,7 +49,7 @@ const translations = {
       processing: 'Thinking…',
     },
     footer: {
-      title: 'Let’s talk.',
+      title: 'Let’s talk?',
       desc: 'Product, AI for finance, or the software behind wealth planning.',
       mark: 'CFP® is a mark owned by FPSB',
     },
