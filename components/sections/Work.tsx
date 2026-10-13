@@ -34,7 +34,7 @@ export const Work: React.FC = () => {
 
   return (
     <section id="work" className="max-w-6xl mx-auto px-6 pb-24 scroll-mt-14">
-      <h2 className="text-[13px] uppercase tracking-[0.18em] border-b border-ink pb-3">{t('work.label')}</h2>
+      <h2 className="text-[13px] uppercase tracking-[0.18em] border-b-[0.5px] border-ink pb-3">{t('work.label')}</h2>
 
       {featured.map((p, i) => (
         <a
@@ -57,7 +57,7 @@ export const Work: React.FC = () => {
         </a>
       ))}
 
-      <h3 className="mt-20 text-[13px] uppercase tracking-[0.18em] border-b border-ink pb-3">{t('work.more')}</h3>
+      <h3 className="mt-20 text-[13px] uppercase tracking-[0.18em] border-b-[0.5px] border-ink pb-3">{t('work.more')}</h3>
 
       <ul className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
         {pinned.map((p, i) => (
