@@ -14,7 +14,7 @@ export const Masthead: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6 border-b border-ink text-[13px]">
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6 text-[13px]">
         <a href="#top" className="font-semibold tracking-tight">{PERSON.displayName}</a>
 
         <nav aria-label={language === 'pt' ? 'Seções' : 'Sections'} className="hidden md:flex gap-7 text-muted">
