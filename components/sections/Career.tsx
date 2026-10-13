@@ -7,7 +7,7 @@ export const Career: React.FC = () => {
 
   return (
     <section id="career" className="max-w-6xl mx-auto px-6 pb-24 scroll-mt-14">
-      <h2 className="text-[13px] uppercase tracking-[0.18em] text-teal border-b-[0.5px] border-ink pb-3">{t('career.label')}</h2>
+      <h2 className="text-[13px] uppercase tracking-[0.18em] font-semibold border-b-[0.5px] border-ink pb-3">{t('career.label')}</h2>
 
       {EXPERIENCE.map((job) => (
         <article key={job.id} className="grid grid-cols-12 gap-x-6 gap-y-3 py-10 border-b border-ink/20">
