@@ -27,7 +27,7 @@ export const PERSON = {
   } as Localized,
   summary: {
     en: 'CFP® financial planner (Planejar / FPSB) and CEA (ANBIMA) with 8+ years in fintech and wealth management. Manages a book of high-net-worth clients exceeding USD 20M in assets at Warren Investimentos and works as a Subject-Matter Expert in Financial Services (via Mercor), improving LLM reliability for financial reasoning. Builds software for his own profession: Wealthuman OS, an operating system for wealth advisors that connects probabilistic planning, a family-centric CRM and AI agents; Futuro em Foco, a retirement simulator built on 1,001-path Monte Carlo projections; and OpenFinData, open-source infrastructure for Brazilian public financial data. Also builds open-source tools for AI coding agents.',
-    pt: 'Planejador financeiro CFP® (Planejar / FPSB) e CEA (ANBIMA), com mais de 8 anos em fintech e gestão de patrimônio (wealth management). Atende pessoas e famílias com planejamento financeiro completo: aposentadoria, sucessão, eficiência tributária, proteção e investimentos. Gerencia carteira de clientes de alta renda com ativos superiores a USD 20 milhões (R$ 120M+) na Warren Investimentos. Usa tecnologia para atender melhor: constrói o Wealthuman OS, sistema operacional do consultor patrimonial que une planejamento probabilístico, CRM centrado em família e agentes de IA, e o Futuro em Foco, simulador de aposentadoria com projeções Monte Carlo de 1.001 trajetórias. Também atua como especialista em avaliação de IA para o setor financeiro (via Mercor) e mantém o OpenFinData, infraestrutura open source de dados financeiros públicos do Brasil.',
+    pt: 'Planejador financeiro CFP® (Planejar / FPSB) e CEA (ANBIMA), com mais de 8 anos em fintech e gestão de patrimônio (wealth management). Atende pessoas e famílias com planejamento financeiro completo: aposentadoria, sucessão, eficiência tributária, proteção e investimentos. Gerencia carteira de clientes de alta renda com ativos superiores a R$ 100 milhões na Warren Investimentos. Usa tecnologia para atender melhor: constrói o Wealthuman OS, sistema operacional do consultor patrimonial que une planejamento probabilístico, CRM centrado em família e agentes de IA, e o Futuro em Foco, simulador de aposentadoria com projeções Monte Carlo de 1.001 trajetórias. Também atua como especialista em avaliação de IA para o setor financeiro (via Mercor) e mantém o OpenFinData, infraestrutura open source de dados financeiros públicos do Brasil.',
   } as Localized,
 };
 
@@ -261,7 +261,7 @@ export const EXPERIENCE: Job[] = [
         'Identify market opportunities and client pain points, proposing strategic improvements that support the evolution of Warren from a fintech startup to a full-service platform.',
       ],
       pt: [
-        'Gestão de carteira de clientes de alta renda (High Net Worth) com ativos superiores a USD 20 milhões (R$ 120M+).',
+        'Gestão de carteira de clientes de alta renda (High Net Worth) com ativos superiores a R$ 100 milhões.',
         'Ofereço planejamento financeiro completo (fiscal, sucessório, aposentadoria), criando estratégias personalizadas alinhadas aos objetivos de vida do cliente.',
         'Atuo no desenvolvimento de negócios, identificando necessidades de mercado e construindo relacionamentos de confiança de longo prazo.',
         'Colaboro com equipes internas para refinar a plataforma da Warren, garantindo uma experiência de investimento premium e sem atritos.',
