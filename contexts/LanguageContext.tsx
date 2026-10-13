@@ -58,7 +58,7 @@ const translations = {
     nav: { work: 'Trabalho', career: 'Trajetória', ask: 'Pergunte', contact: 'Contato' },
     hero: {
       kicker: 'Planejador financeiro CFP® · Atendendo clientes desde 2018',
-      title: 'Planejo o patrimônio de famílias há oito anos.',
+      title: 'Cuido do patrimônio de famílias há oito anos.',
       titleAccent: 'Com método, dados e as ferramentas que eu mesmo construo.',
       notes: ['Planejamento completo: aposentadoria, sucessão, impostos e investimentos', 'CFP® (Planejar) e CEA (ANBIMA)', 'Carteira de clientes acima de US$ 20 mi na Warren', 'Avaliação de LLMs para finanças via Mercor'],
       caption: 'Fig. 1: Roberto Freitas, São Paulo',
