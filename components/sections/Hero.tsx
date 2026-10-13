@@ -41,12 +41,12 @@ export const Hero: React.FC = () => {
             className="w-full h-full object-cover object-top"
           />
         </div>
-        <span
+        {t('hero.sticker') && <span
           aria-hidden="true"
           className="absolute -top-4 -right-3 sm:-right-5 rotate-[6deg] px-4 py-2 bg-teal text-paper font-mono text-sm uppercase tracking-wide border-2 border-ink shadow-[4px_4px_0_var(--color-ink)]"
         >
           {t('hero.sticker')}
-        </span>
+        </span>}
         <figcaption className="mt-3 font-serif italic text-[13px] text-muted">{t('hero.caption')}</figcaption>
       </figure>
     </section>

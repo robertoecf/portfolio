@@ -62,7 +62,7 @@ const translations = {
       titleAccent: 'Com método, dados e as ferramentas que eu mesmo construo.',
       notes: ['Planejamento completo: aposentadoria, sucessão, impostos e investimentos', 'CFP® (Planejar) e CEA (ANBIMA)', 'Carteira de clientes acima de US$ 20 mi na Warren', 'Avaliação de LLMs para finanças via Mercor'],
       caption: 'Fig. 1: Roberto Freitas, São Paulo',
-      sticker: 'Atende clientes',
+      sticker: '',
       cta: 'Agende uma conversa',
       ctaHref: '#contact',
       secondary: 'Ver o trabalho',
@@ -94,7 +94,7 @@ const translations = {
     },
     footer: {
       title: 'Vamos conversar.',
-      desc: 'Quer planejar seu patrimônio? Atendo pessoas e famílias em aposentadoria, sucessão, impostos e investimentos. Para software e parcerias, o contato é o mesmo.',
+      desc: 'Estou aceitando novos clientes. Atendo pessoas e famílias em aposentadoria, sucessão, impostos e investimentos. Para software e parcerias, o contato é o mesmo.',
       mark: 'A marca CFP® pertence à FPSB',
     },
   },
