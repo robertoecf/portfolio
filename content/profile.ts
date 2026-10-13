@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
     id: 'futuro-em-foco',
     name: 'Futuro em Foco',
     featured: true,
-    category: { en: 'Product · Financial planning', pt: 'Produto · Planejamento financeiro' },
+    category: { en: 'Product · Retirement calculator', pt: 'Produto · Calculadora de aposentadoria' },
     description: {
       en: 'Retirement and wealth planning web app for Brazilian investors: projects retirement, maps the investor profile and emails a personalized plan.',
       pt: 'Aplicação de planejamento financeiro e de aposentadoria para o investidor brasileiro: projeta a aposentadoria, identifica o perfil de investidor e envia um plano personalizado por e-mail.',
