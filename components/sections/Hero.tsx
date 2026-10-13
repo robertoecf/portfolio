@@ -22,12 +22,6 @@ export const Hero: React.FC = () => {
             {t('hero.secondary')}
           </a>
         </div>
-
-        <ol className="text-[13px] text-muted space-y-1 border-t border-ink/20 pt-4">
-          {(t('hero.notes') as string[]).map((note, i) => (
-            <li key={note}><sup className="mr-1">{i + 1}</sup>{note}</li>
-          ))}
-        </ol>
       </div>
 
       <figure className="lg:col-span-5 relative">
