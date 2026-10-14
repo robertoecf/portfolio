@@ -81,7 +81,7 @@ Decisão de 2026-10-14: sem o adaptador `@astrojs/cloudflare`. O site continua 1
 2. `worker/index.ts`: `/api/chat` (só POST) chama `worker/chat.ts`; em `.com.br`, `/` e `/index.html` servem `/pt/`; o resto vai para os assets.
 3. Saem `functions/` e `public/_routes.json`.
 4. Secret `CEREBRAS_API_KEY` no Worker a partir do Doppler; teste em `portfolio.robertoecf.workers.dev`.
-5. Domínios: tirar `robertoecf.com` e `robertoecf.com.br` do projeto Pages e ligar como Custom Domains do Worker. É o único passo com risco de queda, e ele é reversível (devolver os domínios ao Pages).
+5. Domínios: feito em 2026-10-14 com Worker Routes (`robertoecf.com/*` e `robertoecf.com.br/*`), sem queda. Custom Domain não deu: os hostnames ainda têm o CNAME do Pages, e o token do wrangler não pode apagar DNS. A rota roda antes da origem, então o CNAME antigo não recebe tráfego. Para trocar por Custom Domain depois: apagar os CNAMEs no dashboard e usar `"custom_domain": true` nas rotas.
 6. Workers Builds já está ligado ao repositório com o Worker `portfolio`: o deploy fica automático a cada push na `main`.
 7. Apagar o projeto Pages só depois de alguns dias estável.
 
