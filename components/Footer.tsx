@@ -1,10 +1,10 @@
 import React from 'react';
-import { useLanguage } from '../contexts/LanguageContext';
-import { PERSON } from '../content/profile';
+import { translator } from '../content/ui';
+import { PERSON, type Lang } from '../content/profile';
 import { SocialLinks } from './SocialLinks';
 
-export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+export const Footer: React.FC<{ lang: Lang }> = ({ lang }) => {
+  const t = translator(lang);
 
   return (
     <footer id="contact" className="bg-ink text-paper scroll-mt-14">

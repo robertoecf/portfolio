@@ -1,26 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { generateChatResponse, MAX_MESSAGE_CHARS } from '../../services/chat';
 import { ChatMessage, UserRole } from '../../types';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { translator } from '../../content/ui';
+import type { Lang } from '../../content/profile';
 
-export const AIChat: React.FC = () => {
-  const { t, language } = useLanguage();
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+export const AIChat: React.FC<{ lang: Lang }> = ({ lang }) => {
+  const t = translator(lang);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
+    {
+      id: '1',
+      role: UserRole.MODEL,
+      text: t('chat.initialMessage'),
+      timestamp: Date.now()
+    }
+  ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-
-  // Initialize or reset chat when language changes
-  useEffect(() => {
-    setMessages([
-      {
-        id: '1',
-        role: UserRole.MODEL,
-        text: t('chat.initialMessage'),
-        timestamp: Date.now()
-      }
-    ]);
-  }, [language, t]);
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
@@ -53,7 +49,7 @@ export const AIChat: React.FC = () => {
     setIsLoading(true);
 
     // Pass the current language to the API service
-    const responseText = await generateChatResponse(messages, userMessage.text, language);
+    const responseText = await generateChatResponse(messages, userMessage.text, lang);
 
     const botMessage: ChatMessage = {
       id: (Date.now() + 1).toString(),

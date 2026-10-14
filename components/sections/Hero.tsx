@@ -1,9 +1,9 @@
 import React from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
-import { PERSON } from '../../content/profile';
+import { translator } from '../../content/ui';
+import { PERSON, type Lang } from '../../content/profile';
 
-export const Hero: React.FC = () => {
-  const { t } = useLanguage();
+export const Hero: React.FC<{ lang: Lang }> = ({ lang }) => {
+  const t = translator(lang);
 
   return (
     <section id="top" className="max-w-6xl mx-auto px-6 pt-14 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12">

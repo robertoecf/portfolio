@@ -1,15 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { languageForHost, type Lang } from '../content/profile';
+import type { Lang } from './profile';
 
-type Language = Lang;
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => any;
-}
-
-const translations = {
+export const UI = {
   en: {
     nav: { work: 'Work', career: 'Career', ask: 'Ask', contact: 'Contact' },
     hero: {
@@ -98,29 +89,6 @@ const translations = {
   },
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-const getDefaultLanguage = (): Language =>
-  typeof window !== 'undefined' ? languageForHost(window.location.hostname) : 'en';
-
-export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(getDefaultLanguage);
-
-  const t = (path: string) => {
-    return path.split('.').reduce((obj, key) => obj && obj[key], translations[language]);
-  };
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
+/** Returns a lookup for dotted keys, e.g. t('hero.title'). */
+export const translator = (lang: Lang) => (path: string): any =>
+  path.split('.').reduce((obj: any, key) => obj && obj[key], UI[lang]);

@@ -1,0 +1,44 @@
+---
+import { LOCALE, type Lang } from '../../content/profile';
+import { headTags } from '../../content/seo';
+import { Masthead } from '../../components/Masthead';
+import { Hero } from '../../components/sections/Hero';
+import { Work } from '../../components/sections/Work';
+import { Career } from '../../components/sections/Career';
+import { AIChat } from '../../components/sections/AIChat';
+import { Footer } from '../../components/Footer';
+import '../../index.css';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={LOCALE[lang]}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpeg" href="/profile.jpg" />
+    <link rel="apple-touch-icon" href="/profile.jpg" />
+    <meta name="theme-color" content="#F3EEE4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <Fragment set:html={headTags(lang)} />
+  </head>
+  <body>
+    <div class="min-h-screen bg-paper text-ink">
+      <Masthead lang={lang} />
+      <main>
+        <Hero lang={lang} />
+        <Work lang={lang} />
+        <Career lang={lang} />
+        <AIChat client:visible lang={lang} />
+      </main>
+      <Footer lang={lang} />
+    </div>
+  </body>
+</html>
