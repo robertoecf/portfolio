@@ -236,7 +236,7 @@ export const EXPERIENCE: Job[] = [
     id: 'mercor',
     company: 'Mercor',
     start: '2025',
-    location: { en: 'Remote (Contract)', pt: 'Remoto (Contrato)' },
+    location: { en: 'San Francisco, CA', pt: 'San Francisco, CA' },
     title: {
       en: 'Subject-Matter Expert (Financial Services)',
       pt: 'Especialista em Consultoria Financeira (IA)',
