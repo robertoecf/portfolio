@@ -4,6 +4,60 @@ import { ChatMessage, UserRole } from '../../types';
 import { translator } from '../../content/ui';
 import type { Lang } from '../../content/profile';
 
+// Renders the small Markdown subset the model tends to use (headings, lists,
+// bold, italics) as React nodes, never as raw HTML.
+const inline = (text: string) =>
+  text.split(/(\*\*[^*]+\*\*|\*[^*\s][^*]*\*)/g).map((part, i) =>
+    part.length > 4 && part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-ink">{part.slice(2, -2)}</strong>
+    ) : part.length > 2 && part.startsWith('*') && part.endsWith('*') ? (
+      <em key={i}>{part.slice(1, -1)}</em>
+    ) : (
+      part
+    )
+  );
+
+const LIST_ITEM = /^(?:[-*•]|\d+[.)])\s+/;
+
+const RichText: React.FC<{ text: string }> = ({ text }) => {
+  const blocks: React.ReactNode[] = [];
+  let list: { ordered: boolean; items: string[] } | null = null;
+
+  const flush = () => {
+    if (!list) return;
+    const { ordered, items } = list;
+    const List = ordered ? 'ol' : 'ul';
+    blocks.push(
+      <List key={blocks.length} className={`${ordered ? 'list-decimal' : 'list-disc'} pl-5 space-y-1.5`}>
+        {items.map((item, i) => <li key={i}>{inline(item)}</li>)}
+      </List>
+    );
+    list = null;
+  };
+
+  for (const raw of text.split('\n')) {
+    const line = raw.trim();
+    if (LIST_ITEM.test(line)) {
+      const ordered = /^\d/.test(line);
+      if (list && list.ordered !== ordered) flush();
+      list ??= { ordered, items: [] };
+      list.items.push(line.replace(LIST_ITEM, ''));
+      continue;
+    }
+    flush();
+    if (!line) continue;
+    const heading = line.match(/^#{1,6}\s+(.*)$/);
+    blocks.push(
+      <p key={blocks.length} className={heading ? 'font-semibold text-ink' : undefined}>
+        {inline(heading ? heading[1] : line)}
+      </p>
+    );
+  }
+  flush();
+
+  return <div className="space-y-3">{blocks}</div>;
+};
+
 export const AIChat: React.FC<{ lang: Lang }> = ({ lang }) => {
   const t = translator(lang);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
@@ -17,20 +71,16 @@ export const AIChat: React.FC<{ lang: Lang }> = ({ lang }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const lastMessageRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTo({
-        top: chatContainerRef.current.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-  };
-
+  // A new question scrolls to the bottom; a new answer scrolls to its first
+  // line, so long answers are read from the top.
   useEffect(() => {
-    if (messages.length > 1) {
-      scrollToBottom();
-    }
+    const box = chatContainerRef.current;
+    const last = lastMessageRef.current;
+    if (!box || !last || messages.length < 2) return;
+    const isAnswer = messages[messages.length - 1].role === UserRole.MODEL;
+    box.scrollTo({ top: isAnswer ? last.offsetTop - 24 : box.scrollHeight, behavior: 'smooth' });
   }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -70,15 +120,19 @@ export const AIChat: React.FC<{ lang: Lang }> = ({ lang }) => {
         <p className="mt-4 text-body">{t('chat.subtitle')}</p>
 
         <div className="mt-10 bg-paper border-2 border-ink shadow-[6px_6px_0_var(--color-ink)]">
-          <div ref={chatContainerRef} className="p-6 space-y-6 h-[420px] overflow-y-auto" aria-live="polite">
-            {messages.map((msg) => (
-              <div key={msg.id} className={msg.role === UserRole.USER ? 'pl-10 sm:pl-24' : 'pr-10 sm:pr-24'}>
+          <div ref={chatContainerRef} className="relative p-6 space-y-6 h-[420px] overflow-y-auto" aria-live="polite">
+            {messages.map((msg, i) => (
+              <div key={msg.id} ref={i === messages.length - 1 ? lastMessageRef : undefined} className={msg.role === UserRole.USER ? 'pl-10 sm:pl-24' : 'pr-10 sm:pr-24'}>
                 <p className={`font-mono text-[11px] uppercase tracking-wide ${msg.role === UserRole.USER ? 'text-muted text-right' : 'text-teal'}`}>
                   {msg.role === UserRole.USER ? t('chat.you') : t('chat.assistant')}
                 </p>
-                <p className={`mt-1 text-[15px] leading-relaxed whitespace-pre-line ${msg.role === UserRole.USER ? 'text-right font-serif italic text-[18px]' : 'text-body'}`}>
-                  {msg.text}
-                </p>
+                {msg.role === UserRole.USER ? (
+                  <p className="mt-1 leading-relaxed text-right font-serif italic text-[18px]">{msg.text}</p>
+                ) : (
+                  <div className="mt-1 text-[15px] leading-relaxed text-body">
+                    <RichText text={msg.text} />
+                  </div>
+                )}
               </div>
             ))}
             {isLoading && <p className="font-mono text-[12px] text-teal animate-pulse">{t('chat.processing')}</p>}

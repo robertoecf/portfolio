@@ -1,5 +1,5 @@
 // Single source of truth for profile data: identity, links, projects and career.
-// Consumed by the React sections, the chat function (functions/api/chat.ts) and the
+// Consumed by the React sections, the chat function (worker/chat.ts) and the
 // build-time generators (content/seo.ts) that emit llms.txt, sitemap and knowledge pages.
 // UI chrome strings (nav labels, section headings, button text) live in content/ui.ts.
 
@@ -236,7 +236,7 @@ export const EXPERIENCE: Job[] = [
     id: 'mercor',
     company: 'Mercor',
     start: '2025',
-    location: { en: 'Remote (Contract)', pt: 'Remoto (Contrato)' },
+    location: { en: 'San Francisco, CA', pt: 'San Francisco, CA' },
     title: {
       en: 'Subject-Matter Expert (Financial Services)',
       pt: 'Especialista em Consultoria Financeira (IA)',

@@ -1,6 +1,6 @@
 // Generators for everything crawlers, social cards and LLMs read, all derived from content/profile.ts.
 // Head tags are rendered by src/layouts/Page.astro, static files by src/pages/[...file].ts,
-// and chat context by functions/api/chat.ts. Keep this file free of DOM/Node APIs.
+// and chat context by worker/chat.ts. Keep this file free of DOM/Node APIs.
 
 import {
   CONTACT,
