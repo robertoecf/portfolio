@@ -1,19 +1,12 @@
 import { languageForHost } from '../content/profile';
-import { localizeIndexHtml } from '../content/seo';
 
-// The same static index.html is served on robertoecf.com and robertoecf.com.br.
-// For the .com.br domain, swap the <head> SEO block (title, description, canonical,
-// og:*, JSON-LD) and <html lang> to Portuguese so each domain is indexed in its language.
-// public/_routes.json limits this middleware to HTML entry points and the API.
-export const onRequest: PagesFunction = async ({ request, next }) => {
-  const response = await next();
-  const lang = languageForHost(new URL(request.url).hostname);
-  const isHtml = response.headers.get('content-type')?.includes('text/html');
-  if (lang === 'en' || !isHtml) return response;
-
-  const html = localizeIndexHtml(await response.text(), lang);
-  const headers = new Headers(response.headers);
-  headers.delete('content-length');
-  headers.delete('etag');
-  return new Response(html, { status: response.status, statusText: response.statusText, headers });
+// The build emits the English page at / and the Portuguese one at /pt/.
+// On .com.br the root serves the Portuguese page so each domain is indexed in its language.
+// public/_routes.json limits this middleware to those entry points and the API.
+export const onRequest: PagesFunction<{ ASSETS: Fetcher }> = ({ request, env, next }) => {
+  const url = new URL(request.url);
+  if (languageForHost(url.hostname) === 'pt' && (url.pathname === '/' || url.pathname === '/index.html')) {
+    return env.ASSETS.fetch(new URL('/pt/', url));
+  }
+  return next();
 };

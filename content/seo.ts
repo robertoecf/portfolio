@@ -1,6 +1,6 @@
 // Generators for everything crawlers, social cards and LLMs read, all derived from content/profile.ts.
-// Used at build time by vite.config.ts, at request time by functions/_middleware.ts (per-domain
-// <head>) and by functions/api/chat.ts (assistant context). Keep this file free of DOM/Node APIs.
+// Head tags are rendered by src/layouts/Page.astro, static files by src/pages/[...file].ts,
+// and chat context by functions/api/chat.ts. Keep this file free of DOM/Node APIs.
 
 import {
   CONTACT,
@@ -57,7 +57,7 @@ export function personJsonLd(lang: Lang) {
   };
 }
 
-/** Everything between the SEO markers in index.html. Swapped per domain by functions/_middleware.ts. */
+/** Head tags rendered by src/layouts/Page.astro for each language. */
 export function headTags(lang: Lang): string {
   const title = esc(SEO.title[lang]);
   const desc = esc(SEO.description[lang]);
@@ -83,22 +83,6 @@ export function headTags(lang: Lang): string {
     `<meta name="twitter:image" content="${image}" />`,
     `<script type="application/ld+json">${jsonLd}</script>`,
   ].join('\n    ');
-}
-
-export const SEO_START = '<!-- seo:start -->';
-export const SEO_END = '<!-- seo:end -->';
-
-export function localizeIndexHtml(html: string, lang: Lang): string {
-  const start = html.indexOf(SEO_START);
-  const end = html.indexOf(SEO_END);
-  if (start === -1 || end === -1) return html;
-  return (
-    html.slice(0, start + SEO_START.length) +
-    '\n    ' +
-    headTags(lang) +
-    '\n    ' +
-    html.slice(end)
-  ).replace(/<html lang="[^"]*"/, `<html lang="${LOCALE[lang]}"`);
 }
 
 /** Plain-text profile shared by the chat assistant and llms-full.txt. */

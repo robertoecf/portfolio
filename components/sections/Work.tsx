@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLanguage } from '../../contexts/LanguageContext';
-import { GITHUB_URL, PROJECTS, type Project } from '../../content/profile';
+import { translator } from '../../content/ui';
+import { GITHUB_URL, PROJECTS, type Lang, type Project } from '../../content/profile';
 
 const featured = PROJECTS.filter((p) => p.featured);
 const pinned = PROJECTS.filter((p) => !p.featured && p.pinned);
@@ -29,8 +29,8 @@ const ExtraLinks: React.FC<{ p: Project }> = ({ p }) =>
     </span>
   ) : null;
 
-export const Work: React.FC = () => {
-  const { t, language } = useLanguage();
+export const Work: React.FC<{ lang: Lang }> = ({ lang }) => {
+  const t = translator(lang);
 
   return (
     <section id="work" className="max-w-6xl mx-auto px-6 pb-24 scroll-mt-14">
@@ -47,11 +47,11 @@ export const Work: React.FC = () => {
           <span className="col-span-2 sm:col-span-1 font-serif text-2xl text-teal">0{i + 1}</span>
           <div className="col-span-10 sm:col-span-5">
             <h3 className="font-serif text-[40px] sm:text-[48px] leading-none group-hover:italic">{p.name}</h3>
-            <p className="mt-3 text-[12px] uppercase tracking-[0.14em] text-muted">{p.category[language]}</p>
+            <p className="mt-3 text-[12px] uppercase tracking-[0.14em] text-muted">{p.category[lang]}</p>
           </div>
           <div className="col-span-12 sm:col-span-6 text-[15px] leading-relaxed text-body">
-            <p>{p.description[language]}</p>
-            {p.highlight && <p className="mt-3 font-serif italic text-[17px] text-muted">“{p.highlight[language]}”</p>}
+            <p>{p.description[lang]}</p>
+            {p.highlight && <p className="mt-3 font-serif italic text-[17px] text-muted">“{p.highlight[lang]}”</p>}
             <p className="mt-4 text-[13px] underline underline-offset-4 decoration-teal">{p.links[0].label} ↗</p>
           </div>
         </a>
@@ -70,8 +70,8 @@ export const Work: React.FC = () => {
               {p.status && <span className="opacity-70">{p.status}</span>}
             </div>
             <StretchedName p={p} className="mt-8 font-serif text-[40px] leading-[0.95] break-words hover:italic" />
-            <p className="mt-2 text-[12px] uppercase tracking-[0.14em] opacity-70">{p.category[language]}</p>
-            <p className="mt-5 text-[14px] leading-relaxed opacity-90">{p.description[language]}</p>
+            <p className="mt-2 text-[12px] uppercase tracking-[0.14em] opacity-70">{p.category[lang]}</p>
+            <p className="mt-5 text-[14px] leading-relaxed opacity-90">{p.description[lang]}</p>
             <div className="mt-auto pt-6 flex flex-wrap items-center justify-between gap-3 font-mono text-[11px]">
               <span className="opacity-70">{p.tags.join(' / ')}</span>
               <ExtraLinks p={p} />

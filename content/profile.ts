@@ -1,7 +1,7 @@
 // Single source of truth for profile data: identity, links, projects and career.
 // Consumed by the React sections, the chat function (functions/api/chat.ts) and the
 // build-time generators (content/seo.ts) that emit llms.txt, sitemap and knowledge pages.
-// UI chrome strings (nav labels, section headings, button text) live in contexts/LanguageContext.tsx.
+// UI chrome strings (nav labels, section headings, button text) live in content/ui.ts.
 
 export type Lang = 'en' | 'pt';
 export type Localized<T = string> = Record<Lang, T>;
