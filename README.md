@@ -8,8 +8,8 @@
 [![PT-BR](https://img.shields.io/badge/PT--BR-robertoecf.com.br-009c3b?style=flat-square)](https://robertoecf.com.br/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
-[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare-Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://pages.cloudflare.com/)
+[![Astro](https://img.shields.io/badge/Astro-7-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build/)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 
 </div>
 
@@ -36,19 +36,19 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 - **Fonte única de dados** — perfil, redes, projetos, experiência e certificações vivem em `content/profile.ts` e alimentam o site, o chat e os arquivos de SEO
 - **Bilíngue por domínio** — `.com` em inglês, `.com.br` em português, com alternância manual PT/EN
 - **Projetos open source** — seção com os repositórios públicos, projeto em destaque e links para GitHub e npm
-- **Chat com IA** — assistente via Cloudflare Pages Function (Cerebras, Qwen), chave apenas no servidor, limites de tamanho de mensagem e histórico
+- **Chat com IA** — assistente via Cloudflare Worker (Cerebras, Qwen), chave apenas no servidor, limites de tamanho de mensagem e histórico
 - **SEO e GEO** — `robots.txt`, `sitemap.xml` com hreflang, `llms.txt`, `llms-full.txt`, páginas `knowledge/` legíveis sem JavaScript, OpenGraph e JSON-LD `Person`, todos gerados no build
-- **Head por domínio** — middleware troca `lang`, título, descrição, canonical e JSON-LD para português em `robertoecf.com.br`
+- **Página por domínio** — o build gera `/` em inglês e `/pt/` em português; o Worker serve `/pt/` na raiz de `robertoecf.com.br`
 
 ## Stack
 
 | Camada | Tecnologia |
 |--------|-----------|
-| Frontend | React 19, TypeScript, Tailwind CSS 4 (compilado no build via `@tailwindcss/vite`), Lucide Icons |
-| Build | Vite 7 + plugin local que gera os arquivos de SEO |
-| Backend | Cloudflare Pages Functions (`functions/`) |
+| Frontend | Astro 7 (HTML estático), React 19 só na ilha do chat, TypeScript, Tailwind CSS 4, Lucide Icons |
+| Build | `astro build`; os arquivos de SEO saem de `src/pages/[...file].ts` |
+| Backend | Cloudflare Worker (`worker/`) com static assets |
 | IA | Cerebras (`qwen-3.8-27b`) |
-| Deploy | Cloudflare Pages |
+| Deploy | Cloudflare Workers (Workers Builds a cada push na `main`) |
 
 ## Onde editar o conteúdo
 
@@ -59,77 +59,75 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 | WhatsApp, email, LinkedIn, GitHub e novas redes | `content/profile.ts` → `CONTACT` e `SOCIALS` (ícone novo em `components/SocialLinks.tsx`) |
 | Projetos | `content/profile.ts` → `PROJECTS` (`featured: true` para o destaque) |
 | Experiência, competências, formação, certificações, idiomas | `content/profile.ts` |
-| Textos de interface (menu, títulos de seção, botões) | `contexts/LanguageContext.tsx` |
-| Persona e regras do assistente | `functions/api/chat.ts` |
+| Textos de interface (menu, títulos de seção, botões) | `content/ui.ts` |
+| Persona e regras do assistente | `worker/chat.ts` |
 
 `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt` e `knowledge/*.html` **não existem no repositório**: são gerados a partir de `content/profile.ts` em cada build (`content/seo.ts`). Basta editar o perfil.
 
 ## Estrutura do projeto
 
 ```
-├── App.tsx                    # Layout, background e footer
-├── index.tsx                  # Entry point React
-├── index.html                 # Template; o bloco seo:start/seo:end é gerado no build
+├── astro.config.mjs           # Astro + React (ilha do chat) + Tailwind
+├── wrangler.jsonc             # Worker, static assets em dist/ e build
 ├── index.css                  # Tailwind: paleta, fontes e animações (@theme) + estilos globais
-├── vite.config.ts             # Vite + geração dos arquivos de SEO
+├── src/
+│   ├── layouts/Page.astro     # Documento completo: head, seções e chat
+│   └── pages/
+│       ├── index.astro        # Inglês (/)
+│       ├── pt/index.astro     # Português (/pt/)
+│       └── [...file].ts       # robots, sitemap, llms e knowledge pages
 ├── content/
 │   ├── profile.ts             # Fonte única: perfil, redes, projetos, carreira
+│   ├── ui.ts                  # Textos de interface PT/EN
 │   └── seo.ts                 # Geradores: head, JSON-LD, llms.txt, sitemap, knowledge pages, contexto do chat
 ├── components/
-│   ├── Navbar.tsx             # Navegação + troca de idioma
+│   ├── Masthead.tsx           # Topo + links PT/EN para o outro domínio
+│   ├── Footer.tsx
 │   ├── SocialLinks.tsx        # Ícones de contato e redes
-│   ├── sections/
-│   │   ├── Hero.tsx
-│   │   ├── Expertise.tsx
-│   │   ├── Experience.tsx
-│   │   ├── Projects.tsx
-│   │   └── AIChat.tsx
-│   └── ui/Button.tsx
-├── contexts/
-│   └── LanguageContext.tsx    # Textos de interface PT/EN
+│   └── sections/              # Hero, Work, Career, AIChat
 ├── services/
 │   └── chat.ts                # Cliente do endpoint /api/chat
-├── functions/
-│   ├── _middleware.ts         # Head em português para robertoecf.com.br
-│   └── api/chat.ts            # Endpoint do assistente (Cerebras)
+├── worker/
+│   ├── index.ts               # Idioma por domínio e rota /api/chat
+│   └── chat.ts                # Endpoint do assistente (Cerebras)
 └── public/
-    ├── _routes.json           # Limita as Functions a "/" e "/api/*"
+    ├── photos/
     └── profile.jpg
 ```
 
 ## Rodando localmente
 
-**Pré-requisitos:** Node.js 20.19+ ou 22.12+ (exigência do Vite 7)
+**Pré-requisitos:** Node.js 22.12+ (exigência do Astro 7)
 
 ```bash
 git clone git@github.com:robertoecf/portfolio.git
 cd portfolio
 npm install
 
-# Só o frontend (sem chat), em http://localhost:3000
+# Só o frontend (sem chat), em http://127.0.0.1:4317
 npm run dev
 
-# Frontend + Functions (chat e middleware), em http://localhost:8788
+# Site + Worker (chat e idioma por domínio), em http://localhost:8787
 cp .dev.vars.example .dev.vars   # preencha CEREBRAS_API_KEY
-npm run pages:dev
+npm run worker:dev
 ```
 
 ## Variáveis de ambiente
 
 | Variável | Obrigatória | Onde | Descrição |
 |----------|-------------|------|-----------|
-| `CEREBRAS_API_KEY` | Para o chat | `.dev.vars` local; secret no projeto Cloudflare Pages | Chave da API Cerebras |
+| `CEREBRAS_API_KEY` | Para o chat | `.dev.vars` local; secret do Worker `portfolio` | Chave da API Cerebras |
 
 Sem a chave o site funciona normalmente; apenas o chat responde com mensagem de indisponibilidade.
 
 ## Deploy
 
-Cloudflare Pages com build command `npm run build` e output `dist`. Os dois domínios (`robertoecf.com` e `robertoecf.com.br`) apontam para o mesmo projeto.
+Cloudflare Workers, Worker `portfolio`, com os domínios `robertoecf.com` e `robertoecf.com.br`. O Workers Builds faz o deploy a cada push na `main`. O `wrangler.jsonc` roda `npm run build` antes de publicar `dist/`.
 
 Deploy manual:
 
 ```bash
-npm run pages:deploy
+npm run deploy
 ```
 
 ## Contato

@@ -75,9 +75,14 @@ O adaptador `@astrojs/cloudflare` não suporta mais o Cloudflare Pages desde a v
 
 ## Fase 2: Workers (depois da fase 1 no ar)
 
-1. Adicionar `@astrojs/cloudflare` v14 e `wrangler.jsonc`.
-2. Mover o chat para `src/pages/api/chat.ts` (`prerender = false`), lendo o secret com `import { env } from 'cloudflare:workers'`.
-3. Mover o roteamento por domínio para o Worker: `/` sob demanda ou `run_worker_first: ["/"]`. A escolha sai de um teste curto.
-4. Criar o secret no Worker a partir do Doppler e testar tudo em `*.workers.dev`.
-5. Apontar os dois domínios para o Worker. Este é o único passo com risco de queda, e ele é reversível. Ligar o Workers Builds ao repositório: o check passa a funcionar e o deploy fica automático a cada merge.
-6. Apagar o projeto Pages só depois de alguns dias estável.
+Decisão de 2026-10-14: sem o adaptador `@astrojs/cloudflare`. O site continua 100% estático; um Worker próprio com static assets cuida só do chat e do idioma por domínio. O adaptador só traria renderização sob demanda, que o site não usa, e uma dependência a mais.
+
+1. `wrangler.jsonc`: Worker `portfolio`, assets em `dist/` com binding `ASSETS`, `run_worker_first` para `/`, `/index.html` e `/api/*`, e `build.command` = `npm run build`.
+2. `worker/index.ts`: `/api/chat` (só POST) chama `worker/chat.ts`; em `.com.br`, `/` e `/index.html` servem `/pt/`; o resto vai para os assets.
+3. Saem `functions/` e `public/_routes.json`.
+4. Secret `CEREBRAS_API_KEY` no Worker a partir do Doppler; teste em `portfolio.robertoecf.workers.dev`.
+5. Domínios: tirar `robertoecf.com` e `robertoecf.com.br` do projeto Pages e ligar como Custom Domains do Worker. É o único passo com risco de queda, e ele é reversível (devolver os domínios ao Pages).
+6. Workers Builds já está ligado ao repositório com o Worker `portfolio`: o deploy fica automático a cada push na `main`.
+7. Apagar o projeto Pages só depois de alguns dias estável.
+
+Diferenças aceitas em relação ao Pages: redirect de `*.html` passa de 308 para 307 (padrão do Workers assets), e caminho inexistente responde 404 em vez de 200 com a home.

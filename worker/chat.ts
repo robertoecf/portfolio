@@ -1,7 +1,7 @@
-import type { Lang } from '../../content/profile';
-import { resumeText } from '../../content/seo';
+import type { Lang } from '../content/profile';
+import { resumeText } from '../content/seo';
 
-interface Env {
+export interface Env {
   CEREBRAS_API_KEY: string;
 }
 
@@ -42,9 +42,7 @@ function buildSystemInstruction(language: Lang): string {
   `;
 }
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request, env } = context;
-
+export async function chat(request: Request, env: Env): Promise<Response> {
   if (!env.CEREBRAS_API_KEY) {
     return new Response(JSON.stringify({ error: 'API key not configured' }), {
       status: 500,
@@ -132,4 +130,4 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       headers: { 'Content-Type': 'application/json' },
     });
   }
-};
+}
