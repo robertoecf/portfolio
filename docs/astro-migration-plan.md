@@ -77,11 +77,11 @@ O adaptador `@astrojs/cloudflare` não suporta mais o Cloudflare Pages desde a v
 
 Decisão de 2026-10-14: sem o adaptador `@astrojs/cloudflare`. O site continua 100% estático; um Worker próprio com static assets cuida só do chat e do idioma por domínio. O adaptador só traria renderização sob demanda, que o site não usa, e uma dependência a mais.
 
-1. `wrangler.jsonc`: Worker `portfolio`, assets em `dist/` com binding `ASSETS`, `run_worker_first` para `/`, `/index.html` e `/api/*`, e `build.command` = `npm run build`.
+1. `wrangler.jsonc`: Worker `portfolio`, assets em `dist/` com binding `ASSETS` e `run_worker_first` para `/`, `/index.html` e `/api/*`. O build fica no Workers Builds e nos scripts `deploy` e `worker:dev`.
 2. `worker/index.ts`: `/api/chat` (só POST) chama `worker/chat.ts`; em `.com.br`, `/` e `/index.html` servem `/pt/`; o resto vai para os assets.
 3. Saem `functions/` e `public/_routes.json`.
 4. Secret `CEREBRAS_API_KEY` no Worker a partir do Doppler; teste em `portfolio.robertoecf.workers.dev`.
-5. Domínios: feito em 2026-10-14 com Worker Routes (`robertoecf.com/*` e `robertoecf.com.br/*`), sem queda. Custom Domain não deu: os hostnames ainda têm o CNAME do Pages, e o token do wrangler não pode apagar DNS. A rota roda antes da origem, então o CNAME antigo não recebe tráfego. Para trocar por Custom Domain depois: apagar os CNAMEs no dashboard e usar `"custom_domain": true` nas rotas.
+5. Domínios: em 2026-10-14 os dois domínios saíram do projeto Pages, os CNAMEs para `portfolio-eqx.pages.dev` foram apagados e os domínios viraram Custom Domains do Worker (DNS `AAAA 100::` gerenciado pelo Worker). Queda de poucos segundos por domínio.
 6. Workers Builds já está ligado ao repositório com o Worker `portfolio`: o deploy fica automático a cada push na `main`.
 7. Apagar o projeto Pages só depois de alguns dias estável.
 
