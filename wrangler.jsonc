@@ -3,7 +3,6 @@
   "name": "portfolio",
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
-  "build": { "command": "npm run build" },
   "assets": {
     "directory": "dist",
     "binding": "ASSETS",
@@ -12,8 +11,8 @@
   "workers_dev": true,
   "preview_urls": true,
   "routes": [
-    { "pattern": "robertoecf.com/*", "zone_name": "robertoecf.com" },
-    { "pattern": "robertoecf.com.br/*", "zone_name": "robertoecf.com.br" }
+    { "pattern": "robertoecf.com", "custom_domain": true },
+    { "pattern": "robertoecf.com.br", "custom_domain": true }
   ],
   "observability": { "enabled": true }
 }

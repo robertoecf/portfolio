@@ -122,7 +122,7 @@ Sem a chave o site funciona normalmente; apenas o chat responde com mensagem de 
 
 ## Deploy
 
-Cloudflare Workers, Worker `portfolio`, com rotas em `robertoecf.com/*` e `robertoecf.com.br/*` (`wrangler.jsonc`). O Workers Builds faz o deploy a cada push na `main`. O `wrangler.jsonc` roda `npm run build` antes de publicar `dist/`.
+Cloudflare Workers, Worker `portfolio`, com `robertoecf.com` e `robertoecf.com.br` como Custom Domains (`wrangler.jsonc`). O Workers Builds roda `npm run build` e faz o deploy a cada push na `main`; branches geram só uma versão de preview.
 
 Deploy manual:
 
