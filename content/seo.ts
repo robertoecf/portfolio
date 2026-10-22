@@ -35,7 +35,7 @@ export function personJsonLd(lang: Lang) {
     name: PERSON.name,
     alternateName: PERSON.shortName,
     url: home(lang),
-    image: `${SITE_URL[lang]}${PERSON.photo}`,
+    image: `${SITE_URL[lang]}${PERSON.portraitSmile}`,
     jobTitle: PERSON.headline[lang],
     description: SEO.description[lang],
     email: `mailto:${CONTACT.email}`,
@@ -61,7 +61,7 @@ export function personJsonLd(lang: Lang) {
 export function headTags(lang: Lang): string {
   const title = esc(SEO.title[lang]);
   const desc = esc(SEO.description[lang]);
-  const image = `${SITE_URL[lang]}${PERSON.photo}`;
+  const image = `${SITE_URL[lang]}/og-${lang}.jpg`;
   // "<" is escaped so the JSON can never close the script tag early.
   const jsonLd = JSON.stringify(personJsonLd(lang)).replace(/</g, '\\u003c');
   return [
@@ -77,7 +77,10 @@ export function headTags(lang: Lang): string {
     `<meta property="og:description" content="${desc}" />`,
     `<meta property="og:url" content="${home(lang)}" />`,
     `<meta property="og:image" content="${image}" />`,
-    `<meta name="twitter:card" content="summary" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${esc(PERSON.displayName)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${title}" />`,
     `<meta name="twitter:description" content="${desc}" />`,
     `<meta name="twitter:image" content="${image}" />`,
@@ -98,16 +101,16 @@ export function resumeText(lang: Lang): string {
   EXPERTISE.forEach((a) => lines.push(`${a.title[lang]}: ${a.items[lang].join(', ')}.`));
   lines.push('', pt ? 'EXPERIÊNCIA PROFISSIONAL' : 'WORK EXPERIENCE');
   EXPERIENCE.forEach((j) => {
-    lines.push(`${j.company} — ${j.title[lang]}`, `${j.location[lang]} | ${formatPeriod(j, lang)}`);
+    lines.push(`${j.company} · ${j.title[lang]}`, `${j.location[lang]} | ${formatPeriod(j, lang)}`);
     j.bullets[lang].forEach((b) => lines.push(`• ${b}`));
     lines.push('');
   });
   lines.push(pt ? 'PROJETOS OPEN SOURCE' : 'OPEN-SOURCE PROJECTS');
   PROJECTS.forEach((p) => lines.push(`• ${p.name} (${p.links[0].url}): ${p.description[lang]}`));
   lines.push('', pt ? 'FORMAÇÃO' : 'EDUCATION');
-  EDUCATION.forEach((e) => lines.push(`${e.school[lang]} — ${e.degree[lang]} (${e.period[lang]})`));
+  EDUCATION.forEach((e) => lines.push(`${e.school[lang]} · ${e.degree[lang]} (${e.period[lang]})`));
   lines.push('', pt ? 'CERTIFICAÇÕES' : 'CERTIFICATIONS');
-  CREDENTIALS.forEach((c) => lines.push(`${c.name[lang]} — ${c.detail[lang]} (${c.issuer})`));
+  CREDENTIALS.forEach((c) => lines.push(`${c.name[lang]}: ${c.detail[lang]} (${c.issuer})`));
   lines.push('', pt ? 'IDIOMAS' : 'LANGUAGES');
   lines.push(LANGUAGES.map((l) => `${l.name[lang]} (${l.level[lang]})`).join(', '));
   return lines.join('\n');
@@ -139,7 +142,7 @@ ${SOCIALS.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
 }
 
 export function buildLlmsFullTxt(): string {
-  return `# ${PERSON.name} — Extended profile for AI systems
+  return `# ${PERSON.name}: extended profile for AI systems
 
 Canonical: ${home('en')} (EN) · ${home('pt')} (PT-BR)
 
@@ -176,7 +179,7 @@ export function buildKnowledgePage(lang: Lang): string {
       pt ? 'Trajetória' : 'Experience',
       EXPERIENCE.map(
         (j) =>
-          `<article><h3>${h(j.company)} — ${h(j.title[lang])}</h3><p>${h(j.location[lang])} · ${h(formatPeriod(j, lang))}</p>${list(j.bullets[lang].map(h))}</article>`,
+          `<article><h3>${h(j.company)} · ${h(j.title[lang])}</h3><p>${h(j.location[lang])} · ${h(formatPeriod(j, lang))}</p>${list(j.bullets[lang].map(h))}</article>`,
       ).join(''),
     ),
     section(
@@ -207,7 +210,7 @@ export function buildKnowledgePage(lang: Lang): string {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${h(PERSON.displayName)} — ${pt ? 'Perfil profissional' : 'Professional profile'}</title>
+<title>${h(PERSON.displayName)} | ${pt ? 'Perfil profissional' : 'Professional profile'}</title>
 <meta name="description" content="${h(SEO.description[lang])}" />
 <link rel="canonical" href="${knowledgeUrl(lang)}" />
 ${LANGS.map((l) => `<link rel="alternate" hreflang="${LOCALE[l]}" href="${knowledgeUrl(l)}" />`).join('\n')}
