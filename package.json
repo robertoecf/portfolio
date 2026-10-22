@@ -25,7 +25,7 @@
     "@types/react-dom": "^19.3.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~5.8.2",
-    "wrangler": "^4.147.0"
+    "wrangler": "^4.151.3"
   },
   "engines": {
     "node": ">=24.22.1 <25"
