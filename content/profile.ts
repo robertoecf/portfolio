@@ -17,7 +17,6 @@ export const PERSON = {
   name: 'Roberto E. C. Freitas',
   shortName: 'Roberto Freitas',
   displayName: 'Roberto E. C. Freitas, CFP®',
-  photo: '/profile.jpg',
   portrait: '/photos/roberto-portrait.jpg',
   portraitSmile: '/photos/roberto-smile.jpg',
   location: { city: 'São Paulo', region: 'SP', country: 'BR', label: 'São Paulo · SP · Brasil' },
@@ -230,7 +229,20 @@ export const EXPERIENCE: Job[] = [
       en: 'Partner & Investment Consultant',
       pt: 'Sócio & Consultor de Investimentos',
     },
-    bullets: { en: [], pt: [] },
+    bullets: {
+      en: [
+        'Advise about 70 clients with roughly USD 20M in assets under management.',
+        'Helped found the firm: brand positioning, ownership structure and the transition of clients from the previous business.',
+        'Built Wealthuman OS on my own with AI-assisted development: a CRM and financial planning platform used by 9 advisors, with 600+ client profiles, plus Charlie, an AI agent that works inside it.',
+        'In practice, run operations and internal technology: automations and agentic workflows for support and administration, small internal applications and the firm’s knowledge base.',
+      ],
+      pt: [
+        'Atendo cerca de 70 clientes, com aproximadamente R$ 100 milhões sob gestão.',
+        'Participei da fundação da Monvanti: posicionamento de marca, estrutura societária e a transição dos clientes do negócio anterior.',
+        'Construí sozinho, com desenvolvimento assistido por IA, o Wealthuman OS: CRM e plataforma de planejamento financeiro usada por 9 consultores, com mais de 600 perfis de clientes, e o Charlie, agente de IA que trabalha dentro dele.',
+        'Na prática, cuido de operações e tecnologia interna: automações e fluxos com agentes de IA para suporte e administração, pequenas aplicações internas e a organização do conhecimento da empresa.',
+      ],
+    },
   },
   {
     id: 'mercor',

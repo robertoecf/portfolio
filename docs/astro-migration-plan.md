@@ -83,6 +83,6 @@ Decisão de 2026-10-14: sem o adaptador `@astrojs/cloudflare`. O site continua 1
 4. Secret `CEREBRAS_API_KEY` no Worker a partir do Doppler; teste em `portfolio.robertoecf.workers.dev`.
 5. Domínios: em 2026-10-14 os dois domínios saíram do projeto Pages, os CNAMEs para `portfolio-eqx.pages.dev` foram apagados e os domínios viraram Custom Domains do Worker (DNS `AAAA 100::` gerenciado pelo Worker). Queda de poucos segundos por domínio.
 6. Workers Builds já está ligado ao repositório com o Worker `portfolio`: o deploy fica automático a cada push na `main`.
-7. Apagar o projeto Pages só depois de alguns dias estável.
+7. Projeto Pages `portfolio` apagado depois de uma semana estável (até 2026-10-21), junto com os secrets antigos.
 
 Diferenças aceitas em relação ao Pages: redirect de `*.html` passa de 308 para 307 (padrão do Workers assets), e caminho inexistente responde 404 em vez de 200 com a home.

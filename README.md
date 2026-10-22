@@ -1,6 +1,6 @@
 <div align="center">
 
-# Roberto E. C. Freitas — Portfolio
+# Roberto E. C. Freitas | Portfolio
 
 **Consultor Financeiro CFP® | Strategy & Operations | Fintech & AI**
 
@@ -33,12 +33,12 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 
 ## Features
 
-- **Fonte única de dados** — perfil, redes, projetos, experiência e certificações vivem em `content/profile.ts` e alimentam o site, o chat e os arquivos de SEO
-- **Bilíngue por domínio** — `.com` em inglês, `.com.br` em português, com alternância manual PT/EN
-- **Projetos open source** — seção com os repositórios públicos, projeto em destaque e links para GitHub e npm
-- **Chat com IA** — assistente via Cloudflare Worker (Cerebras, Qwen), chave apenas no servidor, limites de tamanho de mensagem e histórico
-- **SEO e GEO** — `robots.txt`, `sitemap.xml` com hreflang, `llms.txt`, `llms-full.txt`, páginas `knowledge/` legíveis sem JavaScript, OpenGraph e JSON-LD `Person`, todos gerados no build
-- **Página por domínio** — o build gera `/` em inglês e `/pt/` em português; o Worker serve `/pt/` na raiz de `robertoecf.com.br`
+- **Fonte única de dados**: perfil, redes, projetos, experiência e certificações vivem em `content/profile.ts` e alimentam o site, o chat e os arquivos de SEO
+- **Bilíngue por domínio**: `.com` em inglês, `.com.br` em português, com alternância manual PT/EN
+- **Projetos open source**: seção com os repositórios públicos, projeto em destaque e links para GitHub e npm
+- **Chat com IA**: assistente via Cloudflare Worker (Cerebras, Qwen), chave apenas no servidor, limites de tamanho de mensagem e histórico
+- **SEO e GEO**: `robots.txt`, `sitemap.xml` com hreflang, `llms.txt`, `llms-full.txt`, páginas `knowledge/` legíveis sem JavaScript, OpenGraph e JSON-LD `Person`, todos gerados no build
+- **Página por domínio**: o build gera `/` em inglês e `/pt/` em português; o Worker serve `/pt/` na raiz de `robertoecf.com.br`
 
 ## Stack
 
@@ -92,7 +92,8 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 │   └── chat.ts                # Endpoint do assistente (Cerebras)
 └── public/
     ├── photos/
-    └── profile.jpg
+    ├── icon.jpg               # Favicon
+    └── og-en.jpg, og-pt.jpg   # Imagens de compartilhamento (1200x630)
 ```
 
 ## Rodando localmente
