@@ -98,7 +98,7 @@ Portfólio pessoal e profissional bilíngue, com design inspirado em interfaces 
 
 ## Rodando localmente
 
-**Pré-requisitos:** Node.js 22.12+ (exigência do Astro 7)
+**Pré-requisitos:** Node.js 24.22.1 (patch de segurança; validado antes de cada build)
 
 ```bash
 git clone git@github.com:robertoecf/portfolio.git
