@@ -117,7 +117,7 @@ export const PROJECTS: Project[] = [
       pt: '1.001 trajetórias Monte Carlo desenhadas em canvas, com cenários pessimista, mediano e otimista.',
     },
     tags: ['React', 'Monte Carlo', 'Supabase'],
-    links: [{ label: 'futuroemfoco.app.br', url: 'https://futuroemfoco.app.br' }],
+    links: [{ label: 'futuroemfoco.com', url: 'https://futuroemfoco.com' }],
   },
   {
     id: 'openfindata',
